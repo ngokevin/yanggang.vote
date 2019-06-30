@@ -1,0 +1,96 @@
+html,
+body
+  font-family 'Roboto'
+  height 100%
+  margin 0
+  padding 0
+  width 100%
+
+#background,
+#mask
+  height 100%
+  left 0
+  position fixed
+  top 0
+  width 100%
+
+#background
+  background-image url(/assets/hero.png)
+  background-size cover
+  z-index -2
+
+#logo
+  height 100px
+  left 0
+  position fixed
+  top 0
+  width 100px
+
+#video
+  border 5px solid alpha(#002d70, 0.65)
+  margin-top 20px
+
+#container
+  align-items space-between
+  display flex
+  height 100%
+  justify-content center
+  width 100%
+
+#outerInputContainer
+  bottom 50px
+  display flex
+  flex-direction column
+  position fixed
+
+#inputContainer
+  align-items flex-end
+  display flex
+  justify-content center
+  width 100%
+
+#gif
+  margin-right 30px
+  opacity 0.85
+  max-height 128px
+
+#input
+  background rgba(0.8, 0.8, 0.9, 0.75)
+  border 0
+  border-radius 50px
+  color #FAFAFA
+  font-size 20px
+  font-style italic
+  font-weight 400
+  height 56px
+  padding 5px 20px 5px 20px
+  transition .2s background
+  width 400px
+  &:hover:not(:focus),
+  &:focus
+    background rgba(1, 1, 1, 0.5)
+
+input::placeholder
+  opacity 1
+  color #FAFAFA
+
+#suggested
+  display flex
+  padding 0
+  list-style none
+  margin-top 20px
+
+  li
+    background alpha(#002d70, 0.85)
+    border-radius 50px
+    color #FAFAFA
+    cursor pointer
+    margin-right 20px
+    padding 10px 20px
+    text-transform uppercase
+    transition .2s background
+    &:hover
+      background alpha(#305dA0, 0.85)
+  i
+    display inline-block
+    width 25px
