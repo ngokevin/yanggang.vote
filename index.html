@@ -7,13 +7,13 @@
   <div id="background"></div>
 
   <div id="app">
-    <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/cTsEzmFamZ8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen :data-is-searching="query.length >= 3"></iframe>
+    <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/cTsEzmFamZ8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen :data-is-searching="query.length >= 2"></iframe>
 
-    <ul id="results" v-if="query.length >= 3">
+    <ul id="results" v-if="query.length >= 2">
       <li class="resultCard" v-for="result in results">
-        <h2 class="policy">{{ result.name }}</h2>
-        <p class="problem"><b>Problem:</b> {{ result.problems.split('\n')[0] }}</p>
-        <p class="statement">{{ result.statement }}</p>
+        <h2 class="policy" v-html="result.name"></h2>
+        <p class="problem"><b>Problem:</b>&nbsp;<span v-html="result.problem"></span></p>
+        <p class="statement">"&nbsp;<b>As president,</b>&nbsp;I will&nbsp;<span v-html="result.statement"></span>"</p>
       </li>
     </ul>
 
@@ -38,7 +38,7 @@
       </ul>
     </div>
 
-    <p class="footer">This site was built by regular volunteers with no relation but in support for Andrew Yang</p>
+    <p class="footer">This site was built by regular volunteers with no relation but in support for <a href="https://yang2020.com">Andrew Yang</a></p>
   </div>
 
   <script src="build.js"></script>

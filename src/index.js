@@ -16,10 +16,16 @@ const app = new Vue({
   methods: {
     search: debounce(function (evt) {
       this.query = evt.target.value;
-      if (this.query.length < 3) { return; }
+      if (this.query.length < 2) { return; }
       index.search({query: this.query}, (err, content) => {
         content.hits.map(result => {
-          result.statement = `"As President, I will ${lowerFirstLetter(result.statement)}"`;
+          result.name = highlightQuery(result.name, this.query);
+
+          const problem = highlightQuery(getFirstPoint(result.problems), this.query);
+          result.problem = upperFirstLetter(problem);
+
+          const statement = lowerFirstLetter(getFirstPoint(result.statement));
+          result.statement = highlightQuery(statement, this.query);
         });
         this.results = content.hits;
       });
@@ -27,6 +33,20 @@ const app = new Vue({
   }
 });
 
+function getFirstPoint (string) {
+  return string.split('\n')[0];
+}
+
+function highlightQuery (string, query) {
+  if (!query) { return string; }
+  const re = new RegExp(`(${query})`, 'gi');
+  return string.replace(re, `<span class="searchHighlight">$1</span>`);
+}
+
 function lowerFirstLetter (string) {
   return string.charAt(0).toLowerCase() + string.slice(1);
+}
+
+function upperFirstLetter (string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

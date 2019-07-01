@@ -10,6 +10,9 @@ isSearching() {
   }
 }
 
+$blue=#002D70
+$red=#DA344B
+
 html,
 body
   font-family 'Roboto'
@@ -17,6 +20,9 @@ body
   margin 0
   padding 0
   width 100%
+
+a
+  color $red
 
 ul
   list-style none
@@ -44,11 +50,11 @@ ul
   width 100px
 
 #video
-  border 5px solid alpha(#002d70, 0.65)
+  border 5px solid alpha($blue, 0.65)
   left 0
   margin 0 auto
   margin-top 20px
-  max-height 180px
+  max-height 240px
   max-width 90%
   position absolute
   right 0
@@ -90,9 +96,12 @@ ul
     max-height 128px
 
 #search
+  -webkit-appearance none
+  -webkit-box-shadow none
   background rgba(0.8, 0.8, 0.9, 0.75)
   border 0
-  border-radius 50px
+  border-radius 30px 5px 30px 5px
+  box-shadow none
   color #FAFAFA
   font-size 16px
   font-style italic
@@ -100,12 +109,13 @@ ul
   height 56px
   padding 5px 20px 5px 20px
   transition .2s background
-  width 320px
+  width 280px
   &:hover:not(:focus),
   &:focus
     background rgba(1, 1, 1, 0.5)
   +desktop()
-    font-size 20px
+    font-size 18px
+    width 320px
 
 input::placeholder
   opacity 1
@@ -121,8 +131,8 @@ input::placeholder
     display flex
 
   li
-    background alpha(#002d70, 0.85)
-    border-radius 50px
+    background alpha($blue, 0.85)
+    border-radius 50px 5px 50px 5px
     color #FAFAFA
     cursor pointer
     margin-right 20px
@@ -136,44 +146,64 @@ input::placeholder
     width 25px
 
 #results
-  align-items top
+  align-items flex-start
   color #FAFAFA
   display flex
-  height 100%
-  overflow-x auto
-  overflow-y hidden
+  flex-direction column
+  height 75%
+  overflow-x hidden
+  overflow-y auto
+  +desktop()
+    flex-direction row
+    height 100%
+    overflow-x auto
+    overflow-y hidden
 
 .resultCard
-  background alpha(#002d70, 0.85)
+  background alpha($blue, 0.85)
   box-shadow 1px 0 1px 0 #222
-  border-radius 20px
+  border-radius 20px 5px 20px 5px
   display inline-block
   font-size 12px
-  height unquote('calc(100% - 320px)')
   padding 15px
   margin 10px
   min-width 320px
   max-width 320px
   +desktop()
-    border-radius 50px
+    border-radius 40px 2px 40px 2px
     font-size 18px
     padding 20px
 
-  .problem
-    +desktop()
-      min-height 90px
-
   h2
-    color #da344b
+    color $red
     font-family Merriweather
     font-size 20px
     text-transform uppercase
     +desktop()
-      font-size 24px
-      min-height 100px
+      font-size 22px
+      min-height 60px
+
+  .problem
+    +desktop()
+      font-size 16px
+      line-height 26px
+      min-height 105px
+    b
+      font-family monospace
+      text-transform uppercase
 
   .statement
-    font-style italic
+    +desktop()
+      font-size 16px
+      line-height 26px
+    b
+      font-family monospace
+      text-transform uppercase
+
+  .searchHighlight
+    text-decoration underline
+    color $red
+    font-weight bold
 
 .footer
   bottom 0
