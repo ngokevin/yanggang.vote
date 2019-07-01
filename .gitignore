@@ -46,3 +46,4 @@ exports/
 dump.rdb
 .ghpages
 package-lock.json
+config.js

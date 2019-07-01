@@ -1,3 +1,4 @@
+const algolia = require('algoliasearch');
 const fetch = require('node-fetch');
 const fs = require('fs');
 const JSDOM = require('jsdom').JSDOM;
@@ -6,9 +7,7 @@ const DEBUG = false;
 const indexPage = 'https://www.yang2020.com/policies/';
 const policies = [];
 
-fetchIndex();
-
-function fetchIndex () {
+module.exports.index = function () {
   fetch(indexPage)
     .then(res => res.text())
     .then(body => {
@@ -39,7 +38,12 @@ function fetchPolicy (policy, policyUrl) {
 
       // Brief.
       policy.brief = '';
-      document.querySelectorAll('.brief .column p span').forEach(text => {
+      document.querySelectorAll('.brief .column p').forEach(text => {
+        const span = text.querySelector('span');
+        if (span) {
+          policy.brief += `${getText(span)}\n`;
+          return;
+        }
         policy.brief += `${getText(text)}\n`;
       });
       policy.brief = policy.brief.slice(0, -1);
@@ -95,3 +99,19 @@ function clean (body) {
     .replace(/\xa0/g, '')
     .replace(/\u0094/g, '');
 }
+
+module.exports.algolia = function () {
+  const config = require('./config');
+  const client = algolia(config.ALGOLIA_APP_ID, config.ALGOLIA_ADMIN_KEY);
+  const index = client.initIndex('andrewyang');
+
+  const policies = require('../policies.json').map(policy => {
+    policy.objectID = policy.name;
+    return policy;
+  });
+  index.saveObjects(policies, err => {
+    if (err) { return console.error(err); }
+    console.log('Indexed.');
+  });
+}
+require('make-runnable');

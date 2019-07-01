@@ -1,16 +1,25 @@
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto|Merriweather&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/2209fad987.js"></script>
 
 <body>
   <div id="background"></div>
 
-  <div id="container">
-    <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/cTsEzmFamZ8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div id="app">
+    <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/cTsEzmFamZ8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen :data-is-searching="query.length >= 3"></iframe>
 
-    <div id="outerInputContainer">
-      <div id="inputContainer">
+    <ul id="results" v-if="query.length >= 3">
+      <li class="resultCard" v-for="result in results">
+        <h2 class="policy">{{ result.name }}</h2>
+        <p class="problem"><b>Problem:</b> {{ result.problems.split('\n')[0] }}</p>
+        <p class="statement">{{ result.statement }}</p>
+      </li>
+    </ul>
+
+    <div id="outerSearchContainer">
+      <div id="searchContainer">
         <img id="gif" src="/assets/yang.gif">
-        <input id="input" type="text" placeholder="Ask anything here about Andrew Yang!">
+        <input id="search" type="text" placeholder="Ask anything here about Andrew Yang!" @keydown="search">
       </div>
       <ul id="suggested">
         <li>
