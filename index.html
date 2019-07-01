@@ -9,13 +9,13 @@
   <div id="app">
     <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/cTsEzmFamZ8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen :data-is-searching="query.length >= 2"></iframe>
 
-    <ul id="results" v-if="query.length >= 2">
-      <li class="resultCard" v-for="result in results">
+    <transition-group id="results" name="fade" tag="ul">
+      <li class="resultCard" v-for="result in results" :key="result.name">
         <h2 class="policy" v-html="result.name"></h2>
         <p class="problem"><b>Problem:</b>&nbsp;<span v-html="result.problem"></span></p>
         <p class="statement">"<b>As president,</b>&nbsp;I will&nbsp;<span v-html="result.statement"></span>"</p>
       </li>
-    </ul>
+    </transition-group>
 
     <div id="outerSearchContainer">
       <div id="searchContainer">

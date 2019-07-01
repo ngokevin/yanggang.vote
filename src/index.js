@@ -16,7 +16,10 @@ const app = new Vue({
   methods: {
     search: debounce(function (evt) {
       this.query = evt.target.value;
-      if (this.query.length < 2) { return; }
+      if (this.query.length < 2) {
+        this.results = [];
+        return;
+      }
       index.search({query: this.query}, (err, content) => {
         content.hits.map(result => {
           result.name = highlightQuery(result.name, this.query);
