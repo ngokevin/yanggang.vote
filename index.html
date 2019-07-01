@@ -23,15 +23,15 @@
         <input id="search" type="text" placeholder="Ask here about Andrew Yang!" @keydown="search">
       </div>
       <ul id="suggested">
-        <li>
+        <li @click="suggestion" data-query="Freedom Dividend">
           <i class="fas fa-money-bill-wave"></i>
           <span>Freedom Dividend</span>
         </li>
-        <li>
+        <li @click="suggestion" data-query="Medicare">
           <i class="fas fa-heartbeat"></i>
           <span>Medicare for All</span>
         </li>
-        <li>
+        <li @click="suggestion" data-query="Human">
           <i class="fas fa-people-carry"></i>
           <span>Humanity First</span>
         </li>

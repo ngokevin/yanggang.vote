@@ -32,7 +32,14 @@ const app = new Vue({
         });
         this.results = content.hits;
       });
-    }, 250)
+    }, 250),
+
+    suggestion: function (evt) {
+      const query = evt.target.closest('li').dataset.query;
+      const search = document.getElementById('search');
+      search.setAttribute('value', query);
+      search.dispatchEvent(new CustomEvent('keydown'));
+    }
   }
 });
 
