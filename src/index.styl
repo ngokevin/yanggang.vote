@@ -99,28 +99,32 @@ ul
 #search
   -webkit-appearance none
   -webkit-box-shadow none
-  background rgba(0.8, 0.8, 0.9, 0.75)
+  background alpha(#FAFAFA, 0.7)
   border 0
   border-radius 30px 5px 30px 5px
   box-shadow none
-  color #FAFAFA
+  color #111
+  font-family 'Roboto'
   font-size 16px
   font-style italic
   font-weight 400
-  height 56px
+  height 55px
   padding 5px 20px 5px 20px
+  text-transform uppercase
   transition .2s background
   width 280px
   &:hover:not(:focus),
   &:focus
-    background rgba(1, 1, 1, 0.5)
+    background alpha(#FAFAFA, 0.85)
   +desktop()
     font-size 18px
     width 320px
 
 input::placeholder
+  font-family 'Roboto'
   opacity 1
-  color #FAFAFA
+  color #060606
+  text-transform none
 
 #suggested
   display none
@@ -177,12 +181,13 @@ input::placeholder
 
   h2
     color $red
-    font-family Merriweather
+    font-family 'Zilla Slab Highlight'
+    font-weight bold
     font-size 20px
     text-transform uppercase
     +desktop()
-      font-size 22px
-      min-height 60px
+      font-size 26px
+      min-height 95px
 
   .problem
     +desktop()
@@ -190,7 +195,7 @@ input::placeholder
       line-height 26px
       min-height 105px
     b
-      font-family monospace
+      font-family Forum
       text-transform uppercase
 
   .statement
@@ -198,7 +203,7 @@ input::placeholder
       font-size 16px
       line-height 26px
     b
-      font-family monospace
+      font-family Forum
       text-transform uppercase
 
   .searchHighlight
