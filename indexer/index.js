@@ -35,11 +35,7 @@ function fetchPolicy (policy, policyUrl) {
     .then(res => res.text())
     .then(body => {
       console.log(`${policyUrl} fetched.`);
-      body = body.replace(/\xc3/g, '');
-      body = body.replace(/\x82/g, '');
-      body = body.replace(/\xc2/g, '');
-      body = body.replace(/\xa0/g, '');
-      const document = new JSDOM(body).window.document;
+      const document = new JSDOM(clean(body)).window.document;
 
       // Brief.
       policy.brief = '';
@@ -84,9 +80,18 @@ function getText (el) {
     .replace(/[ââââ]/g, '')
     .replace(/[â]/g, '-')
     .replace(/\xc3\x82\xc2\xa0/g, '')
+    .replace(/\u0094/g, '')
     .replace(/  /, ' ')
     .replace(/ /, ' ')
     .trim();
+}
 
-
+function clean (body) {
+  return body
+    .replace(/\xc3/g, '')
+    .replace(/\x82/g, '')
+    .replace(/\xc2/g, '')
+    .replace(/\xc2\x94/g, '')
+    .replace(/\xa0/g, '')
+    .replace(/\u0094/g, '');
 }
