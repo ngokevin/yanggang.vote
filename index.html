@@ -11,9 +11,10 @@
 
     <transition-group id="results" name="fade" tag="ul">
       <li class="resultCard" v-for="result in results" :key="result.name">
-        <h2 class="policy" v-html="result.name"></h2>
-        <p class="problem"><b>Problem:</b>&nbsp;<span v-html="result.problem"></span></p>
-        <p class="statement">"<b>As president,</b>&nbsp;I will&nbsp;<span v-html="result.statement"></span>"</p>
+        <i class="icon" :class="result.icon"></i>
+        <h2 class="name" v-html="result.name"></h2>
+        <p class="problem"><b>Problem</b>&nbsp;<span v-html="result.problem"></span></p>
+        <p class="statement"><b>As president</b>&nbsp;"I will&nbsp;<span v-html="result.statement"></span>"</p>
       </li>
     </transition-group>
 

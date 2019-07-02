@@ -1,5 +1,6 @@
 const algolia = require('algoliasearch/lite');
 const debounce = require('lodash.debounce');
+const policyConfig = require('./policyConfig');
 require('./index.styl');
 
 const client = algolia('JYM7HVFCCH', '183859a024403b314e105277e94dfd61');
@@ -22,6 +23,7 @@ const app = new Vue({
       }
       index.search({query: this.query}, (err, content) => {
         content.hits.map(result => {
+          result.icon = policyConfig[result.name].icon;
           result.name = highlightQuery(result.name, this.query);
 
           const problem = highlightQuery(getFirstPoint(result.problems), this.query);
