@@ -17,8 +17,8 @@ const app = new Vue({
   mounted: function () {
     index.getObjects([
       'The Freedom Dividend',
-      'Medicare for All',
       'Human-Centered Capitalism',
+      'Medicare for All',
       'Value-Added Tax',
       'Improve the American Scorecard',
       'Combat Climate Change',
