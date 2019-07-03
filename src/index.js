@@ -1,4 +1,5 @@
 const algolia = require('algoliasearch/lite');
+import Bricks from 'bricks.js';
 const debounce = require('lodash.debounce');
 const policyConfig = require('./policyConfig');
 require('./index.styl');
@@ -156,6 +157,24 @@ const app = new Vue({
       if (resultsEl) {
         resultsEl.scrollLeft = 0;
         resultsEl.scrollTop = 0;
+      }
+    }
+  },
+
+  watch: {
+    view: function (val) {
+      if (val === 'switchedforyang') {
+        this.$nextTick(() => {
+          new Bricks({
+            container: document.getElementById('testimonials'),
+            packed: 'data-packed',
+            sizes: [
+              {columns: 1, gutter: 20},
+              {mq: '700px', columns: 2, gutter: 20},
+              {mq: '1400px', columns: 4, gutter: 20}
+            ]
+          }).pack();
+        });
       }
     }
   }

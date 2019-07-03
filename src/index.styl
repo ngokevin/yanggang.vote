@@ -245,6 +245,9 @@ input::placeholder
   opacity 0
 
 #testimonialContainer
+  align-items center
+  display flex
+  flex-direction column
   height 90%
   overflow-y auto
 
@@ -278,28 +281,16 @@ input::placeholder
     text-align center
 
  #testimonials
-    align-items center
-    display flex
-    flex-direction column
-    justify-content center
     margin-top 20px
-    +desktop()
-      align-items flex-start
-      flex-direction row
-      justify-content flex-start
-
- .submitTestimonialContainer
-    display flex
-    justify-content center
-    margin-top 15px
-    width 100%
 
  .submitTestimonial
     background $red
     box-shadow 1px 1px 2px 1px #222
     border-radius 5px
     color #FAFAFA
+    display inline-block
     margin 0 auto
+    margin-top 20px
     padding 10px 20px
     text-decoration none
 
@@ -312,8 +303,7 @@ input::placeholder
   font-size 12px
   padding 15px
   position relative
-  margin 10px
-  width 70%
+  width 300px
   +desktop()
     border-radius 40px 2px 40px 2px
     font-size 18px

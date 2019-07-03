@@ -33,6 +33,7 @@
     "algoliasearch": "^3.33.0",
     "babel-loader": "^8.0.6",
     "babel-preset-minify": "^0.5.0",
+    "bricks.js": "^1.8.0",
     "cross-env": "^5.2.0",
     "css-loader": "^3.0.0",
     "font-awesome": "^4.7.0",
