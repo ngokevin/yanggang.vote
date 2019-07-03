@@ -30,6 +30,7 @@ const app = new Vue({
       this.indexHits = data.results;
       this.handleSearch(data.results);
     });
+    document.getElementById('app').classList.add('loaded');
   },
 
   methods: {

@@ -57,8 +57,11 @@ ul
   width 100px
 
 #app
+  display none
   height 100%
   width 100%
+  &.loaded
+    display block
 
 #searchContainer
   align-items flex-end
@@ -145,11 +148,14 @@ input::placeholder
     padding 20px
 
   .icon
-    font-size 36px
+    font-size 30px
     right -10px
     opacity 0.75
     position absolute
     top -10px
+    +desktop()
+      font-size 36px
+      right -10px
 
   h2
     color $red
