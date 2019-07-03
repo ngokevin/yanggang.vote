@@ -167,7 +167,7 @@ module.exports = {
   'Human-Centered Capitalism': {
     icon: 'fas fa-people-carry'
   },
-  'Invest in America’s Mental Health': {
+  'Invest in America\'s Mental Health': {
     icon: 'fas fa-smile-beam'
   },
   'American Journalism Fellows': {

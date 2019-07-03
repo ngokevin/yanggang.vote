@@ -22,6 +22,7 @@ body
   height 100%
   margin 0
   padding 0
+  overflow-y hidden
   width 100%
 
 a
@@ -55,23 +56,6 @@ ul
   top 0
   width 100px
 
-#video
-  background alpha($blue, 0.65)
-  border 5px solid alpha($blue, 0.65)
-  left 0
-  margin 0 auto
-  margin-top 20px
-  max-height 240px
-  max-width 90%
-  position absolute
-  right 0
-  transition transform 0.75s
-  transform translate(0, 0);
-  &[data-is-searching="true"]
-    transform translate(0, -1000px);
-  +desktop()
-    max-height 100%
-
 #app
   height 100%
   width 100%
@@ -85,7 +69,7 @@ ul
   position absolute
   right 0
   +desktop()
-    bottom 60px
+    bottom 25px
     margin 0 auto
 
 #searchContainer
@@ -100,7 +84,7 @@ ul
   max-height 84px
   +desktop()
     margin-right 10px
-    max-height 128px
+    max-height 110px
 
 #search
   -webkit-appearance none
@@ -132,33 +116,8 @@ input::placeholder
   opacity 0.95
   text-transform none
 
-#suggested
-  display none
-  flex-direction column
-  padding 0
-  margin 0 auto
-  +desktop()
-    flex-direction row
-    display flex
-
-  li
-    background-image url(/assets/bg.png)
-    border-radius 50px 5px 50px 5px
-    color #FAFAFA
-    cursor pointer
-    margin-right 20px
-    opacity 0.9
-    padding 10px 20px
-    text-transform uppercase
-    transition .2s background
-    &:hover
-      opacity 1
-  i
-    display inline-block
-    width 25px
-
 #results
-  align-items flex-start
+  align-items center
   color #FAFAFA
   display flex
   flex-direction column
@@ -167,6 +126,7 @@ input::placeholder
   overflow-x hidden
   overflow-y auto
   +desktop()
+    align-items flex-start
     flex-direction row
     height 100%
     overflow-x auto
@@ -180,8 +140,7 @@ input::placeholder
   padding 15px
   position relative
   margin 10px
-  min-width 320px
-  max-width 320px
+  width 65%
   &::after
     content ''
     background url(/assets/bg.png) repeat scroll 0% 0%
@@ -195,6 +154,8 @@ input::placeholder
   +desktop()
     border-radius 40px 2px 40px 2px
     font-size 18px
+    min-width 320px
+    max-width 320px
     padding 20px
 
   .icon
@@ -214,8 +175,8 @@ input::placeholder
       display inline-block
       margin-right 10px
     +desktop()
-      font-size 26px
-      min-height 95px
+      font-size 24px
+      min-height 60px
 
   .problem
     +desktop()

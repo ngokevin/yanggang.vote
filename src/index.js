@@ -14,36 +14,54 @@ const app = new Vue({
     results: []
   },
 
+  mounted: function () {
+    index.getObjects([
+      'The Freedom Dividend',
+      'Medicare for All',
+      'Human-Centered Capitalism',
+      'Value-Added Tax',
+      'Improve the American Scorecard',
+      'Combat Climate Change',
+      'Gun Safety',
+      "Invest in America's Mental Health",
+      'Foreign Policy First Principles',
+      'Democracy Dollars'
+    ]).then(data => {
+      this.indexHits = data.results;
+      this.handleSearch(data.results);
+    });
+  },
+
   methods: {
     search: debounce(function (evt) {
       this.query = evt.target.value;
+      if (!this.query && this.indexHits.length) {
+        return this.handleSearch(this.indexHits);
+      }
       if (this.query.length < 2) {
         this.results = [];
         return;
       }
-      index.search({query: this.query}, (err, content) => {
-        content.hits.map(result => {
-          result.icon = policyConfig[result.name].icon;
-          result.name = highlightQuery(result.name, this.query);
-
-          const problem = highlightQuery(getFirstPoint(result.problems), this.query);
-          result.problem = upperFirstLetter(problem);
-
-          const statement = lowerFirstLetter(getFirstPoint(result.statement));
-          result.statement = highlightQuery(statement, this.query);
-
-        });
-
-        this.results = content.hits;
-        document.getElementById('results').scrollLeft = 0;
+      index.search({query: this.query}).then((content, err) => {
+        this.handleSearch(content.hits);
       });
     }, 250),
 
-    suggestion: function (evt) {
-      const query = evt.target.closest('li').dataset.query;
-      const search = document.getElementById('search');
-      search.setAttribute('value', query);
-      search.dispatchEvent(new CustomEvent('keydown'));
+    handleSearch: function (results) {
+      results.forEach(result => {
+        result.icon = policyConfig[result.name].icon;
+        result.name = highlightQuery(
+          result.name.replace('Pharmaceutical', 'Pharma'), this.query);
+
+        const problem = highlightQuery(getFirstPoint(result.problems), this.query);
+        result.problem = upperFirstLetter(problem);
+
+        const statement = lowerFirstLetter(getFirstPoint(result.statement));
+        result.statement = truncate(highlightQuery(statement, this.query), 400);
+      });
+
+      this.results = results;
+      document.getElementById('results').scrollLeft = 0;
     }
   }
 });
@@ -64,4 +82,12 @@ function lowerFirstLetter (string) {
 
 function upperFirstLetter (string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function truncate (str, length) {
+  if (!str) { return ''; }
+  if (str.length >= length) {
+    return str.substring(0, length - 3) + '...';
+  }
+  return str;
 }
