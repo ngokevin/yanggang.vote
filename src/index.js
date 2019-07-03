@@ -19,15 +19,43 @@ const app = new Vue({
       {
         name: 'Fred R.',
         location: 'Mariscopa, AZ',
-        why: '" I met with him and he rode in my truck. "',
+        why: '"I met with him and he rode in my truck."',
         link: 'https://twitter.com/@felon_fred',
-        image: '/assets/firstTestimonial.jpg'
+        image: '/assets/firstTestimonial.jpg',
+        candidate: 'Donald Trump'
+      },
+      {
+        name: 'John B.',
+        location: 'Kentucky',
+        why: '"He is the only candidate trying to think of how to handle the automation future thats coming down the line. We have already seen the affects from China doing those jobs, but now as automation takes even more jobs that can\'t be outsourced, we will have MASSIVE unemployment and we need to plan NOW on how to handle that. Thats why I will vote for him."',
+        candidate: 'Gary Johnson',
+        link: 'https://reddit/u/Collective82'
+      },
+      {
+        name: 'Sam M.',
+        location: 'New York',
+        why: '"Heard him on Ben Shapiro\'s Sunday special, and was surprised by his character, intelligence, common-sense, humane philosophy, torrent of fresh ideas, Everything! Even while I don\'t support some of his policies, he will still be the best president America has had in decades."',
+        candidate: 'Abstained'
+      },
+      {
+        name: 'Sarah M.',
+        location: 'New York',
+        why: '"His ideas are the best way forward. Period."',
+        candidate: 'Donald Trump'
       },
       {
         name: 'Kelton K.',
         location: 'Phoenix, AZ',
-        why: '" Yes! "',
-        link: 'https://twitter.com/@tasteslikewall'
+        why: '"Yes!"',
+        link: 'https://twitter.com/@tasteslikewall',
+        candidate: 'Donald Trump'
+      },
+      {
+        name: 'Chandler W.',
+        location: 'Bellevue, WA',
+        why: '"He\'s the only candidate talking about the real issues that are affecting and will be affecting people\'s daily lives - automation and AI displacing human jobs. In order to effectively tackle climate change and other issues, we need to address the mindset of scarcity that is affecting so many Americans (like the 78% that can\'t afford an extra $500 monthly expense). I\'m a conservative but above all else, I\'m a patriot that cares about where my country is headed if the Democrats and Republicans don\'t get their acts together."',
+        link: 'https://twitter.com/@chandlerbwils0n',
+        candidate: 'Gary Johnson'
       }
     ],
     view: ''

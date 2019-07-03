@@ -248,7 +248,7 @@ input::placeholder
   height 90%
   overflow-y auto
   +desktop()
-    height 100%
+    height auto
 
   h1
     color $blue
@@ -276,7 +276,7 @@ input::placeholder
     display block
     font-size 24px
     font-family 'Zilla Slab Highlight'
-    margin 0 auto 15px auto
+    margin 0 auto 20px auto
     text-align center
 
  #testimonials
@@ -284,14 +284,16 @@ input::placeholder
     display flex
     flex-direction column
     justify-content center
-    margin-top 50px
+    margin-top 20px
     +desktop()
+      align-items flex-start
       flex-direction row
+      justify-content flex-start
 
  .submitTestimonialContainer
     display flex
     justify-content center
-    margin-top 50px
+    margin-top 15px
     width 100%
 
  .submitTestimonial

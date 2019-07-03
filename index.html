@@ -38,6 +38,9 @@
       <p class="aboutTestimonial">
         Testimonials from conservative voters (previous or current) that now support presidential candidate, Andrew Yang. This shows Andrew Yang has a broad constituency base that crosses party lines.
       </p>
+      <div class="submitTestimonialContainer">
+        <a class="submitTestimonial" href="https://forms.gle/4TTSKykfju4T8EHS7">Submit Your Story</a>
+      </div>
       <transition-group id="testimonials" name="fade" tag="ul">
         <li class="testimonial" v-for="testimonial in testimonials" :key="testimonial.name">
           <div class="testimonialHeading">
@@ -49,15 +52,12 @@
             <div id="testimonialInfo">
               <h2 class="name">{{ testimonial.name }}</h2>
               <p class="location">{{ testimonial.location }}</p>
-              <p class="voted">Previously voted Donald Trump</p>
+              <p class="voted">Previously voted {{ testimonial.candidate }}</p>
             </div>
           </div>
           <p class="why">{{ testimonial.why }}</p>
         </li>
       </transition-group>
-      <div class="submitTestimonialContainer">
-        <a class="submitTestimonial" href="https://forms.gle/4TTSKykfju4T8EHS7">Submit Your Story</a>
-      </div>
     </div>
 
     <div id="outerSearchContainer" v-if="!view || view !== 'switchedforyang'">
