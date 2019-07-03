@@ -245,13 +245,21 @@ input::placeholder
   opacity 0
 
 #testimonialContainer
+  height 90%
+  overflow-y auto
+  +desktop()
+    height 100%
+
   h1
     color $blue
     font-family 'Zilla Slab Highlight'
-    font-size 50px
-    margin 30px auto 10px auto
+    font-size 40px
+    margin 0 auto
     text-align center
-    width 100%
+    +desktop()
+      font-size 50px
+      margin 30px auto 10px auto
+      width 100%
 
  .aboutTestimonial
     color #FAFAFA
@@ -259,7 +267,9 @@ input::placeholder
     font-family 'Zilla Slab Highlight'
     margin 0 auto
     text-align center
-    max-width 900px
+    max-width 90%
+    +desktop()
+      max-width 900px
 
  .testimonialSlogan
     color $blue
@@ -270,9 +280,13 @@ input::placeholder
     text-align center
 
  #testimonials
+    align-items center
     display flex
+    flex-direction column
     justify-content center
     margin-top 50px
+    +desktop()
+      flex-direction row
 
  .submitTestimonialContainer
     display flex
