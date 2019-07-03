@@ -91,7 +91,7 @@ const app = new Vue({
   }
 });
 
-const split = /\n|\n\n/g;
+const split = /\n|\\n/g;
 function getFirstPoint (string) {
   return string.split(split)[0];
 }
