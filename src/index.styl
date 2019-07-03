@@ -183,6 +183,7 @@ input::placeholder
       text-transform uppercase
 
   .statement
+    margin-bottom 25px
     img
       border-radius 50px
       height 32px
@@ -202,6 +203,19 @@ input::placeholder
   .searchHighlight
     color lighten($red, 15%)
     font-weight bold
+
+  .learnMore
+    display flex
+    justify-content center
+    a
+      border 0
+      color #CCC
+      font-family 'Zilla Slab Highlight'
+      font-size 12px
+      font-style italic
+      text-decoration none
+      +desktop()
+        font-size 16px
 
 .footer
   bottom 0
