@@ -174,7 +174,7 @@ const app = new Vue({
               {mq: '1400px', columns: 4, gutter: 20}
             ]
           }).pack();
-          setTimeout(() => { bricks.resize(); });
+          setTimeout(() => { bricks.pack().resize(); });
         });
       }
     }
