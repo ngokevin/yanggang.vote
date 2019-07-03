@@ -19,7 +19,7 @@
   <div id="background"></div>
 
   <div id="app">
-    <transition-group id="results" name="fade" tag="ul">
+    <transition-group id="results" name="fade" tag="ul" v-if="!view || view === 'policies'">
       <li class="resultCard" v-for="result in results" :key="result.name" :data-expanded="result.expanded">
         <i class="icon" :class="result.icon"></i>
         <div class="resultContainer">
@@ -32,7 +32,35 @@
       </li>
     </transition-group>
 
-    <div id="outerSearchContainer">
+    <div id="testimonialContainer" v-if="view === 'switchedforyang'">
+      <h1>#SwitchedForYang</h1>
+      <b class="testimonialSlogan" >Not left, not right, forward.</b>
+      <p class="aboutTestimonial">
+        Testimonials from conservative voters (previous or current) that now support presidential candidate, Andrew Yang. This shows Andrew Yang has a broad constituency base that crosses party lines.
+      </p>
+      <transition-group id="testimonials" name="fade" tag="ul">
+        <li class="testimonial" v-for="testimonial in testimonials" :key="testimonial.name">
+          <div class="testimonialHeading">
+            <div
+              class="testimonialImage"
+              :style="{backgroundImage: 'url(' + testimonial.image + ')'}"
+              v-if="testimonial.image"></div>
+            <i class="iconImage fas fa-republican" v-if="!testimonial.image"></i>
+            <div id="testimonialInfo">
+              <h2 class="name">{{ testimonial.name }}</h2>
+              <p class="location">{{ testimonial.location }}</p>
+              <p class="voted">Previously voted Donald Trump</p>
+            </div>
+          </div>
+          <p class="why">{{ testimonial.why }}</p>
+        </li>
+      </transition-group>
+      <div class="submitTestimonialContainer">
+        <a class="submitTestimonial" href="https://forms.gle/4TTSKykfju4T8EHS7">Submit Your Story</a>
+      </div>
+    </div>
+
+    <div id="outerSearchContainer" v-if="!view || view !== 'switchedforyang'">
       <div id="searchContainer">
         <img id="icon" src="/assets/logo.png">
         <input id="search" type="text" placeholder="Ask here about Andrew Yang" @keydown="search">

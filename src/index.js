@@ -14,7 +14,23 @@ const app = new Vue({
 
   data: {
     query: '',
-    results: []
+    results: [],
+    testimonials: [
+      {
+        name: 'Fred R.',
+        location: 'Mariscopa, AZ',
+        why: '" I met with him and he rode in my truck. "',
+        link: 'https://twitter.com/@felon_fred',
+        image: '/assets/firstTestimonial.jpg'
+      },
+      {
+        name: 'Kelton K.',
+        location: 'Phoenix, AZ',
+        why: '" Yes! "',
+        link: 'https://twitter.com/@tasteslikewall'
+      }
+    ],
+    view: ''
   },
 
   mounted: function () {
@@ -34,6 +50,10 @@ const app = new Vue({
       this.handleSearch(data.results);
     });
     document.getElementById('app').classList.add('loaded');
+
+    if (window.location.hash.toLowerCase() === '#switchedforyang') {
+      this.view = 'switchedforyang';
+    }
   },
 
   updated: function () {
@@ -77,7 +97,6 @@ const app = new Vue({
         result.brief = result.brief.replace(newLine, '<br><br>');
         result.expanded = false;
 
-        console.log(result.name);
         result.icon = policyConfig[result.name].icon;
         result.nameDisplay = highlightQuery(
           result.name.replace('Pharmaceutical', 'Pharma'), this.query);
@@ -92,8 +111,12 @@ const app = new Vue({
       });
 
       this.results = results;
-      document.getElementById('results').scrollLeft = 0;
-      document.getElementById('results').scrollTop = 0;
+
+      const resultsEl = document.getElementById('results');
+      if (resultsEl) {
+        resultsEl.scrollLeft = 0;
+        resultsEl.scrollTop = 0;
+      }
     }
   }
 });

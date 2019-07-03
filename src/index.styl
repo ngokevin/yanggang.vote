@@ -131,7 +131,7 @@ input::placeholder
 
 .resultCard
   background url(/assets/bg.png) repeat scroll 0% 0%
-  box-shadow 1px 0 1px 0 #222
+  box-shadow 1px 1px 1px 0 #222
   border-radius 20px 5px 20px 5px
   display inline-block
   font-size 12px
@@ -243,3 +243,111 @@ input::placeholder
 .fade-enter,
 .fade-leave-to
   opacity 0
+
+#testimonialContainer
+  h1
+    color $blue
+    font-family 'Zilla Slab Highlight'
+    font-size 50px
+    margin 30px auto 10px auto
+    text-align center
+    width 100%
+
+ .aboutTestimonial
+    color #FAFAFA
+    font-size 20px
+    font-family 'Zilla Slab Highlight'
+    margin 0 auto
+    text-align center
+    max-width 900px
+
+ .testimonialSlogan
+    color $blue
+    display block
+    font-size 24px
+    font-family 'Zilla Slab Highlight'
+    margin 0 auto 15px auto
+    text-align center
+
+ #testimonials
+    display flex
+    justify-content center
+    margin-top 50px
+
+ .submitTestimonialContainer
+    display flex
+    justify-content center
+    margin-top 50px
+    width 100%
+
+ .submitTestimonial
+    background $red
+    box-shadow 1px 1px 2px 1px #222
+    border-radius 5px
+    color #FAFAFA
+    margin 0 auto
+    padding 10px 20px
+    text-decoration none
+
+.testimonial
+  background url(/assets/bg.png) repeat scroll 0% 0%
+  box-shadow 1px 1px 1px 0 #222
+  border-radius 20px 5px 20px 5px
+  color #FAFAFA
+  display inline-block
+  font-size 12px
+  padding 15px
+  position relative
+  margin 10px
+  width 70%
+  +desktop()
+    border-radius 40px 2px 40px 2px
+    font-size 18px
+    max-height auto
+    min-width 320px
+    max-width 320px
+    padding 20px
+
+  .testimonialHeading
+    align-items flex-start
+    display flex
+
+    .testimonialImage
+      background-size cover
+      border-radius 200px
+      margin-right 20px
+      height 64px
+      width 64px
+
+    .iconImage
+      font-size 48px
+      margin-right 20px
+
+    .location
+      font-style italic
+      margin 0
+
+    .voted
+      bottom 3px
+      font-size 12px
+      font-style italic
+      margin 0
+      position relative
+
+  p,
+  span
+    font-size 16px
+    line-height 26px
+
+  h2
+    color $red
+    font-family 'Zilla Slab Highlight'
+    margin 0
+
+  b
+    font-family 'Zilla Slab Highlight'
+    margin-right 2px;
+    text-transform uppercase
+
+  .why
+    margin-bottom 0
