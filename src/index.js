@@ -165,7 +165,7 @@ const app = new Vue({
     view: function (val) {
       if (val === 'switchedforyang') {
         this.$nextTick(() => {
-          new Bricks({
+          const bricks = new Bricks({
             container: document.getElementById('testimonials'),
             packed: 'data-packed',
             sizes: [
@@ -174,6 +174,7 @@ const app = new Vue({
               {mq: '1400px', columns: 4, gutter: 20}
             ]
           }).pack();
+          setTimeout(() => { bricks.resize(); });
         });
       }
     }
