@@ -71,7 +71,7 @@ const app = new Vue({
 
     handleSearch: function (results) {
       results.forEach(result => {
-        result.brief = result.brief.replace('\\n', '<br><br>');
+        result.brief = result.brief.replace(/\\n/g, '<br><br>');
         result.expanded = false;
 
         result.icon = policyConfig[result.name].icon;
@@ -91,8 +91,9 @@ const app = new Vue({
   }
 });
 
+const split = /\n|\n\n/g;
 function getFirstPoint (string) {
-  return string.split('\n')[0];
+  return string.split(split)[0];
 }
 
 function highlightQuery (string, query) {
