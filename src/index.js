@@ -90,6 +90,7 @@ const app = new Vue({
 
       this.results = results;
       document.getElementById('results').scrollLeft = 0;
+      document.getElementById('results').scrollTop = 0;
     }
   }
 });
