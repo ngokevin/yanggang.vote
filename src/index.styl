@@ -76,13 +76,20 @@ ul
   align-items flex-end
   display flex
   justify-content center
+  position relative
+  right 24px
   margin-bottom 20px
   width 100%
 
-#gif
+#icon
+  position relative
+  left 12px
   margin-right 5px
   max-height 84px
+  top 12px
   +desktop()
+    left 24px
+    top 24px
     margin-right 10px
     max-height 110px
 
@@ -121,7 +128,7 @@ input::placeholder
   color #FAFAFA
   display flex
   flex-direction column
-  height 75%
+  height unquote('calc(100% - 120px)')
   margin-top 5px
   overflow-x hidden
   overflow-y auto
