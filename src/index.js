@@ -44,6 +44,8 @@ const app = new Vue({
           if (window.innerWidth / window.devicePixelRatio >= DESKTOP) {
             card.style.height = card.parentNode.clientHeight - CARD_PADDING + 'px';
           }
+        } else {
+          card.style.height = 'auto';
         }
       });
     })
@@ -75,6 +77,7 @@ const app = new Vue({
         result.brief = result.brief.replace(newLine, '<br><br>');
         result.expanded = false;
 
+        console.log(result.name);
         result.icon = policyConfig[result.name].icon;
         result.nameDisplay = highlightQuery(
           result.name.replace('Pharmaceutical', 'Pharma'), this.query);
