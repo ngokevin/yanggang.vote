@@ -15,7 +15,6 @@ $red=#DA344B
 
 html,
 body
-  cursor url('/assets/cursor.png'), auto
   font-family 'Roboto'
   height 100%
   margin 0
@@ -102,16 +101,16 @@ ul
 #search
   -webkit-appearance none
   -webkit-box-shadow none
-  background alpha(#FAFAFA, 0.7)
+  background-image url(/assets/inputBg.png)
   border 0
   border-radius 30px 5px 30px 5px
   box-shadow none
   color #111
   font-family 'Roboto'
   font-size 16px
-  font-style italic
   font-weight 400
   height 55px
+  opacity 0.9
   padding 5px 20px 5px 20px
   transition .2s background
   width 280px
@@ -123,9 +122,10 @@ ul
     width 320px
 
 input::placeholder
+  color #777
   font-family 'Roboto'
-  opacity 1
-  color #060606
+  font-style italic
+  opacity 0.95
   text-transform none
 
 #suggested
@@ -138,16 +138,17 @@ input::placeholder
     display flex
 
   li
-    background alpha($blue, 0.85)
+    background-image url(/assets/bg.png)
     border-radius 50px 5px 50px 5px
     color #FAFAFA
     cursor pointer
     margin-right 20px
+    opacity 0.9
     padding 10px 20px
     text-transform uppercase
     transition .2s background
     &:hover
-      background alpha(#305dA0, 0.85)
+      opacity 1
   i
     display inline-block
     width 25px
@@ -168,7 +169,6 @@ input::placeholder
     overflow-y hidden
 
 .resultCard
-  background alpha($blue, 0.85)
   box-shadow 1px 0 1px 0 #222
   border-radius 20px 5px 20px 5px
   display inline-block
@@ -178,6 +178,16 @@ input::placeholder
   margin 10px
   min-width 320px
   max-width 320px
+  &::after
+    content ''
+    background url(/assets/bg.png) repeat scroll 0% 0%
+    opacity 0.85
+    top 0
+    left 0
+    bottom 0
+    right 0
+    position absolute
+    z-index -1
   +desktop()
     border-radius 40px 2px 40px 2px
     font-size 18px
@@ -214,6 +224,14 @@ input::placeholder
       text-transform uppercase
 
   .statement
+    img
+      border-radius 50px
+      height 32px
+      margin-right 10px
+      opacity 0.85
+      position relative
+      top 4px
+      width 32px
     +desktop()
       font-size 16px
       line-height 26px

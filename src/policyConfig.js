@@ -24,7 +24,7 @@ module.exports = {
     icon: 'fas fa-vote-yea'
   },
   'Crypto/Digital Asset Regulation and Consumer Protection': {
-    icon: 'fas fa-bitcoin'
+    icon: 'fab fa-bitcoin'
   },
   'Proportional Selection of Electors': {
     icon: 'fas fa-users'
@@ -153,7 +153,7 @@ module.exports = {
     icon: 'fas fa-child'
   },
   'Legalize Marijuana': {
-    icon: 'fas fa-canadian-maple-leaf'
+    icon: 'fab fa-canadian-maple-leaf'
   },
   'Make Puerto Rico a State': {
     icon: 'fas fa-globe-americas'
