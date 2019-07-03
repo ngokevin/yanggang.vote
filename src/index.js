@@ -22,20 +22,28 @@ const app = new Vue({
         location: 'Kentucky',
         why: '"He is the only candidate trying to think of how to handle the automation future that\'s coming down the line. We have already seen the affects from China doing those jobs, but now as automation takes even more jobs that can\'t be outsourced, we will have MASSIVE unemployment and we need to plan NOW on how to handle that. That\'s why I will vote for him."',
         candidate: 'Gary Johnson',
-        link: 'https://reddit/u/Collective82'
+        username: '/u/Collective82'
       },
       {
         name: 'Polissa C.',
         location: 'Florence, AL',
         why: '"I voted Trump last time to avoid what I saw was a bigger evil. I am not voting Trump again. He is even worse than he came off before he got elected. He is in it for himself and to puff up his ego. Nothing has changed for our family since Trump entered office other than price of everything except gas has gone up it seems. I am disabled, and my husband works in food. My income is not enough to survive on much less thrive. And my husband\'s income at $10p/h at 33-/+hrs a week and must keep open availability to get hours isn\'t working. He loves his job. But it is a chain store and the number one complaint from restaurants is consistency of product. Automated kitchens are coming fast. The fancier places will survive but it\'s the chain stores like my husband\'s who will automate to save cost and operate with skeleton crews. What happens to us then. Yang is the only one saying what I\'ve been saying for the last 7 years. The future is now, and we can\'t afford to wait and make a plan tomorrow."',
-        candidate: 'Donald Trump'
+        candidate: 'Donald Trump',
+        username: '@CampbellPolissa'
       },
       {
         name: 'Chandler W.',
         location: 'Bellevue, WA',
         why: '"He\'s the only candidate talking about the real issues that are affecting and will be affecting people\'s daily lives - automation and AI displacing human jobs. In order to effectively tackle climate change and other issues, we need to address the mindset of scarcity that is affecting so many Americans (like the 78% that can\'t afford an extra $500 monthly expense). I\'m a conservative but above all else, I\'m a patriot that cares about where my country is headed if the Democrats and Republicans don\'t get their acts together."',
-        link: 'https://twitter.com/@chandlerbwils0n',
+        username: '@chandlerbwils0n',
         candidate: 'Gary Johnson'
+      },
+      {
+        name: 'Brandon B.',
+        location: 'Dallas, TX',
+        why: '"I have always considered myself a reasonable conservative. Someone who rarely voted straight down party lines and would always look for opportunities to see compromises. Andrew Yang represents that to me. My biggest problem with most democratic candidates is that I don\'t feel as though they recognize the problems that everyday Americans face. Andrew Yang, I believe, is the only candidate who not only recognizes the problems Americans face, but offers solutions based in today\'s America not solutions from decades past. I will always vote for someone who recognizes the issues over someone who doesn\'t, or manufactures new issues."',
+        candidate: 'Donald Trump',
+        username: '@brandon_b12'
       },
       {
         name: 'Ryan W.',
@@ -53,7 +61,7 @@ const app = new Vue({
         name: 'Fred R.',
         location: 'Mariscopa, AZ',
         why: '"I met with him and he rode in my truck."',
-        link: 'https://twitter.com/@felon_fred',
+        username: '@felon_fred',
         image: '/assets/firstTestimonial.jpg',
         candidate: 'Donald Trump'
       },
@@ -64,10 +72,16 @@ const app = new Vue({
         candidate: 'Donald Trump'
       },
       {
+        name: 'Scott H.',
+        location: 'Latham, NY',
+        why: '"Support all of his forward thinking, bipartisan ideas."',
+        candidate: 'Donald Trump'
+      },
+      {
         name: 'Kelton K.',
         location: 'Phoenix, AZ',
         why: '"Yes!"',
-        link: 'https://twitter.com/@tasteslikewall',
+        username: '@tasteslikewall',
         candidate: 'Donald Trump'
       },
     ],

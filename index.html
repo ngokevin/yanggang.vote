@@ -48,7 +48,13 @@
               v-if="testimonial.image"></div>
             <i class="iconImage fas fa-republican" v-if="!testimonial.image"></i>
             <div id="testimonialInfo">
-              <h2 class="name">{{ testimonial.name }}</h2>
+              <h2 class="name">
+                <span v-if="!testimonial.username">{{ testimonial.name }}</span>
+                <a :href="testimonial.username.indexOf('@') !== -1 ? 'https://twitter.com/' + testimonial.username : 'https://reddit.com/u/' + testimonial.username"
+                   v-if="testimonial.username">
+                  {{ testimonial.name }}
+                </a>
+              </h2>
               <p class="location">{{ testimonial.location }}</p>
               <p class="voted">Previously voted {{ testimonial.candidate }}</p>
             </div>
