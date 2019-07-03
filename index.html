@@ -12,7 +12,7 @@
   <link rel="icon" href="assets/cursor.png" type="image/x-icon">
   <script src="assets/fontawesome/js/all.min.js"></script>
   <link href="assets/fontawesome/css/all.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="assets/vue.js"></script>
 </head>
 
 <body>
@@ -20,12 +20,15 @@
 
   <div id="app">
     <transition-group id="results" name="fade" tag="ul">
-      <li class="resultCard" v-for="result in results" :key="result.name">
+      <li class="resultCard" v-for="result in results" :key="result.name" :data-expanded="result.expanded">
         <i class="icon" :class="result.icon"></i>
-        <h2 class="name" v-html="result.name"></h2>
-        <p class="problem"><b>Problem</b>&nbsp;<span v-html="result.problem"></span></p>
-        <p class="statement"><img src="/assets/avatar.jpg"><b>As president</b>&nbsp;I will&nbsp;<span v-html="result.statement"></span></p>
-        <div class="learnMore"><a href="#">Read more&hellip;</a></div>
+        <div class="resultContainer">
+          <h2 class="name" v-html="result.nameDisplay"></h2>
+          <p class="problem"><b>Problem</b>&nbsp;<span v-html="result.problem"></span></p>
+          <p class="statement"><img src="/assets/avatar.jpg"><b>As president</b>&nbsp;<span>I will&nbsp;<span v-html="result.statement"></span></p>
+          <div class="brief" v-if="result.expanded"><b>Details</b>&nbsp;<p v-html="result.brief"></p></div>
+          <div class="learnMore" v-if="!result.expanded" @click="expand(result.name)"><a href="#">Read more&hellip;</a></div>
+        </div>
       </li>
     </transition-group>
 

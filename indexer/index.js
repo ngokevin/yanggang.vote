@@ -38,13 +38,13 @@ function fetchPolicy (policy, policyUrl) {
 
       // Brief.
       policy.brief = '';
-      document.querySelectorAll('.brief .column p').forEach(text => {
+      document.querySelectorAll('.brief p').forEach(text => {
         const span = text.querySelector('span');
         if (span) {
-          policy.brief += `${getText(span)}\n`;
+          policy.brief += `${getText(span)}\\n`;
           return;
         }
-        policy.brief += `${getText(text)}\n`;
+        policy.brief += `${getText(text)}\\n`;
       });
       policy.brief = policy.brief.slice(0, -1);
 
@@ -54,14 +54,14 @@ function fetchPolicy (policy, policyUrl) {
       // Problems.
       policy.problems = '';
       document.querySelectorAll('.problems-to-be-solved .column li').forEach(text => {
-        policy.problems += `${getText(text)}\n`;
+        policy.problems += `${getText(text)}\\n`;
       });
       policy.problems = policy.problems.slice(0, -1);
 
       // Goals.
       policy.goals = '';
       document.querySelectorAll('.goals li').forEach(text => {
-        policy.goals += `${getText(text)}\n`;
+        policy.goals += `${getText(text)}\\n`;
       });
       policy.goals = policy.goals.slice(0, -1);
 
@@ -70,7 +70,7 @@ function fetchPolicy (policy, policyUrl) {
       const statementList = document.querySelectorAll('.as-president li');
       if (statementList.length) {
         statementList.forEach(text => {
-          policy.statement += `${getText(text)}\n`;
+          policy.statement += `${getText(text)}\\n`;
         });
       } else {
         policy.statement = getText(document.querySelector('.as-president span'));

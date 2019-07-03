@@ -6,6 +6,8 @@ require('./index.styl');
 const client = algolia('JYM7HVFCCH', '183859a024403b314e105277e94dfd61');
 const index = client.initIndex('andrewyang');
 
+const DESKTOP = 1024;
+
 const app = new Vue({
   el: '#app',
 
@@ -33,7 +35,26 @@ const app = new Vue({
     document.getElementById('app').classList.add('loaded');
   },
 
+  updated: function () {
+    const CARD_PADDING = 50;
+    this.$nextTick(() => {
+      Array.from(document.querySelectorAll('.resultContainer')).forEach(card => {
+        if (card.parentNode.dataset.expanded === 'true') {
+          if (window.innerWidth / window.devicePixelRatio >= DESKTOP) {
+            card.style.height = card.parentNode.clientHeight - CARD_PADDING + 'px';
+          }
+        }
+      });
+    })
+  },
+
   methods: {
+    expand: function (name)  {
+      const policy = this.results.filter(result => result.name === name);
+      if (!policy) { return; }
+      policy[0].expanded = true;
+    },
+
     search: debounce(function (evt) {
       this.query = evt.target.value;
       if (!this.query && this.indexHits.length) {
@@ -50,8 +71,11 @@ const app = new Vue({
 
     handleSearch: function (results) {
       results.forEach(result => {
+        result.brief = result.brief.replace('\\n', '<br><br>');
+        result.expanded = false;
+
         result.icon = policyConfig[result.name].icon;
-        result.name = highlightQuery(
+        result.nameDisplay = highlightQuery(
           result.name.replace('Pharmaceutical', 'Pharma'), this.query);
 
         const problem = highlightQuery(getFirstPoint(result.problems), this.query);
