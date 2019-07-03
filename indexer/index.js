@@ -46,7 +46,7 @@ function fetchPolicy (policy, policyUrl) {
         }
         policy.brief += `${getText(text)}\\n`;
       });
-      policy.brief = policy.brief.slice(0, -1);
+      policy.brief = policy.brief.slice(0, -2);
 
       // Quote.
       policy.quote = getText(document.querySelector('.brief + blockquote .wrap'));
@@ -56,14 +56,14 @@ function fetchPolicy (policy, policyUrl) {
       document.querySelectorAll('.problems-to-be-solved .column li').forEach(text => {
         policy.problems += `${getText(text)}\\n`;
       });
-      policy.problems = policy.problems.slice(0, -1);
+      policy.problems = policy.problems.slice(0, -2);
 
       // Goals.
       policy.goals = '';
       document.querySelectorAll('.goals li').forEach(text => {
         policy.goals += `${getText(text)}\\n`;
       });
-      policy.goals = policy.goals.slice(0, -1);
+      policy.goals = policy.goals.slice(0, -2);
 
       // Statement.
       policy.statement = '';
@@ -72,6 +72,7 @@ function fetchPolicy (policy, policyUrl) {
         statementList.forEach(text => {
           policy.statement += `${getText(text)}\\n`;
         });
+        policy.statement = policy.statement.slice(0, -2);
       } else {
         policy.statement = getText(document.querySelector('.as-president span'));
       }
