@@ -60,31 +60,25 @@ ul
   height 100%
   width 100%
 
-#outerSearchContainer
-  bottom 20px
-  display flex
-  flex-direction column
-  left 0
-  margin 0 10px
-  position absolute
-  right 0
-  +desktop()
-    bottom 25px
-    margin 0 auto
-
 #searchContainer
   align-items flex-end
+  bottom 20px
   display flex
   justify-content center
-  position relative
-  right 24px
+  left 0
+  position absolute
+  right 0
   margin-bottom 20px
   width 100%
+  +desktop()
+    bottom 25px
 
 #icon
   position relative
   margin-right 10px
-  max-height 60px
+  max-height 50px
+  +desktop()
+    max-height 60px
 
 #search
   -webkit-appearance none
@@ -97,7 +91,7 @@ ul
   font-family 'Roboto'
   font-size 16px
   font-weight 400
-  height 55px
+  height 45px
   opacity 0.9
   padding 5px 20px 5px 20px
   transition .2s background
@@ -107,6 +101,7 @@ ul
     opacity 1
   +desktop()
     font-size 18px
+    height 55px
     width 320px
 
 input::placeholder
@@ -121,7 +116,7 @@ input::placeholder
   color #FAFAFA
   display flex
   flex-direction column
-  height unquote('calc(100% - 120px)')
+  height unquote('calc(100% - 110px)')
   margin-top 5px
   overflow-x hidden
   overflow-y auto
@@ -133,6 +128,7 @@ input::placeholder
     overflow-y hidden
 
 .resultCard
+  background url(/assets/bg.png) repeat scroll 0% 0%
   box-shadow 1px 0 1px 0 #222
   border-radius 20px 5px 20px 5px
   display inline-block
@@ -141,16 +137,6 @@ input::placeholder
   position relative
   margin 10px
   width 65%
-  &::after
-    content ''
-    background url(/assets/bg.png) repeat scroll 0% 0%
-    opacity 0.85
-    top 0
-    left 0
-    bottom 0
-    right 0
-    position absolute
-    z-index -1
   +desktop()
     border-radius 40px 2px 40px 2px
     font-size 18px
