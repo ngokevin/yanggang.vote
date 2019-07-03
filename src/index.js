@@ -31,8 +31,11 @@ const app = new Vue({
 
           const statement = lowerFirstLetter(getFirstPoint(result.statement));
           result.statement = highlightQuery(statement, this.query);
+
         });
+
         this.results = content.hits;
+        document.getElementById('results').scrollLeft = 0;
       });
     }, 250),
 
