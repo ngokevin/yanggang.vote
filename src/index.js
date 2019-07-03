@@ -6,6 +6,7 @@ require('./index.styl');
 const client = algolia('JYM7HVFCCH', '183859a024403b314e105277e94dfd61');
 const index = client.initIndex('andrewyang');
 
+const newLine = /\\n/g;
 const DESKTOP = 1024;
 
 const app = new Vue({
@@ -71,7 +72,7 @@ const app = new Vue({
 
     handleSearch: function (results) {
       results.forEach(result => {
-        result.brief = result.brief.replace(/\\n/g, '<br><br>');
+        result.brief = result.brief.replace(newLine, '<br><br>');
         result.expanded = false;
 
         result.icon = policyConfig[result.name].icon;
@@ -79,10 +80,12 @@ const app = new Vue({
           result.name.replace('Pharmaceutical', 'Pharma'), this.query);
 
         const problem = highlightQuery(getFirstPoint(result.problems), this.query);
-        result.problem = upperFirstLetter(problem);
+        result.problems = upperFirstLetter(problem).replace(newLine, '<br><br>');
+        result.problemDisplay = upperFirstLetter(result.problems);
 
-        const statement = lowerFirstLetter(getFirstPoint(result.statement));
-        result.statement = truncate(highlightQuery(statement, this.query), 400);
+        const statement = lowerFirstLetter(getFirstPoint(result.statement))
+        result.statementDisplay = truncate(highlightQuery(statement, this.query), 400);
+        result.statement = lowerFirstLetter(result.statement).replace(newLine, '<br><br>');
       });
 
       this.results = results;

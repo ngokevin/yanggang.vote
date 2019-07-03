@@ -24,8 +24,8 @@
         <i class="icon" :class="result.icon"></i>
         <div class="resultContainer">
           <h2 class="name" v-html="result.nameDisplay"></h2>
-          <p class="problem"><b>Problem</b>&nbsp;<span v-html="result.problem"></span></p>
-          <p class="statement"><img src="/assets/avatar.jpg"><b>As president</b>&nbsp;<span>I will&nbsp;<span v-html="result.statement"></span></p>
+          <p class="problem"><b>Problem</b>&nbsp;<span v-html="result.expanded ? result.problems : result.problemDisplay"></span></p>
+          <p class="statement"><img src="/assets/avatar.jpg"><b>As president</b>&nbsp;<span>I will&nbsp;<span v-html="result.expanded ? result.statement : result.statementDisplay"></span></p>
           <div class="brief" v-if="result.expanded"><b>Details</b>&nbsp;<p v-html="result.brief"></p></div>
           <div class="learnMore" v-if="!result.expanded" @click="expand(result.name)"><a href="#">Read more&hellip;</a></div>
         </div>
