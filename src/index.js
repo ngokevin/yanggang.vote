@@ -185,7 +185,8 @@ const app = new Vue({
             sizes: [
               {columns: 1, gutter: 20},
               {mq: '700px', columns: 2, gutter: 20},
-              {mq: '1400px', columns: 4, gutter: 20}
+              {mq: '1000px', columns: 3, gutter: 20},
+              {mq: '1500px', columns: 4, gutter: 20}
             ]
           }).pack();
           setTimeout(() => { bricks.pack().resize(); });
