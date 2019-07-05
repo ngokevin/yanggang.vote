@@ -38,6 +38,7 @@ function fetchPolicy (policy, policyUrl) {
       // Brief.
       policy.brief = '';
       document.querySelectorAll('.brief p, .brief li').forEach(text => {
+        if (text.querySelector('ul')) { return; }
         const span = text.querySelector('span');
         if (span) {
           policy.brief += `${getText(span)}`;
