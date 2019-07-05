@@ -243,7 +243,7 @@ input::placeholder
   color #FAFAFA
   font-size 9px
   font-style italic
-  position absolute
+  position fixed
   left 0
   right 0
   text-align center
@@ -291,8 +291,10 @@ input::placeholder
   align-items center
   display flex
   flex-direction column
-  height 90%
+  height unquote('calc(100% - 120px)')
   overflow-y auto
+  +desktop()
+    height unquote('calc(100% - 200px)')
 
  .aboutTestimonial
     color #FAFAFA
@@ -303,6 +305,7 @@ input::placeholder
     text-align center
     max-width 90%
     +desktop()
+      margin-top 0
       max-width 900px
 
  #testimonials
