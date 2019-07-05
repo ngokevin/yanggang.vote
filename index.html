@@ -19,9 +19,10 @@
   <div id="background"></div>
 
   <div id="app">
-    <div class="header" v-if="view === 'policies'">
-      <h1>Andrew Yang 2020</h1>
-      <b class="policy subheader" >Not left, not right, forward.</b>
+    <div class="header">
+      <h1 v-if="view === 'policies'">Andrew Yang 2020</h1>
+      <h1 v-if="view === 'switchedforyang'">#switchedForYang</h1>
+      <b :class="{policy: view === 'policies', subheader: true}">Not left, not right, forward.</b>
     </div>
 
     <nav id="nav">
@@ -51,10 +52,6 @@
     </transition-group>
 
     <div id="testimonialContainer" v-if="view === 'switchedforyang'">
-      <div class="header">
-        <h1>#SwitchedForYang</h1>
-        <b class="subheader">Not left, not right, forward.</b>
-      </div>
       <p class="aboutTestimonial">
         Testimonials from conservative voters (previous or current) that now support presidential candidate, Andrew Yang. This shows Andrew Yang has a broad constituency base that crosses party lines.
       </p>
