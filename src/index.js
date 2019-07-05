@@ -95,6 +95,8 @@ const app = new Vue({
         const statement = lowerFirstLetter(getFirstPoint(result.statement))
         result.statementDisplay = truncate(highlightQuery(statement, this.query), 400);
         result.statement = lowerFirstLetter(result.statement).replace(newLine, '<br><br>');
+
+        result.goals = result.goals.replace(newLine, '<br><br>');
       });
 
       this.results = results;
