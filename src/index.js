@@ -17,7 +17,7 @@ const app = new Vue({
     query: '',
     results: [],
     testimonials: require('./testimonials'),
-    view: ''
+    view: 'policies'
   },
 
   mounted: function () {

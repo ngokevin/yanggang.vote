@@ -19,7 +19,20 @@
   <div id="background"></div>
 
   <div id="app">
-    <transition-group id="results" name="fade" tag="ul" v-if="!view || view === 'policies'">
+    <div class="header" v-if="view === 'policies'">
+      <h1>Andrew Yang 2020</h1>
+      <b class="subheader" >Not left, not right, forward.</b>
+    </div>
+
+    <nav id="nav">
+      <a href="https://yang2020.com/volunteer">Volunteer</a>
+      <a href="#policies" @click="view = 'policies'" v-if="view !== 'policies'">Policies</a>
+      <a href="#switchedForYang"
+        @click="view = 'switchedforyang'"
+        v-if="view !== 'switchedforyang'">#switchedForYang</a>
+    </nav>
+
+    <transition-group id="results" name="fade" tag="ul" v-if="view === 'policies'">
       <li class="resultCard" v-for="result in results" :key="result.name" :data-expanded="result.expanded">
         <i class="icon" :class="result.icon"></i>
         <div class="resultContainer">
@@ -33,8 +46,10 @@
     </transition-group>
 
     <div id="testimonialContainer" v-if="view === 'switchedforyang'">
-      <h1>#SwitchedForYang</h1>
-      <b class="testimonialSlogan" >Not left, not right, forward.</b>
+      <div class="header">
+        <h1>#SwitchedForYang</h1>
+        <b class="subheader">Not left, not right, forward.</b>
+      </div>
       <p class="aboutTestimonial">
         Testimonials from conservative voters (previous or current) that now support presidential candidate, Andrew Yang. This shows Andrew Yang has a broad constituency base that crosses party lines.
       </p>
@@ -64,7 +79,7 @@
       </transition-group>
     </div>
 
-    <div id="outerSearchContainer" v-if="!view || view !== 'switchedforyang'">
+    <div id="outerSearchContainer" v-if="view !== 'switchedforyang'">
       <div id="searchContainer">
         <img id="icon" src="/assets/logo.png">
         <input id="search" type="text" placeholder="Ask here about Andrew Yang" @keydown="search">
