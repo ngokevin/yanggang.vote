@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const JSDOM = require('jsdom').JSDOM;
 
-const DEBUG = false;
+const DEBUG = '';
 const indexPage = 'https://www.yang2020.com/policies/';
 const policies = [];
 
@@ -16,8 +16,8 @@ module.exports.index = function () {
       const links = document.querySelectorAll('article.policy a');
 
       const policiesFetched = Array.from(links).map((link, i) => {
-        if (DEBUG && i > 5) { return; }
         const name = link.textContent.trim();
+        if (DEBUG && name !== DEBUG) { return; }
         policy = {name: name};
         policies.push(policy);
         return fetchPolicy(policy, link.getAttribute('href'));
@@ -32,36 +32,36 @@ module.exports.index = function () {
 function fetchPolicy (policy, policyUrl) {
   return fetch(policyUrl)
     .then(res => res.text())
-    .then(body => {
-      console.log(`${policyUrl} fetched.`);
+    .then(body => { console.log(`${policyUrl} fetched.`);
       const document = new JSDOM(clean(body)).window.document;
 
       // Brief.
       policy.brief = '';
-      document.querySelectorAll('.brief p').forEach(text => {
+      document.querySelectorAll('.brief p, .brief li').forEach(text => {
         const span = text.querySelector('span');
         if (span) {
-          policy.brief += `${getText(span)}\\n`;
+          policy.brief += `${getText(span)}`;
           return;
         }
-        policy.brief += `${getText(text)}\\n`;
+        policy.brief += `${getText(text)}`;
       });
       policy.brief = policy.brief.slice(0, -2);
 
       // Quote.
       policy.quote = getText(document.querySelector('.brief + blockquote .wrap'));
+      policy.quote = policy.quote.slice(0, -2);
 
       // Problems.
       policy.problems = '';
       document.querySelectorAll('.problems-to-be-solved .column li').forEach(text => {
-        policy.problems += `${getText(text)}\\n`;
+        policy.problems += `${getText(text)}`;
       });
       policy.problems = policy.problems.slice(0, -2);
 
       // Goals.
       policy.goals = '';
       document.querySelectorAll('.goals li').forEach(text => {
-        policy.goals += `${getText(text)}\\n`;
+        policy.goals += `${getText(text)}`;
       });
       policy.goals = policy.goals.slice(0, -2);
 
@@ -70,16 +70,17 @@ function fetchPolicy (policy, policyUrl) {
       const statementList = document.querySelectorAll('.as-president li');
       if (statementList.length) {
         statementList.forEach(text => {
-          policy.statement += `${getText(text)}\\n`;
+          policy.statement += `${getText(text)}`;
         });
-        policy.statement = policy.statement.slice(0, -2);
       } else {
         policy.statement = getText(document.querySelector('.as-president span'));
       }
+      policy.statement = policy.statement.slice(0, -2);
     });
 }
 
 function getText (el) {
+  if (el.textContent.length < 3) { return ''; }
   return unescape(encodeURIComponent(el.textContent))
     .trim()
     .replace(/[ââââ]/g, '')
@@ -88,17 +89,18 @@ function getText (el) {
     .replace(/\u0094/g, '')
     .replace(/  /, ' ')
     .replace(/ /, ' ')
-    .trim();
+    .replace(/.  /, '. ')
+    .trim() + '\\n';
 }
 
 function clean (body) {
   return body
-    .replace(/\xc3/g, '')
-    .replace(/\x82/g, '')
-    .replace(/\xc2/g, '')
-    .replace(/\xc2\x94/g, '')
-    .replace(/\xa0/g, '')
-    .replace(/\u0094/g, '');
+    .replace(/\xc3/g, ' ')
+    .replace(/\x82/g, ' ')
+    .replace(/\xc2/g, ' ')
+    .replace(/\xc2\x94/g, ' ')
+    .replace(/\xa0/g, ' ')
+    .replace(/\u0094/g, ' ');
 }
 
 module.exports.algolia = function () {
