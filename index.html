@@ -21,7 +21,7 @@
   <div id="app">
     <div class="header" v-if="view === 'policies'">
       <h1>Andrew Yang 2020</h1>
-      <b class="subheader" >Not left, not right, forward.</b>
+      <b class="policy subheader" >Not left, not right, forward.</b>
     </div>
 
     <nav id="nav">
@@ -39,6 +39,10 @@
           <h2 class="name" v-html="result.nameDisplay"></h2>
           <p class="problem"><b>Problem</b>&nbsp;<span v-html="result.expanded ? result.problems : result.problemDisplay"></span></p>
           <p class="statement"><img src="/assets/avatar.jpg"><b>As president</b>&nbsp;<span>I will&nbsp;<span v-html="result.expanded ? result.statement : result.statementDisplay"></span></p>
+          <div class="images">
+            <img v-for="image in result.images" :src="image">
+          </div>
+
           <div class="brief" v-if="result.expanded"><b>Details</b>&nbsp;<p v-html="result.brief"></p></div>
           <div class="goals" v-if="result.expanded"><b>Goals</b>&nbsp;<p v-html="result.goals"></p></div>
           <div class="learnMore" v-if="!result.expanded" @click="expand(result.name)"><a href="#">Read more&hellip;</a></div>
@@ -87,7 +91,7 @@
       </div>
     </div>
 
-    <p class="footer">This site was built by regular volunteers in support for Andrew Yang. Donate at <a href="https://yang2020.com">Andrew Yang's official campaign page</a>!</p>
+    <p class="footer">Built by volunteers in support for Andrew Yang. Donate at <a href="https://yang2020.com">the official campaign page</a>!</p>
   </div>
 
   <script src="build.js"></script>

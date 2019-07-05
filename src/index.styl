@@ -78,15 +78,16 @@ ul
   overflow hidden
   position absolute
   right 0
-  margin-bottom 20px
+  margin-bottom 10px
   width 100%
   +desktop()
+    margin-bottom 20px
     bottom 30px
 
 #icon
   position relative
   margin-right 10px
-  max-height 50px
+  max-height 40px
   +desktop()
     max-height 60px
 
@@ -99,9 +100,9 @@ ul
   box-shadow none
   color #111
   font-family 'Roboto'
-  font-size 16px
+  font-size 15px
   font-weight 400
-  height 45px
+  height 35px
   opacity 0.9
   padding 5px 20px 5px 20px
   transition .2s background
@@ -126,12 +127,13 @@ input::placeholder
   color #FAFAFA
   display flex
   flex-direction column
-  height unquote('calc(100% - 265px)')
+  height unquote('calc(100% - 160px)')
   margin-top 5px
   overflow-y auto
   position relative
   +desktop()
     align-items flex-start
+    height unquote('calc(100% - 265px)')
     flex-direction row
     overflow-y hidden
 
@@ -157,6 +159,11 @@ input::placeholder
 
   .resultContainer
     overflow-y scroll
+
+  .images
+    img
+      margin-bottom  20px
+      max-width 100%
 
   p,
   span
@@ -270,8 +277,15 @@ input::placeholder
     display block
     font-size 24px
     font-family 'Zilla Slab Highlight'
-    margin 0 auto 20px auto
+    margin 0 auto 5px auto
     text-align center
+    +desktop()
+      margin 0 auto 20px auto
+
+.subheader.policy
+  display none
+  +desktop()
+    display block
 
 #testimonialContainer
   align-items center

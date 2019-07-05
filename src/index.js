@@ -44,13 +44,11 @@ const app = new Vue({
   },
 
   updated: function () {
-    const CARD_PADDING = 50;
+    const CARD_PADDING = 30;
     this.$nextTick(() => {
       Array.from(document.querySelectorAll('.resultContainer')).forEach(card => {
-        if (card.parentNode.dataset.expanded === 'true') {
-          if (window.innerWidth / window.devicePixelRatio >= DESKTOP) {
-            card.style.height = card.parentNode.clientHeight - CARD_PADDING + 'px';
-          }
+        if (window.innerWidth / window.devicePixelRatio >= DESKTOP) {
+          card.style.height = card.parentNode.clientHeight - CARD_PADDING + 'px';
         } else {
           card.style.height = 'auto';
         }
@@ -97,6 +95,7 @@ const app = new Vue({
         result.statement = lowerFirstLetter(result.statement).replace(newLine, '<br><br>');
 
         result.goals = result.goals.replace(newLine, '<br><br>');
+        result.images = policyConfig[result.name].images;
       });
 
       this.results = results;

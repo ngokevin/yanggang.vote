@@ -93,7 +93,11 @@ module.exports = {
     icon: 'fas fa-prescription-bottle-alt'
   },
   'The Freedom Dividend': {
-    icon: 'fas fa-money-bill-wave'
+    icon: 'fas fa-money-bill-wave',
+    images: [
+      '/assets/ubipay.jpg',
+      '/assets/needs.jpg'
+    ]
   },
   'Combat Climate Change': {
     icon: 'fas fa-temperature-high'
@@ -165,7 +169,10 @@ module.exports = {
     icon: 'fas fa-tablets'
   },
   'Human-Centered Capitalism': {
-    icon: 'fas fa-people-carry'
+    icon: 'fas fa-people-carry',
+    images: [
+      '/assets/capitalism.jpg'
+    ]
   },
   'Invest in America\'s Mental Health': {
     icon: 'fas fa-smile-beam'
