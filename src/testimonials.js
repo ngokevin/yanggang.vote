@@ -46,6 +46,18 @@ module.exports = [
     candidate: 'Abstained'
   },
   {
+    name: 'Aaron B.',
+    location: 'Monroe, MI',
+    why: '"I voted for Donald Trump in 2016 because I felt that I couldn\'t trust Hillary Clinton. Mr. Trump was preaching as if he supported populism and "draining the swamp." He failed to live up to both, miserably.\n The two Democratic candidates I am supporting are Bernie Sanders and Andrew Yang. (I would also be happy with Elizabeth Warren or Tulsi Gabbard.) I feel that Bernie and Andrew genuinely want to help the average person and have the ideas and willpower to get things done. Mr. Trump has turned his back on me, my family and the entire Rust Belt. He\'s helped to divide this country to where it almost feels beyond repair. I feel genuine guilt for throwing my vote in his direction last time around, and I certainly won\'t make that mistake again."',
+    candidate: 'Donald Trump'
+  },
+  {
+    name: 'Vera Y.',
+    location: 'Virginia Beach',
+    why: '"As a former Trump voter, I\'m rooting for Andrew Yang to win the Democratic nomination so that I can vote for him in 2020. The Freedom Dividend (Universal Basic Income) and Value Added Tax that Mr. Yang is proposing is what the nation needs moving into this next industrial revolution of automation and artificial intelligence. Mr. Yang brings fresh, logical solutions to the problems that got Mr. Trump elected. Mr. Yang is the one to bring this nation together and Make America Think Harder."',
+    candidate: 'Donald Trump'
+  },
+  {
     name: 'Fred R.',
     location: 'Mariscopa, AZ',
     why: '"I met with him and he rode in my truck."',
