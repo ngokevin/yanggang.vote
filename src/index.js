@@ -47,7 +47,7 @@ const app = new Vue({
     const CARD_PADDING = 30;
     this.$nextTick(() => {
       Array.from(document.querySelectorAll('.resultContainer')).forEach(card => {
-        if (window.innerWidth / window.devicePixelRatio >= DESKTOP) {
+        if (window.innerWidth >= DESKTOP) {
           card.style.height = card.parentNode.clientHeight - CARD_PADDING + 'px';
         } else {
           card.style.height = 'auto';
