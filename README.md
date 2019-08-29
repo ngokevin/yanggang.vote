@@ -2,13 +2,9 @@
 
 [yang2020]: https://yang2020.com
 
-Unofficial page for supporting [Andrew Yang's][yang2020] presidential candidacy
-in 2020.
+Unofficial website for presidential candidate [Andrew Yang][yang2020].
 
 ### Webpage
-
-Contains a search bar or input bar that searches through Andrew Yang's index of
-policies and displays relevant information in a concise and consumable format.
 
 ```
 npm install
@@ -33,6 +29,5 @@ to spread the message. The file contains an array of objects:
 ### About
 
 - Donate to Andrew Yang's mission on [his official site][yang2020].
-- Join the [Discord](https://discord.gg/RWpjcAx) to be part of Humanity First!
 
 *Most site images and policy text belong to Andrew Yang and his campaign.*

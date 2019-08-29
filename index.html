@@ -1,94 +1,22 @@
 <head>
   <title>Andrew Yang for President 2020</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="image" content="https://andrewyang.vote/assets/screenshot.jpg">
-  <meta property="og:image" content="https://andrewyang.vote/assets/screenshot.jpg">
-  <meta property="twitter:image" content="https://andrewyang.vote/assets/screenshot.jpg">
-  <meta property="description" content="An easy way to search and read about presidential candidate Andrew Yang's policies.">
-  <meta property="og:description" content="An easy way to search and read about presidential candidate Andrew Yang's policies.">
-  <meta property="twitter:description" content="An easy way to search and read about presidential candidate Andrew Yang's policies.">
+  <meta property="image" content="">
+  <meta property="og:image" content="">
+  <meta property="twitter:image" content="">
+  <meta property="description" content="">
+  <meta property="og:description" content="">
+  <meta property="twitter:description" content="">
 
-  <link href="https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:700|Roboto|Merriweather|Forum&display=swap" rel="stylesheet">
-  <link rel="icon" href="assets/cursor.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700&display=swap" rel="stylesheet">
   <script src="assets/fontawesome/js/all.min.js"></script>
   <link href="assets/fontawesome/css/all.min.css" rel="stylesheet">
   <script src="assets/vue.js"></script>
 </head>
 
 <body>
-  <div id="background"></div>
-
-  <div id="app">
-    <div class="header">
-      <h1 v-if="view === 'policies'">Andrew Yang 2020</h1>
-      <h1 v-if="view === 'switchedforyang'">#switchedForYang</h1>
-      <b :class="{policy: view === 'policies', subheader: true}">Not left, not right, forward.</b>
-    </div>
-
-    <nav id="nav">
-      <a href="https://yang2020.com/volunteer">Volunteer</a>
-      <a href="#policies" @click="view = 'policies'" v-if="view !== 'policies'">Policies</a>
-      <a href="#switchedForYang"
-        @click="view = 'switchedforyang'"
-        v-if="view !== 'switchedforyang'">#switchedForYang</a>
-    </nav>
-
-    <transition-group id="results" name="fade" tag="ul" v-if="view === 'policies'">
-      <li class="resultCard" v-for="result in results" :key="result.name" :data-expanded="result.expanded">
-        <i class="icon" :class="result.icon"></i>
-        <div class="resultContainer">
-          <h2 class="name" v-html="result.nameDisplay"></h2>
-          <p class="problem"><b>Problem</b>&nbsp;<span v-html="result.expanded ? result.problems : result.problemDisplay"></span></p>
-          <p class="statement"><img src="/assets/avatar.jpg"><b>As president</b>&nbsp;<span>I will&nbsp;<span v-html="result.expanded ? result.statement : result.statementDisplay"></span></p>
-          <div class="images">
-            <img v-for="image in result.images" :src="image">
-          </div>
-
-          <div class="brief" v-if="result.expanded"><b>Details</b>&nbsp;<p v-html="result.brief"></p></div>
-          <div class="goals" v-if="result.expanded"><b>Goals</b>&nbsp;<p v-html="result.goals"></p></div>
-          <div class="learnMore" v-if="!result.expanded" @click="expand(result.name)"><a href="#">Read more&hellip;</a></div>
-        </div>
-      </li>
-    </transition-group>
-
-    <div id="testimonialContainer" v-if="view === 'switchedforyang'">
-      <p class="aboutTestimonial">
-        Testimonials from conservative voters (previous or current) that now support presidential candidate, Andrew Yang. This shows Andrew Yang has a broad constituency base that crosses party lines.
-      </p>
-      <a class="submitTestimonial" href="https://forms.gle/4TTSKykfju4T8EHS7">Submit Your Story</a>
-      <transition-group id="testimonials" name="fade" tag="ul">
-        <li class="testimonial" v-for="testimonial in testimonials" :key="testimonial.name">
-          <div class="testimonialHeading">
-            <div
-              class="testimonialImage"
-              :style="{backgroundImage: 'url(' + testimonial.image + ')'}"
-              v-if="testimonial.image"></div>
-            <i class="iconImage fas fa-republican" v-if="!testimonial.image"></i>
-            <div id="testimonialInfo">
-              <h2 class="name">
-                <span v-if="!testimonial.username">{{ testimonial.name }}</span>
-                <a :href="testimonial.username.indexOf('@') !== -1 ? 'https://twitter.com/' + testimonial.username : 'https://reddit.com/u/' + testimonial.username"
-                   v-if="testimonial.username">
-                  {{ testimonial.name }}
-                </a>
-              </h2>
-              <p class="location">{{ testimonial.location }}</p>
-              <p class="voted">Previously voted {{ testimonial.candidate }}</p>
-            </div>
-          </div>
-          <p class="why">{{ testimonial.why }}</p>
-        </li>
-      </transition-group>
-    </div>
-
-    <div id="outerSearchContainer" v-if="view !== 'switchedforyang'">
-      <div id="searchContainer">
-        <img id="icon" src="/assets/logo.png">
-        <input id="search" type="text" placeholder="Ask here about Andrew Yang" @keydown="search">
-      </div>
-    </div>
-
-    <p class="footer">Built by volunteers in support for Andrew Yang. Donate at <a href="https://yang2020.com">the official campaign page</a>!</p>
+  <div class="headerContainer">
+    <h1 class="header boldLine">Andrew Yang</h1>
   </div>
 
   <script src="build.js"></script>
