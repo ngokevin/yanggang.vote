@@ -13,14 +13,31 @@ These materials can be handed out to local businesses, to other people, during
 tabling events, left in various areas around town. In some cities, it is legal
 to post flyers on utility poles, check your local city laws.
 
+Make sure to click the images below for **full resolution**.
+
 ## Business Cards
 
-*By [/u/steamin661](https://www.reddit.com/user/steamin661).* Click for full
-resolution.
+*By [/u/steamin661](https://www.reddit.com/user/steamin661).*
 
 [![Front](front.jpg)](frontFull.jpg)
 
 [![Back](back.jpg)](backFull.jpg)
+
+Alternate Front
+
+[![Front Alternate](frontAlternate.jpg)](frontAlternateFull.jpg)
+
+## Posters
+
+*By [@PJMcCartney](https://www.instagram.com/pjmccartney/)*.
+
+[![Firewatch](posterFirewatch.png)](posterFirewatch.png)
+
+[![Policies](posterPolicies.jpg)](posterPolicies.jpg)
+
+[![UBI](posterUBI.png)](posterUBI.png)
+
+[![Bay Area](posterBayArea.jpg)](posterBayAreaFull.png)
 
 ## Stickers
 
@@ -28,13 +45,3 @@ Stickers are available for free or small donation (up to 300) at
 [yangfor.us](http://yangfor.us).
 
 ![Sticker](sticker.png)
-
-## Posters
-
-*By [@PJMcCartney](https://www.instagram.com/pjmccartney/)*
-
-[![Firewatch](posterFirewatch.png)](posterFirewatch.png)
-
-[![Policies](posterPolicies.jpg)](posterPolicies.jpg)
-
-[![UBI](posterUBI.png)](posterUBI.png)
