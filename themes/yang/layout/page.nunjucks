@@ -1,7 +1,3 @@
 <div id="{{ page.id }}" class="content">
-  <h1 id="header" class="boldLine">{{ page.title }}</h1>
-
   {{ page.content }}
-
-  {% include "footer.nunjucks" %}
 </div>

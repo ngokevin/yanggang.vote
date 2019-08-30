@@ -1,12 +1,5 @@
 ---
 title: Andrew Yang
-layout: page
-id: home
+layout: art
+id: art
 ---
-
-- [Freedom Dividend FAQ](faq)
-- [Automation Gallery](automation)
-- [Yang Art](art)
-- [Yang News](news)
-- [Yang Videos](videos)
-- [Canvassing Materials](canvass)

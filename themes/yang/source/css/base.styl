@@ -12,6 +12,7 @@ media--1200() {
 
 $blue=#002D72
 $red=#DA3248
+$redhighlight=#FA4258
 $white=#FFF
 $gray=#eaeaea
 $navy=#13294b
@@ -19,7 +20,7 @@ $lightblue=#6cace4
 $black=#000
 
 html
-  background $blue
+  background $navy
 
 html,
 body
@@ -62,11 +63,41 @@ h1
     width 104%
     z-index -1
 
+#headerContainer
+  align-items center
+  display flex
+  flex-direction column
+  width 100%
+
 #header
   display inline-block
   margin 20px auto
+  margin-bottom -30px
   text-align center
   text-transform uppercase
+
+#nav
+  display flex
+  li
+    padding 10px
+  a
+    color $gray
+    transition .1s all
+    &:hover
+      color $white
+      &:after
+        border-bottom 12px solid $redhighlight
+    &:after
+      content ''
+      bottom 26px
+      border-bottom 12px solid $red
+      display block
+      height 12px
+      position relative
+      right 2%
+      transition all .1s
+      width 104%
+      z-index -1
 
 footer
   color $gray
@@ -78,11 +109,10 @@ footer
 .content
   align-items center
   display flex
-  flex-wrap wrap
   flex-direction column
   width 100%
 
-#misinformation
+#math
   h3
     font-style italic
 
