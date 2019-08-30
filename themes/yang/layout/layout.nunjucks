@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Andrew Yang for President 2020</title>
+    <title>{{ page.title }} | Unofficial Page for Andrew Yang</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta property="image" content="">

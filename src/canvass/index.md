@@ -37,7 +37,7 @@ Alternate Front
 
 <div class="canvassImages">
 
-  [![Firewatch](posterFirewatch.png)](posterFirewatch.png)
+  [![Firewatch](posterFirewatch.jpg)](posterFirewatchFull.png)
 
   [![Policies](posterPolicies.jpg)](posterPolicies.jpg)
 
