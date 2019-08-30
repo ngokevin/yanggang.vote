@@ -4,21 +4,97 @@ layout: page
 id: math
 ---
 
+[bernie]: https://berniesanders.com/issues/
+[policies]: https://yang2020.com/policies
+[warren]: https://elizabethwarren.com/
+
+This page addresses misinformation and frequent criticisms about Andrew Yang
+and his policies. We put forth rebuttals and clarifications that we try to
+support with facts and statistics. Rather than spread knee-jerk reactions,
+myths, and misrepresentation of ideas &mdash; let's delve deeper, and think harder.
+
+
+
+
 ## Andrew Yang
+
 
 ### "Andrew Yang is a one-policy candidate."
 
-No.
+Yang has [**over 100 policies**][policies] on his website. Each policy has its
+own page containing background context, statistics, list of problems identified
+to be solved, stated goals, and action plan as President. His policies tackle
+the economy, jobs and labor, democracy reform, governance, civil rights,
+criminal justice, healthcare, education, family cohesion, foreign policy,
+immigration, and miscellaneous topics.
 
-### "Andrew Yang is a rich tech bro."
+For comparison, [Elizabeth Warren's site][warren] lists 5 issues sans specific
+solutions. [Bernie Sanders' site][bernie] has slightly more on his site at 25
+issues listed.
 
-No.
+"*Yang has the most detailed and comprehensive set of policy proposals we
+have ever seen at this stage in the campaign.*" &mdash; The Democratic Party
+Leadership of Iowa
+
+### "Andrew Yang is the rich Silicon Valley tech candidate."
+
+[vfa]: https://en.wikipedia.org/wiki/Venture_for_America
+
+Andrew Yang is a **non-profit founder and philanthropist** who spent the last
+decade **creating thousands of jobs in disadvantaged cities**. His non-profit
+organization, [Venture for America][vfa], trained young entrepreneurs
+by placing them in diverse startup industries in cities such as Detroit,
+Baltimore, Birmingham, Cleveland, Providence, New Orleans, Atlanta, Nashville,
+Cincinnati.
+
+[Forbes]: https://www.forbes.com/sites/danalexander/2019/08/14/heres-the-net-worth-of-every-2020-presidential-candidate/
+
+Andrew Yang has never been a venture capitalist nor has he spent a significant
+amount of time in Silicon Valley. Before Venture for America, he was the CEO of
+an education startup based out of NYC, tutoring kids for the SAT.
+
+According to [Forbes], Yang has among the **third lowest net worth** in the
+field at $1 million. For comparison, Bernie Sanders has a higher net worth at
+$2.5 million. Elizabeth Warren has a net worth for $12 million.
 
 ### "Andrew Yang has zero political experience."
 
-Sure.
+[Gallup]: https://news.gallup.com/poll/5392/trust-government.aspx
+
+According to [a poll by Gallup][Gallup], American citizens' trust in the
+government to handling the issues of today is at an all-time low. In 2019, 57%
+of people responded they have zero trust or not very much trust in career
+politicians to solve the problems of today. That sentiment is mirrored
+throughout all of our institutions.
+
+[nyer]: https://www.newyorker.com/news/news-desk/how-andrew-yangs-robot-apocalypse-can-heal-a-divided-nation
+
+Andrew Yang previously attempted to bring up the issues of automation he had
+discovered while doing groundwork across the country. Politicians ignored the
+issue or stated they were not able to talk about it. According to [the New
+Yorker][nyer], Yang's friend in Washington D.C. told him "*D.C. is a town of
+followers, not leaders. The only way we in D.C. will do anything about it is if
+you create a wave in the rest of the country and bring that wave crashing down
+on our heads"*.
+
+While not government experience, Yang has been in various leadership positions.
+He spent the last decade leading a [non-profit organization][vfa], training
+young entrepreneurs in disadvantaged cities and creating thousands of jobs.
+Leading a non-profit requires galvanizing energy around a share vision.
+
+### "Andrew Yang should run for mayor, congress, Senate, or a cabinet seat instead."
+
+Andrew Yang says we are running out of time to get ahead of the impending
+wave of automation, AI, and self-driving vehicles. All of the other politicians
+ignored or denied the issue of automation and job displacement. No one was
+talking about it. He says the list of how he could meaningfully address the
+issue started with and ended with running for president.
+
+
+
 
 ## The Freedom Dividend
+
 
 ### "The Freedom Dividend would cause rampant inflation."
 
@@ -76,7 +152,12 @@ No.
 
 No.
 
+### "The Freedom Dividend would never pass congress."
+
+
+
 ## Automation
+
 
 ### "Automation is not displacing jobs."
 
@@ -90,7 +171,10 @@ No.
 
 No.
 
+
+
 ## Climate Change
+
 
 ### "Yang is dangerous for climate change because he says we are too late to stop it."
 

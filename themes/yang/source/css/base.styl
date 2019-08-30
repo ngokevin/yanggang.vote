@@ -33,15 +33,15 @@ body
   padding 0
   width 100%
 
-body
-  padding 0 20px
-
 p
   line-height 36px
 
 a
   color $red
   text-decoration none
+  transition all .1s
+  &:hover
+    color $redhighlight
 
 ul
   list-style none
@@ -103,18 +103,50 @@ footer
   color $gray
   font-size 14px
   margin 0 auto
-  padding-top 50px
+  padding 50px 0 20px 0
   text-align center
 
 .content
+  padding 0 50px
+  width 100%
+
+  p
+    max-width 750px
+
+#art,
+#automation,
+#canvass,
+#news,
+#videos
   align-items center
   display flex
   flex-direction column
-  width 100%
 
 #math
+  h2
+    display inline-block
+    margin-bottom -10px
+    &::after
+      content ''
+      bottom 40px
+      border-bottom 20px solid $red
+      display block
+      height 20px
+      position relative
+      right 2%
+      width 104%
+      z-index -1
+    + h3
+      margin-top 20px
+
   h3
+    color $gray
+    font-size 24px
     font-style italic
+    margin-top 75px
+    margin-bottom 30px
+    max-width 750px
 
   p
-    max-width 720px
+    font-size 18px
+    line-height 32px
