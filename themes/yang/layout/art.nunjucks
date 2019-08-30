@@ -1,5 +1,5 @@
 <div id="{{ page.id }}" class="content">
-  <div class="flex-images">
+  <div class="flex-images" style="max-width: 80%">
     {% for img in site.data.art %}
       <div class="item" data-w="{{ img.w }}" data-h="{{ img.h }}"><img src="{{ img.src }}"></div>
     {% endfor %}
