@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Andrew Yang for President 2020</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta property="image" content="">
+    <meta property="og:image" content="">
+    <meta property="twitter:image" content="">
+    <meta property="description" content="">
+    <meta property="og:description" content="">
+    <meta property="twitter:description" content="">
+
+    {{ css('css/base') }}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700&display=swap" rel="stylesheet">
+    <script src="assets/fontawesome/js/all.min.js"></script>
+    <link href="assets/fontawesome/css/all.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    {{ body }}
+  </body>
+</html>

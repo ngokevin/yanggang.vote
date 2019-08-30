@@ -48,3 +48,4 @@ dump.rdb
 package-lock.json
 config.js
 build.js
+db.json

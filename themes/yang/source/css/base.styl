@@ -13,7 +13,7 @@ media--1200() {
 $blue=#002D72
 $red=#DA3248
 $white=#FFF
-$grey=#eaeaea
+$gray=#eaeaea
 $navy=#13294b
 $lightblue=#6cace4
 $black=#000
@@ -25,14 +25,22 @@ html,
 body
   color $white
   font-family 'Montserrat'
+  font-size 24px
   height 100%
   margin 0
+  overflow-x hidden
   padding 0
-  overflow-y hidden
   width 100%
+
+body
+  padding 0 20px
+
+p
+  line-height 36px
 
 a
   color $red
+  text-decoration none
 
 ul
   list-style none
@@ -40,21 +48,7 @@ ul
   padding 0
 
 h1
-  font-size 50pt
-
-p,
-a
-  font-size 9.5pt
-
-.headerContainer
-  display flex
-  justify-content center
-
-.header
-  display inline-block
-  margin 20px auto
-  text-align center
-  text-transform uppercase
+  font-size 68px
 
 .boldLine
   &::after
@@ -67,3 +61,30 @@ a
     right 2%
     width 104%
     z-index -1
+
+#header
+  display inline-block
+  margin 20px auto
+  text-align center
+  text-transform uppercase
+
+footer
+  color $gray
+  font-size 14px
+  margin 0 auto
+  padding-top 50px
+  text-align center
+
+.content
+  align-items center
+  display flex
+  flex-wrap wrap
+  flex-direction column
+  width 100%
+
+#misinformation
+  h3
+    font-style italic
+
+  p
+    max-width 720px
