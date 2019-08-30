@@ -49,3 +49,5 @@ package-lock.json
 config.js
 build.js
 db.json
+public
+.deploy_git
