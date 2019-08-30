@@ -17,11 +17,15 @@ Make sure to click the images below for **full resolution**.
 
 ## Business Cards
 
-*By [/u/steamin661](https://www.reddit.com/user/steamin661).*
+*By [/u/steamin661](https://www.reddit.com/user/steamin661)*
+
+<div class="canvassImages">
 
 [![Front](front.jpg)](frontFull.jpg)
 
 [![Back](back.jpg)](backFull.jpg)
+
+</div>
 
 Alternate Front
 
@@ -29,19 +33,23 @@ Alternate Front
 
 ## Posters
 
-*By [@PJMcCartney](https://www.instagram.com/pjmccartney/)*.
+*By [@PJMcCartney](https://www.instagram.com/pjmccartney/)*
 
-[![Firewatch](posterFirewatch.png)](posterFirewatch.png)
+<div class="canvassImages">
 
-[![Policies](posterPolicies.jpg)](posterPolicies.jpg)
+  [![Firewatch](posterFirewatch.png)](posterFirewatch.png)
 
-[![UBI](posterUBI.png)](posterUBI.png)
+  [![Policies](posterPolicies.jpg)](posterPolicies.jpg)
 
-[![Bay Area](posterBayArea.jpg)](posterBayAreaFull.png)
+  [![UBI](posterUBI.png)](posterUBI.png)
+
+  [![Bay Area](posterBayArea.jpg)](posterBayAreaFull.png)
+
+</div>
 
 ## Stickers
 
-Stickers are available for free or small donation (up to 300) at
-[yangfor.us](http://yangfor.us).
+Stickers are available for free or small donation (up to 300 stickers) at
+[yangfor.us](http://yangfor.us)
 
 ![Sticker](sticker.png)

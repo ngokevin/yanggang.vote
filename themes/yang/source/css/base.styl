@@ -103,10 +103,12 @@ h1
 
 footer
   color $gray
-  font-size 14px
   margin 0 auto
   padding 50px 0 20px 0
   text-align center
+
+  p
+    font-size 14px
 
 .content
   width 100%
@@ -156,3 +158,26 @@ footer
   p
     font-size 18px
     line-height 32px
+
+#canvass
+  h2
+    font-size 32px
+    margin-bottom -10px
+    margin-top 30px
+    &::after
+      content ''
+      bottom 32px
+      border-bottom 15px solid $red
+      display block
+      height 15px
+      position relative
+      right 2.5%
+      width 105%
+      z-index -1
+
+  .canvassImages
+    display flex
+    max-width 100%
+
+    img
+      margin-right 20px
