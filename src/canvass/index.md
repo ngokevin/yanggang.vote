@@ -31,17 +31,18 @@ Alternate Front
 
 [![Front Alternate](frontAlternate.jpg)](frontAlternateFull.jpg)
 
-## Posters
+## Posters and Flyers
 
-*By [@PJMcCartney](https://www.instagram.com/pjmccartney/)*
+*By [@PJMcCartney](https://www.instagram.com/pjmccartney/)*. Letter aspect
+ratio (8" x 11").
 
 <div class="canvassImages">
 
   [![Firewatch](posterFirewatch.jpg)](posterFirewatchFull.png)
 
-  [![Policies](posterPolicies.jpg)](posterPolicies.jpg)
+  [![Policies](posterPolicies.jpg)](posterPoliciesFull.png)
 
-  [![UBI](posterUBI.png)](posterUBI.png)
+  [![UBI](posterUBI.jpg)](posterUBIFull.png)
 
   [![Bay Area](posterBayArea.jpg)](posterBayAreaFull.png)
 
