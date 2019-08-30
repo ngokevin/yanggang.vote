@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "hexo clean",
-    "deploy": "hexo deploy",
+    "deploy": "hexo generate && hexo deploy",
     "generate": "hexo generate",
     "start": "hexo server"
   },
