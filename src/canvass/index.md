@@ -4,4 +4,39 @@ layout: page
 id: canvass
 ---
 
-This page will provide materials and resources for canvassing your neighborhood locally.
+Materials and resources for canvassing your local neighborhood!
+We recommend using [VistaPrint](https://vistaprint.com) for low-cost, high
+quality, and quick printing services for flyers, business cards, posters, and
+sticky notes.
+
+These materials can be handed out to local businesses, to other people, during
+tabling events, left in various areas around town. In some cities, it is legal
+to post flyers on utility poles, check your local city laws.
+
+Designs taken from others online, we are working on adding credits.
+
+## Business Cards
+
+*By [/u/steamin661](https://www.reddit.com/user/steamin661).* Click for full
+resolution.
+
+[![Front](front.jpg)](frontFull.jpg)
+
+[![Back](back.jpg)](backFull.jpg)
+
+## Stickers
+
+Stickers are available for free or small donation (up to 300) at
+[yangfor.us](http://yangfor.us).
+
+![Sticker](sticker.png)
+
+## Posters
+
+*By [@PJMcCartney](https://www.instagram.com/pjmccartney/).*
+
+[![Firewatch](posterFirewatch.png)](posterFirewatch.png)
+
+[![Policies](posterPolicies.jpg)](posterPolicies.jpg)
+
+[![UBI](posterUBI.png)](posterUBI.png)
