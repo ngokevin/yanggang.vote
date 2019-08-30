@@ -118,42 +118,43 @@ prices in different sectors.
 
 ### "The Freedom Dividend means people can be lazy and not need to work."
 
-No.
+This page is under construction.
 
 ### "People will spend the Freedom Dividend on drugs, gambling, and alcohol."
 
-No.
+This page is under construction.
 
 ### "Work is vital to humans and provides us purpose."
 
-Sure.
+This page is under construction.
 
 ### "The Freedom Dividend's VAT is a regressive tax for the poor."
 
-No.
+This page is under construction.
 
 ### "The Freedom Dividend will cause landlords to jack up the rents."
 
-No.
+This page is under construction.
 
 ### "The Freedom Dividend would remove social safety nets."
 
-No.
+This page is under construction.
 
 ### "The Freedom Dividend is socialism."
 
-No.
+This page is under construction.
 
 ### "Everyone would want to immigrate to the United States for the Freedom Dividend."
 
-No.
+This page is under construction.
 
 ### "Studies have shown universal basic income was not effective."
 
-No.
+This page is under construction.
 
 ### "The Freedom Dividend would never pass congress."
 
+This page is under construction.
 
 
 ## Automation
@@ -178,12 +179,12 @@ No.
 
 ### "Yang is dangerous for climate change because he says we are too late to stop it."
 
-No.
+This page is under construction.
 
 ### "Yang's plan is just for us to move to higher ground."
 
-No.
+This page is under construction.
 
 ### "Yang wants to do crazy stuff with unproven technology like build space mirrors."
 
-No.
+This page is under construction.
