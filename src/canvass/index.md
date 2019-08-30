@@ -54,3 +54,10 @@ Stickers are available for free or small donation (up to 300 stickers) at
 [yangfor.us](http://yangfor.us)
 
 ![Sticker](sticker.png)
+
+[bumper]: https://medium.com/@tmkiefer/the-andrew-yang-sticker-campaign-5ff04290933b
+
+Another Yang Ganger is offering 10 free 4" *Humanity First* bumper stickers.
+Send a self-addressed stamped envelope [as described in this message][bumper].
+
+![Bumper](bumper.png)
