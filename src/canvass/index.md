@@ -13,8 +13,6 @@ These materials can be handed out to local businesses, to other people, during
 tabling events, left in various areas around town. In some cities, it is legal
 to post flyers on utility poles, check your local city laws.
 
-Designs taken from others online, we are working on adding credits.
-
 ## Business Cards
 
 *By [/u/steamin661](https://www.reddit.com/user/steamin661).* Click for full
@@ -33,7 +31,7 @@ Stickers are available for free or small donation (up to 300) at
 
 ## Posters
 
-*By [@PJMcCartney](https://www.instagram.com/pjmccartney/).*
+*By [@PJMcCartney](https://www.instagram.com/pjmccartney/)*
 
 [![Firewatch](posterFirewatch.png)](posterFirewatch.png)
 
