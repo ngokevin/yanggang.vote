@@ -68,7 +68,7 @@ const template = `
 
 {{ description }}
 
-*this event was created by an automated bot*
+*this event was created from an automated bot by [@andgokevin](https://twitter.com/andgokevin)*
 `;
 
 let errors = 0;
@@ -83,6 +83,11 @@ module.exports.post = function post () {
 
     // Some online event.
     if (!event.location) { return; }
+
+    // Only post if within a week
+    if (moment.unix(event.timeslots[0].start_date) > moment().add(7, 'days').unix()) {
+      return;
+    }
 
     // Clean data.
     const eventCity = event.location.locality;
