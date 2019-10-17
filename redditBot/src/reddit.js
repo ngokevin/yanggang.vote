@@ -71,6 +71,8 @@ const template = `
 *this event was created by an automated bot*
 `;
 
+let errors = 0;
+
 module.exports.post = function post () {
   const client = new Reddit(require('./config.local'));
 
@@ -79,6 +81,10 @@ module.exports.post = function post () {
 
     if (event.posted === true) { return; }
 
+    // Some online event.
+    if (!event.location) { return; }
+
+    // Clean data.
     const eventCity = event.location.locality;
     let eventLocation = event.location.venue || event.location.address_lines[0];
     if (event.location.venue && event.location.address_lines[0]) {
@@ -86,19 +92,7 @@ module.exports.post = function post () {
     }
     const eventTime = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('M/D LT');
 
-    /*
-    console.log(
-        nunjucks.renderString(template, {
-          city: eventCity,
-          description: event.description,
-          location: eventLocation,
-          time: eventTime,
-          title: event.title,
-          url: event.browser_url
-        })
-    );
-    */
-
+    // Post.
     const subreddit = subreddits[event.location.region];
     return client
       .getSubreddit(subreddit)
@@ -116,11 +110,17 @@ module.exports.post = function post () {
       .then(() => {
         db[id].posted = true;
       }).catch(() => {
-        fs.writeFileSync('events.json', JSON.stringify(db));
-        process.exit(0);
-      };
+        console.log(`Rate limited for ${subreddit}.`);
+
+        if (errors++ > 10) {
+          console.log('Too rate limited now. Exiting.');
+          fs.writeFileSync('events.json', JSON.stringify(db));
+          process.exit(0);
+        }
+      });
   });
 
+  // Update our file-based DB.
   Promise.all(posts).then(() => {
     fs.writeFileSync('events.json', JSON.stringify(db));
   });
