@@ -85,7 +85,7 @@ module.exports.post = function post () {
     if (!event.location) { return; }
 
     // Only post if within a week
-    if (moment.unix(event.timeslots[0].start_date) > moment().add(7, 'days').unix()) {
+    if (moment.unix(event.timeslots[0].start_date).unix() > moment().add(7, 'days').unix()) {
       return;
     }
 
@@ -99,6 +99,7 @@ module.exports.post = function post () {
 
     // Post.
     const subreddit = subreddits[event.location.region];
+    if (subreddit === 'CA') { return; }
     return client
       .getSubreddit(subreddit)
       .submitSelfpost({
@@ -113,6 +114,7 @@ module.exports.post = function post () {
         })
       })
       .then(() => {
+        console.log(`Posted to ${subreddit}`);
         db[id].posted = true;
       }).catch(() => {
         console.log(`Rate limited for ${subreddit}.`);
