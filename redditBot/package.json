@@ -1,0 +1,20 @@
+{
+  "name": "yangit",
+  "version": "1.0.0",
+  "description": "Post Andrew Yang's mobilize.us/yang2020 events to Reddit.",
+  "main": "index.js",
+  "scripts": {
+    "post": "node src/reddit.js post",
+    "scrape": "node src/scrape.js scrape"
+  },
+  "author": "Kevin Ngo",
+  "license": "MIT",
+  "dependencies": {
+    "make-runnable": "^1.3.6",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.27",
+    "node-fetch": "^2.6.0",
+    "nunjucks": "^3.2.0",
+    "snoowrap": "^1.20.0"
+  }
+}
