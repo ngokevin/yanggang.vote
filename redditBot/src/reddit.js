@@ -39,7 +39,7 @@ const subreddits = {
   NM: 'NewMexicoForYang',
   NY: 'NewYorkForYang',
   OH: 'OhioForYang',
-  OK: 'OKForYang',
+  OK: 'OklahomaForYang',
   OR: 'OregonForYang',
   PA: 'PennsylvaniaForYang',
   RI: 'RIForYang',
@@ -118,12 +118,6 @@ module.exports.post = function post () {
         db[id].posted = true;
       }).catch(() => {
         console.log(`Rate limited for ${subreddit}.`);
-
-        if (errors++ > 10) {
-          console.log('Too rate limited now. Exiting.');
-          fs.writeFileSync('events.json', JSON.stringify(db));
-          process.exit(0);
-        }
       });
   });
 
