@@ -1,8 +1,9 @@
+const Reddit = require('snoowrap');
+const clean = require('./scrape').clean;
+const db = require('../events.json');
 const fs = require('fs');
 const moment = require('moment-timezone');
 const nunjucks = require('nunjucks');
-const Reddit = require('snoowrap');
-const db = require('../events.json');
 
 const subreddits = {
   AK: 'AlaskaForYang',
@@ -38,6 +39,7 @@ const subreddits = {
   NJ: 'NewJerseyForYang',
   NM: 'NewMexicoForYang',
   NY: 'NewYorkForYang',
+  NV: 'NevadaForYang',
   OH: 'OhioForYang',
   OK: 'OklahomaForYang',
   OR: 'OregonForYang',
@@ -71,19 +73,33 @@ const template = `
 
 let errors = 0;
 
-module.exports.post = function post () {
+module.exports.post = function post (debug) {
+  clean(db);
   const client = new Reddit(require('./config.local'));
 
   const posts = Object.keys(db).map((id, i) => {
     const event = db[id];
 
-    if (event.posted === true) { return; }
+    if (event.posted === true) {
+      console.log('Already posted.');
+      return;
+    }
 
     // Some online event.
-    if (!event.location) { return; }
+    if (!event.location || !event.location.region || event.location.region === 'PR') {
+      console.log('No location.');
+      return;
+    }
 
-    // Only post if within a week
+    // Only post if within a week.
     if (moment.unix(event.timeslots[0].start_date).unix() > moment().add(7, 'days').unix()) {
+      console.log('Too early to post.');
+      return;
+    }
+
+    // Double make sure not to post if event is passed or right about to start.
+    if (moment.unix(event.timeslots[0].start_date).unix() < moment().add(1, 'hours').unix()) {
+      console.log('Too late to post.');
       return;
     }
 
@@ -97,7 +113,6 @@ module.exports.post = function post () {
 
     // Post.
     const subreddit = subreddits[event.location.region];
-    if (subreddit === 'CA') { return; }
     return client
       .getSubreddit(subreddit)
       .submitSelfpost({
@@ -122,6 +137,8 @@ module.exports.post = function post () {
 
   // Update our file-based DB.
   Promise.all(posts).then(() => {
+    console.log(`Done (${posts.length}).`);
+    clean(db);
     fs.writeFileSync('events.json', JSON.stringify(db));
   });
 }
