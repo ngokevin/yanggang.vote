@@ -62,7 +62,7 @@ const template = `
 
 **Location:** {{ city }} / {{ location }}
 
-**Event URL:** [mobilize.us]({{ url }})
+**Event URL:** [{{ url }}]({{ url }})
 
 {{ description }}
 
