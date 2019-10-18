@@ -64,7 +64,7 @@ const template = `
 
 **Location:** {{ city }} / {{ location }}
 
-**Event URL:** [{{ url }}]({{ url }})
+**Event URL:** RSVP at [{{ url }}]({{ url }})
 
 {{ description }}
 
