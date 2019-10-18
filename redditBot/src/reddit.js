@@ -60,9 +60,7 @@ const template = `
 
 **Time:** {{ time }}
 
-**Location:** {{ location }}
-
-**City:** {{ city }}
+**Location:** {{ city }} / {{ location }}
 
 **Event URL:** [mobilize.us]({{ url }})
 
@@ -95,7 +93,7 @@ module.exports.post = function post () {
     if (event.location.venue && event.location.address_lines[0]) {
       eventLocation = `${event.location.venue} / ${event.location.address_lines[0]}`;
     }
-    const eventTime = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('M/D LT');
+    const eventTime = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('ddd M/D LT');
 
     // Post.
     const subreddit = subreddits[event.location.region];
