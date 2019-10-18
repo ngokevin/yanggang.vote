@@ -116,6 +116,7 @@ module.exports.post = function post () {
       .then(() => {
         console.log(`Posted to ${subreddit}`);
         db[id].posted = true;
+        fs.writeFileSync('events.json', JSON.stringify(db));
       }).catch(() => {
         console.log(`Rate limited for ${subreddit}.`);
       });
