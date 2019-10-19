@@ -74,7 +74,9 @@ const template = `
 let errors = 0;
 
 module.exports.post = function post (debug) {
+  const db = JSON.parse(fs.readFileSync('./events.json', 'utf8'));
   clean(db);
+
   const client = new Reddit(require('./config.local'));
 
   const posts = Object.keys(db).map((id, i) => {
@@ -92,13 +94,13 @@ module.exports.post = function post (debug) {
     }
 
     // Only post if within a week.
-    if (moment.unix(event.timeslots[0].start_date).unix() > moment().tz(event.timezone).add(7, 'days').unix()) {
+    if (moment.unix(event.timeslots[0].start_date).unix() > moment().add(7, 'days').unix()) {
       console.log('Too early to post.');
       return;
     }
 
     // Double make sure not to post if event is passed or right about to start.
-    if (moment.unix(event.timeslots[0].start_date).unix() < moment().tz(event.timezone).add(3, 'hours').unix()) {
+    if (moment.unix(event.timeslots[0].start_date).unix() < moment().add(4, 'hours').unix()) {
       console.log('Too late to post.');
       return;
     }
