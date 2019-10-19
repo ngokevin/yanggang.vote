@@ -92,13 +92,13 @@ module.exports.post = function post (debug) {
     }
 
     // Only post if within a week.
-    if (moment.unix(event.timeslots[0].start_date).unix() > moment().add(7, 'days').unix()) {
+    if (moment.unix(event.timeslots[0].start_date).unix() > moment().tz(event.timezone).add(7, 'days').unix()) {
       console.log('Too early to post.');
       return;
     }
 
     // Double make sure not to post if event is passed or right about to start.
-    if (moment.unix(event.timeslots[0].start_date).unix() < moment().add(1, 'hours').unix()) {
+    if (moment.unix(event.timeslots[0].start_date).unix() < moment().tz(event.timezone).add(3, 'hours').unix()) {
       console.log('Too late to post.');
       return;
     }
@@ -109,7 +109,11 @@ module.exports.post = function post (debug) {
     if (event.location.venue && event.location.address_lines[0]) {
       eventLocation = `${event.location.venue} / ${event.location.address_lines[0]}`;
     }
-    const eventTime = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('ddd M/D LT');
+
+    let eventTime = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('ddd M/D LT').replace(/:00/g, '');
+    const endTime = moment.unix(event.timeslots[0].end_date).tz(event.timezone).format('LT').replace(/:00/g, '');
+    eventTime = `${eventTime}-${endTime}`;
+    eventTime = eventTime.replace(/ PM/g, 'PM').replace(/ AM/g, 'AM');
 
     // Post.
     const subreddit = subreddits[event.location.region];

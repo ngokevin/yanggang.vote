@@ -11,7 +11,7 @@ function getUrl (page) {
 function clean (db) {
   Object.keys(db).forEach(id => {
     const event = db[id];
-    if (event.timeslots[0].start_date < moment().add(1, 'hours').unix()){
+    if (event.timeslots[0].start_date < moment().tz(event.timezone).add(3, 'hours').unix()){
       delete db[id];
     }
   });
@@ -39,7 +39,7 @@ module.exports.scrape = function scrape () {
     );
   }
 
-  Promise.all(promises).then(() => {
+  return Promise.all(promises).then(() => {
     clean(db);
     fs.writeFileSync('events.json', JSON.stringify(db));
   });
