@@ -74,7 +74,6 @@ const template = `
 let errors = 0;
 
 module.exports.post = function post (debug) {
-  const db = JSON.parse(fs.readFileSync('./events.json', 'utf8'));
   clean(db);
 
   const client = new Reddit(require('./config.local'));
