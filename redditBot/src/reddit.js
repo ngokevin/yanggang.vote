@@ -93,7 +93,7 @@ module.exports.post = function post (debug) {
     }
 
     // Only post if within a week.
-    if (moment.unix(event.timeslots[0].start_date).unix() > moment().add(4, 'days').unix()) {
+    if (moment.unix(event.timeslots[0].start_date).unix() > moment().add(7, 'days').unix()) {
       console.log('Too early to post.');
       return;
     }
