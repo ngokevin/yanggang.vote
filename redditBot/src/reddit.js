@@ -8,6 +8,7 @@ const nunjucks = require('nunjucks');
 const subreddits = {
   AK: 'AlaskaForYang',
   AL: 'AlabamaForYang',
+  AR: 'ArkansasForYang',
   AZ: 'ArizonaForYang',
   CA: 'CaliforniaForYang',
   CO: 'ColoradoForYang',
