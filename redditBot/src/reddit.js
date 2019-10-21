@@ -68,7 +68,7 @@ const template = `
 
 {{ description }}
 
-*this event was created from an automated bot by [@andgokevin](https://twitter.com/andgokevin)*
+*For more information or to get in touch with organizers, RSVP to the event and check your regional Yang Gang's Facebook group. Post pictures from the event here when you're done! This event was cross-posted from an automated bot by [@andgokevin](https://twitter.com/andgokevin)*
 `;
 
 let errors = 0;
