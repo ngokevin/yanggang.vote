@@ -74,6 +74,8 @@ const template = `
 
 let errors = 0;
 
+const stateCounts = {};
+
 module.exports.post = function post (debug) {
   clean(db);
 
@@ -90,6 +92,11 @@ module.exports.post = function post (debug) {
     // Some online event.
     if (!event.location || !event.location.region || event.location.region === 'PR') {
       console.log('No location.');
+      return;
+    }
+
+    if (stateCounts[event.location.region] > 3) {
+      console.log('Only 3 posts per run.');
       return;
     }
 
@@ -116,6 +123,12 @@ module.exports.post = function post (debug) {
     const endTime = moment.unix(event.timeslots[0].end_date).tz(event.timezone).format('LT').replace(/:00/g, '');
     eventTime = `${eventTime}-${endTime}`;
     eventTime = eventTime.replace(/ PM/g, 'PM').replace(/ AM/g, 'AM');
+
+    if (event.location.region in stateCounts) {
+      stateCounts[event.location.region]++;
+    } else {
+      stateCounts[event.location.region] = 1;
+    }
 
     // Post.
     const subreddit = subreddits[event.location.region];
