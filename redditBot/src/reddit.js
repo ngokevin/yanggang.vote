@@ -162,4 +162,28 @@ module.exports.post = function post (debug) {
   });
 }
 
+module.exports.updateDB = function () {
+  const mobilizeRe = /mobilize.us\/yang2020\/event\/(\d+)/;
+  clean(db);
+
+  const client = new Reddit(require('./config.local'));
+
+  client.getMe().then(user => {
+    user.getSubmissions({
+      amount: 200,
+      limit: 200
+    }).then(posts => {
+      posts.forEach(post => {
+        const mobilizeLink = post.selftext_html.match(mobilizeRe);
+        if (!mobilizeLink) { return; }
+        const id = mobilizeLink[1];
+        if (!db[id]) { return; }
+        console.log(`Updating ${id}.`);
+        db[id].posted = true;
+      });
+      fs.writeFileSync('events.json', JSON.stringify(db));
+    });
+  });
+}
+
 require('make-runnable');
