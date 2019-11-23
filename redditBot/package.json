@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "node src/scrape.js clean && node src/reddit.js updateDB",
     "cron": "node src/cron.js",
+    "count": "node src/subredditCount.js scrape",
     "print": "node src/print.js",
     "post": "node src/reddit.js post",
     "scrape": "node src/scrape.js scrape"
