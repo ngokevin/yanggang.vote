@@ -12,22 +12,11 @@
 
     {{ css('css/base') }}
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700&display=swap" rel="stylesheet">
-    <script src="assets/fontawesome/js/all.min.js"></script>
-    <link href="assets/fontawesome/css/all.min.css" rel="stylesheet">
   </head>
 
   <body>
     <div id="headerContainer">
       <h1 id="header" class="boldLine">{{ page.title }}</h1>
-
-      <!--
-      <ul id="nav">
-        <li><a href="/">Art</a></li>
-        <li><a href="/automation">Automation</a></li>
-        <li><a href="/canvass">Canvassing</a></li>
-        <li><a href="/math">MATH</a></li>
-      </ul>
-      -->
     </div>
 
     {{ body }}
