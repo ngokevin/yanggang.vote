@@ -1,0 +1,6 @@
+<div id="{{ page.id }}" class="content">
+  <h2>Count</h2>
+
+  <script>
+  </script>
+</div>

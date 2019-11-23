@@ -1,5 +1,5 @@
 ---
-title: Andrew Yang
-layout: art
-id: art
+title: Join Your Local State Subreddit
+layout: stateSubreddit
+id: stateSubreddit
 ---

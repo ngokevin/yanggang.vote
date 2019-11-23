@@ -1,0 +1,12 @@
+{
+  "name": "facebook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "index": "node index.js"
+  },
+  "dependencies": {
+    "jsdom": "^15.2.0"
+  }
+}
