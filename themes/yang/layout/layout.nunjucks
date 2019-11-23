@@ -3,12 +3,12 @@
     <title>{{ page.title }} | Yang Gang</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="image" content="">
-    <meta property="og:image" content="">
-    <meta property="twitter:image" content="">
-    <meta property="description" content="">
-    <meta property="og:description" content="">
-    <meta property="twitter:description" content="">
+    <meta property="image" content="https://d3n8a8pro7vhmx.cloudfront.net/yang2020/mailings/421/attachments/original/Image_from_iOS.jpg">
+    <meta property="og:image" content="https://d3n8a8pro7vhmx.cloudfront.net/yang2020/mailings/421/attachments/original/Image_from_iOS.jpg">
+    <meta property="twitter:image" content="https://d3n8a8pro7vhmx.cloudfront.net/yang2020/mailings/421/attachments/original/Image_from_iOS.jpg">
+    <meta property="description" content="Funneling Yang Gang excitement to fun IRL events!">
+    <meta property="og:description" content="Funneling Yang Gang excitement to fun IRL events!">
+    <meta property="twitter:description" content="Funneling Yang Gang excitement to fun IRL events!">
 
     {{ css('css/base') }}
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700&display=swap" rel="stylesheet">
