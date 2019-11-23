@@ -1,5 +1,5 @@
 ---
-title: Join Your Local State Subreddit
+title: Yang Gang
 layout: stateSubreddit
 id: stateSubreddit
 ---
