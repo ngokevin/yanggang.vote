@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "hexo clean",
-    "cron": "node src/cron.js",
+    "cron": "forever src/cron.js &",
     "deploy": "hexo generate && hexo deploy",
     "generate": "hexo generate",
     "start": "hexo server"
@@ -16,6 +16,7 @@
     "bricks.js": "^1.8.0",
     "cross-env": "^5.2.0",
     "font-awesome": "^4.7.0",
+    "forever": "^1.0.0",
     "ghpages": "0.0.10",
     "glob": "^7.1.4",
     "hexo": "^3.2.0",
