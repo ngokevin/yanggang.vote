@@ -1,9 +1,11 @@
 const Reddit = require('snoowrap');
 const clean = require('./scrape').clean;
+const gangs = require('./yangGangs.json');
 const db = require('../events.json');
 const fs = require('fs');
 const moment = require('moment-timezone');
 const nunjucks = require('nunjucks');
+const stateAbbr = require('states-abbreviations');
 
 const subreddits = {
   AK: 'AlaskaForYang',
@@ -67,11 +69,17 @@ const template = `
 
 **Event URL:** RSVP at [{{ url }}]({{ url }})
 
+{%- if facebook %}
+
+**~Join the [{{ city }} Facebook Group]({{ facebook }}) for More Information~**
+
+{% endif -%}
+
 {{ description }}
 
 **Get everyone in on the action by joining their local state subreddits:** [yanggang.vote](http://yanggang.vote)
 
-*For more information or to get in touch with organizers, RSVP to the event and check your regional Yang Gang's Facebook group. This event was cross-posted from an automated bot by [@andgokevin](https://twitter.com/andgokevin)*
+*To get in touch with organizers, RSVP to the event and check your regional Yang Gang's Facebook group. This event was cross-posted from an automated bot by [@andgokevin](https://twitter.com/andgokevin). I am not the organizer.*
 `;
 
 let errors = 0;
@@ -132,6 +140,16 @@ module.exports.post = function post (debug) {
       stateCounts[event.location.region] = 1;
     }
 
+    // Facebook group.
+    let facebook = '';
+    const stateGangs = gangs[stateAbbr[event.location.region].trim()];
+    if (stateGangs) {
+      const gang = stateGangs.filter(g => g.city === eventCity);
+      if (gang.length) {
+        facebook = gang[0].facebook;
+      }
+    }
+
     // Post.
     const subreddit = subreddits[event.location.region];
     return client
@@ -141,6 +159,7 @@ module.exports.post = function post (debug) {
         text: nunjucks.renderString(template, {
           city: eventCity,
           description: event.description,
+          facebook: facebook,
           location: eventLocation,
           time: eventTime,
           title: event.title,

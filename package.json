@@ -37,6 +37,7 @@
     "node-cron": "^2.0.3",
     "node-fetch": "^2.6.0",
     "shx": "^0.3.2",
+    "states-abbreviations": "^1.0.0",
     "stylus": "^0.54.5"
   },
   "hexo": {
