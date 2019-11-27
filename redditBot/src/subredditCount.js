@@ -58,12 +58,67 @@ const states = {
     {state: 'WestVirginia', subreddit: 'WestVirginiaForYang', abbr: 'WV'},
     {state: 'Wyoming', subreddit: 'WyomingForYang', abbr: 'WY'},
   ],
-  total: 0
+  total: 0,
+
+  statesSanders: [
+    {state: 'Alaska', subreddit: 'alaskaforsanders', abbr: 'AK'},
+    {state: 'Alabama', subreddit: 'AlabamaForSanders', abbr: 'AL'},
+    {state: 'Arkansas', subreddit: 'ArkansasForSanders', abbr: 'AR'},
+    {state: 'Arizona', subreddit: 'ArizonaForSanders', abbr: 'AZ'},
+    {state: 'California', subreddit: 'CaliforniaForSanders', abbr: 'CA'},
+    {state: 'Colorado', subreddit: 'Colorado4Sanders', abbr: 'CO'},
+    {state: 'Connecticut', subreddit: 'Connecticut4Sanders', abbr: 'CT'},
+    {state: 'DC', subreddit: 'dc4sanders', abbr: 'DC'},
+    {state: 'Delaware', subreddit: 'Delaware4Sanders', abbr: 'DE'},
+    {state: 'Florida', subreddit: 'FloridaForSanders', abbr: 'FL'},
+    {state: 'Georgia', subreddit: 'Georgia4Sanders', abbr: 'GA'},
+    {state: 'Hawaii', subreddit: 'HawaiiForSanders', abbr: 'HI'},
+    {state: 'Iowa', subreddit: 'IowaForSanders', abbr: 'IA'},
+    {state: 'Idaho', subreddit: 'Idaho4Sanders', abbr: 'ID'},
+    {state: 'Illinois', subreddit: 'Illinois4Sanders', abbr: 'IL'},
+    {state: 'Indiana', subreddit: 'IndianaForSanders', abbr: 'IN'},
+    {state: 'Kansas', subreddit: 'Kansas4Sanders', abbr: 'KS'},
+    {state: 'Kentucky', subreddit: 'KentuckyForSanders', abbr: 'KY'},
+    {state: 'Louisiana', subreddit: 'LouisianaForSanders', abbr: 'LA'},
+    {state: 'Massachusetts', subreddit: 'Massachusetts4Sanders', abbr: 'MA'},
+    {state: 'Maryland', subreddit: 'Maryland4Sanders', abbr: 'MD'},
+    {state: 'Maine', subreddit: 'Maine4Sanders', abbr: 'ME'},
+    {state: 'Michigan', subreddit: 'Michigan4Sanders', abbr: 'MI'},
+    {state: 'Minnesota', subreddit: 'MinnesotaForBernie', abbr: 'MN'},
+    {state: 'Missouri', subreddit: 'MississippiForSanders', abbr: 'MO'},
+    {state: 'Mississippi', subreddit: 'Missouri4Sanders', abbr: 'MS'},
+    {state: 'Montana', subreddit: 'Montana4Sanders', abbr: 'MT'},
+    {state: 'North Carolina', subreddit: 'NorthCarolina4Sanders', abbr: 'NC'},
+    {state: 'North Dakota', subreddit: 'NorthDakota4Sanders', abbr: 'ND'},
+    {state: 'Nebraska', subreddit: 'Nebraska4Sanders', abbr: 'NE'},
+    {state: 'New Hampshire', subreddit: 'NewJerseyforSanders', abbr: 'NH'},
+    {state: 'New Jersey', subreddit: 'NevadaForSanders', abbr: 'NJ'},
+    {state: 'New Mexico', subreddit: 'NewYorkForSanders', abbr: 'NM'},
+    {state: 'New York', subreddit: 'NewHampshire4Sanders', abbr: 'NY'},
+    {state: 'Nevada', subreddit: 'NewMexicoForSanders', abbr: 'NV'},
+    {state: 'Ohio', subreddit: 'ohioforsanders', abbr: 'OH'},
+    {state: 'Oklahoma', subreddit: 'OklahomaForSanders', abbr: 'OK'},
+    {state: 'Oregon', subreddit: 'OregonForSanders', abbr: 'OR'},
+    {state: 'Pennsylvania', subreddit: 'PAForSanders', abbr: 'PA'},
+    {state: 'Rhode Island', subreddit: 'RhodeIsland4Sanders', abbr: 'RI'},
+    {state: 'South Carolina', subreddit: 'SouthCarolina4Sanders', abbr: 'SC'},
+    {state: 'Tennessee', subreddit: 'SouthDakotaForSanders', abbr: 'TN'},
+    {state: 'Texas', subreddit: 'TennesseeForSanders', abbr: 'TX'},
+    {state: 'Utah', subreddit: 'TexasForSanders', abbr: 'UT'},
+    {state: 'Virginia', subreddit: 'Utah4Sanders', abbr: 'VA'},
+    {state: 'Vermont', subreddit: 'VirginiaForSanders', abbr: 'VT'},
+    {state: 'Washington', subreddit: 'Vermont4Sanders', abbr: 'WA'},
+    {state: 'Wisconsin', subreddit: 'WashingtonForSanders', abbr: 'WI'},
+    {state: 'WestVirginia', subreddit: 'Wisconsin4Sanders', abbr: 'WV'},
+    {state: 'Wyoming', subreddit: 'WVForSanders', abbr: 'WY'}
+  ],
+  totalSanders: 0,
 };
 
 module.exports.scrape = function post () {
   const client = new Reddit(require('./config.local'));
   let total = 0;
+  let totalSanders = 0;
 
   const promises = states.states.map(state => {
     return client
@@ -75,8 +130,21 @@ module.exports.scrape = function post () {
       });
   });
 
+  promises.concat(states.statesSanders.map(state => {
+    return client
+      .getSubreddit(state.subreddit)
+      .fetch()
+      .then(res => {
+        state.counts = res.subscribers;
+        totalSanders += res.subscribers;
+      }).catch(err => {
+        console.log(state);
+      });
+  }));
+
   Promise.all(promises).then(() => {
     states.total = total;
+    states.totalSanders = totalSanders;
     fs.writeFileSync('../src/subredditCounts.json', JSON.stringify(states));
   });
 }
