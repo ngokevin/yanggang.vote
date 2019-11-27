@@ -1,0 +1,108 @@
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <title>Rising | Yang Gang</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta property="image" content="https://d3n8a8pro7vhmx.cloudfront.net/yang2020/mailings/421/attachments/original/Image_from_iOS.jpg">
+    <meta property="og:image" content="https://d3n8a8pro7vhmx.cloudfront.net/yang2020/mailings/421/attachments/original/Image_from_iOS.jpg">
+    <meta property="twitter:image" content="https://d3n8a8pro7vhmx.cloudfront.net/yang2020/mailings/421/attachments/original/Image_from_iOS.jpg">
+    <meta property="description" content="Funneling Yang Gang excitement to fun IRL events!">
+    <meta property="og:description" content="Funneling Yang Gang excitement to fun IRL events!">
+    <meta property="twitter:description" content="Funneling Yang Gang excitement to fun IRL events!">
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <div id="headerContainer">
+      <h1 id="header" class="boldLine">Rising</h1>
+    </div>
+
+    <div id="rising" class="content">
+  <h2 id="subredditStateHeader" class="boldLine">Join Your Local State Subreddit</h2>
+
+  <h3 id="count">0 Yangsters</h3>
+  <p>subscribed to grassroots Yang Gang state subreddits</p>
+
+  <div id="progressBarContainer">
+    <div id="progressBar"></div>
+    <img id="progressYang" class="miniYang" src="/img/yang.gif">
+    <img class="progressGoal" src="/img/mission.png">
+    <p class="progressGoalMobile">20,000</p>
+    <p class="deadline">Deadline: Nov. 30th, 11:59PM ET</p>
+  </div>
+
+  <h2 class="stateNotify">Get notified about events near you and hit the streets<span class="red">.</span></h2>
+
+  <ul id="states"></ul>
+
+  <script>
+    function l () { console.log.apply(console, arguments) };
+
+    const progressEl = document.getElementById('progressBarContainer');
+    const barEl = document.getElementById('progressBar');
+    const countEl = document.getElementById('count');
+    const yangEl = document.getElementById('progressYang');
+
+    fetch('/subredditCounts.json').then(res => {
+      res.json().then(data => {
+        initProgressBar(data);
+        initStateList(data);
+      });
+
+      function initProgressBar (data) {
+        requestAnimationFrame(count);
+        let runningCount = 0;
+        function count (currentTime) {
+          runningCount += 50;
+          if (runningCount >= data.total) {
+            updateProgress(data.total);
+            return;
+          }
+          updateProgress(runningCount);
+          requestAnimationFrame(count);
+        }
+      }
+      function updateProgress (num) {
+        const percent = num / 20000;
+        countEl.innerHTML = `${num} Yangsters`;
+        barEl.style.transform = `scale(${percent}, 1)`;
+        yangEl.style.transform = `scale(-1, 1) translateX(${-percent * progressEl.offsetWidth + 28}px)`;
+      }
+
+      function initStateList (data) {
+        const list = document.getElementById('states');
+        data.states.forEach(state => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <a href="https://reddit.com/r/${state.subreddit}/">
+              Join ${state.state}
+            </a>
+          `;
+          list.appendChild(li);
+        });
+      }
+    });
+  </script>
+</div>
+
+
+    <footer>
+  <p>
+    This website is not affiliated nor authorized by the official
+    <a href="https://yang2020.com">Yang2020 campaign</a>
+  </p>
+</footer>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-29871909-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-29871909-2');
+		</script>
+  </body>
+</html>
