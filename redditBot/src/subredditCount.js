@@ -48,6 +48,7 @@ const states = {
     {state: 'Pennsylvania', subreddit: 'PennsylvaniaForYang', abbr: 'PA'},
     {state: 'Rhode Island', subreddit: 'RIForYang', abbr: 'RI'},
     {state: 'South Carolina', subreddit: 'SouthCarolinaForYang', abbr: 'SC'},
+    {state: 'South Dakota', subreddit: 'SouthDakotaForYang', abbr: 'SD'},
     {state: 'Tennessee', subreddit: 'TennesseeForYang', abbr: 'TN'},
     {state: 'Texas', subreddit: 'TexasForYang', abbr: 'TX'},
     {state: 'Utah', subreddit: 'UtahForYang', abbr: 'UT'},

@@ -9,7 +9,6 @@
     <img id="progressYang" class="miniYang" src="/img/yang.gif">
     <img class="progressGoal" src="/img/mission.png">
     <p class="progressGoalMobile">20,000</p>
-    <p class="deadline">Deadline: Nov. 30th, 11:59PM ET</p>
   </div>
 
   <h2 class="stateNotify">Get notified about events near you and hit the streets<span class="red">.</span></h2>

@@ -49,6 +49,7 @@ const subreddits = {
   PA: 'PennsylvaniaForYang',
   RI: 'RIForYang',
   SC: 'SouthCarolinaForYang',
+  SD: 'SouthDakotaForYang',
   TN: 'TennesseeForYang',
   TX: 'TexasForYang',
   UT: 'UtahForYang',
@@ -71,9 +72,15 @@ const template = `
 
 {%- if facebook %}
 
-**~Join the [{{ city }} Facebook Group]({{ facebook }}) for More Information~**
+**~Join the [{{ city }} Yang Gang Facebook Group]({{ facebook }}) for More Information~**
+
+{% else %}
+
+**~[Join your Local Yang Gang](https://yangnearme.com) for More Information~**
 
 {% endif -%}
+
+{% if true %}{% endif %}
 
 {{ description }}
 
@@ -84,9 +91,10 @@ const template = `
 
 let errors = 0;
 
-const stateCounts = {};
+let stateCounts = {};
 
 module.exports.post = function post (debug) {
+  stateCounts = {};
   clean(db);
 
   const client = new Reddit(require('./config.local'));

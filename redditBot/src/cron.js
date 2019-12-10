@@ -8,3 +8,7 @@ cron.schedule('*/10 * * * *', () => {
     reddit.post();
   });
 });
+
+scrape.scrape().then(() => {
+  reddit.post();
+});
