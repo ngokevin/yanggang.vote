@@ -273,7 +273,7 @@ footer p {
 }
 #stateSubreddit #states {
   display: grid;
-  grid-template: repeat(25, 1fr) / repeat(2, 1fr);
+  grid-template: repeat(26, 1fr) / repeat(2, 1fr);
   grid-auto-flow: column dense;
   left: 10px;
   margin-top: 20px;
