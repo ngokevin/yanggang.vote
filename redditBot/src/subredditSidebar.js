@@ -1,6 +1,5 @@
 const Reddit = require('snoowrap');
 const clean = require('./scrape').clean;
-const gangs = require('./yangGangs.json');
 const db = require('../events.json');
 const fs = require('fs');
 const moment = require('moment-timezone');
@@ -62,31 +61,9 @@ const subreddits = {
 };
 
 const template = `
-**Title:** {{ title }}
+{% for eventDay in eventDays %}
 
-**Time:** {{ time }}
-
-**Location:** {{ city }} / {{ location }}
-
-**Event URL:** RSVP at [{{ url }}]({{ url }})
-
-{%- if facebook %}
-
-**~Join the [{{ city }} Yang Gang Facebook Group]({{ facebook }}) for More Information~**
-
-{% else %}
-
-**~[Join your Local Yang Gang](https://yangnearme.com) for More Information~**
-
-{% endif -%}
-
-{% if true %}{% endif %}
-
-{{ description }}
-
-**Get everyone in on the action by joining their local state subreddits:** [yanggang.vote](http://yanggang.vote)
-
-*To get in touch with organizers, RSVP to the event and check your regional Yang Gang's Facebook group. This event was cross-posted from an automated bot by [@andgokevin](https://twitter.com/andgokevin). I am not the organizer.*
+{% endfor %}
 `;
 
 let errors = 0;
@@ -95,7 +72,6 @@ let stateCounts = {};
 
 module.exports.post = function post (debug) {
   stateCounts = {};
-  clean(db);
 
   const client = new Reddit(require('./config.local'));
 
@@ -174,10 +150,9 @@ module.exports.post = function post (debug) {
           url: event.browser_url
         })
       })
-      .then(post => {
+      .then(() => {
         console.log(`Posted to ${subreddit}`);
         db[id].posted = true;
-        db[id].postId = post.name;
         fs.writeFileSync('events.json', JSON.stringify(db));
       }).catch(() => {
         console.log(`Rate limited for ${subreddit}.`);
