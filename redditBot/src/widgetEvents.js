@@ -68,7 +68,11 @@ if (process.env.TEST) {
 
 const template = `
 {% for eventDay in eventDays %}
+  {{ eventDay.date }}
 
+  {% for event in eventDay.events %}
+    - {{ event }}
+  {% endfor %}
 {% endfor %}
 `;
 
@@ -78,8 +82,10 @@ module.exports.updateSidebar = function post (debug) {
   Object.keys(subreddits).forEach(state => {
     const subreddit = subreddits[state];
 
+    const eventDays = [];
+
     // Filter by state and sort by time.
-    const statePosts = Object.keys(db)
+    let stateEvents = Object.keys(db)
       .filter(id => {
         const event = db[id];
         return event.location.region === state;
@@ -98,6 +104,8 @@ module.exports.updateSidebar = function post (debug) {
 
         return event;
       })
-      .sort(event => event.start_date)
+      .sort(event => event.start_date);
+
+    // Bucket into days.
   });
 };
