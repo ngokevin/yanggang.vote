@@ -7,7 +7,7 @@ const moment = require('moment-timezone');
 const nunjucks = require('nunjucks');
 const stateAbbr = require('states-abbreviations');
 
-const subreddits = {
+let subreddits = {
   AK: 'AlaskaForYang',
   AL: 'AlabamaForYang',
   AR: 'ArkansasForYang',
@@ -61,6 +61,12 @@ const subreddits = {
   WY: 'WyomingForYang'
 };
 
+if (process.env.TEST) {
+  subreddits = {
+    CA: 'TestModForYang'
+  };
+}
+
 const template = `
 **Title:** {{ title }}
 
@@ -102,32 +108,34 @@ module.exports.post = function post (debug) {
   const posts = Object.keys(db).map((id, i) => {
     const event = db[id];
 
-    if (event.posted === true) {
-      console.log('Already posted.');
-      return;
-    }
+    if (!process.env.TEST) {
+      if (event.posted === true) {
+        console.log('Already posted.');
+        return;
+      }
 
-    // Some online event.
-    if (!event.location || !event.location.region || event.location.region === 'PR') {
-      console.log('No location.');
-      return;
-    }
+      // Some online event.
+      if (!event.location || !event.location.region || event.location.region === 'PR') {
+        console.log('No location.');
+        return;
+      }
 
-    if (stateCounts[event.location.region] > 3) {
-      console.log('Only 3 posts per run.');
-      return;
-    }
+      if (stateCounts[event.location.region] > 3) {
+        console.log('Only 3 posts per run.');
+        return;
+      }
 
-    // Only post if within a week.
-    if (moment.unix(event.timeslots[0].start_date).unix() > moment().add(7, 'days').unix()) {
-      console.log('Too early to post.');
-      return;
-    }
+      // Only post if within a week.
+      if (moment.unix(event.timeslots[0].start_date).unix() > moment().add(7, 'days').unix()) {
+        console.log('Too early to post.');
+        return;
+      }
 
-    // Double make sure not to post if event is passed or right about to start.
-    if (moment.unix(event.timeslots[0].start_date).unix() < moment().add(4, 'hours').unix()) {
-      console.log('Too late to post.');
-      return;
+      // Double make sure not to post if event is passed or right about to start.
+      if (moment.unix(event.timeslots[0].start_date).unix() < moment().add(4, 'hours').unix()) {
+        console.log('Too late to post.');
+        return;
+      }
     }
 
     // Clean data.
@@ -158,6 +166,11 @@ module.exports.post = function post (debug) {
       }
     }
 
+    if (process.env.TEST && i > 0) { return; }
+    if (process.env.TEST) {
+      event.location.region = 'CA';
+    }
+
     // Post.
     const subreddit = subreddits[event.location.region];
     return client
@@ -175,10 +188,13 @@ module.exports.post = function post (debug) {
         })
       })
       .then(post => {
-        console.log(`Posted to ${subreddit}`);
-        db[id].posted = true;
-        db[id].postId = post.name;
-        fs.writeFileSync('events.json', JSON.stringify(db));
+        return post.id.then(postId => {
+          console.log(`Posted to ${subreddit}`);
+          console.log(postId);
+          db[id].posted = true;
+          db[id].postId = postId;
+          fs.writeFileSync('events.json', JSON.stringify(db));
+        });
       }).catch(() => {
         console.log(`Rate limited for ${subreddit}.`);
       });
