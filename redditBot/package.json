@@ -9,7 +9,8 @@
     "count": "node src/subredditCount.js scrape",
     "print": "node src/print.js",
     "post": "node src/reddit.js post",
-    "scrape": "node src/scrape.js scrape"
+    "scrape": "node src/scrape.js scrape",
+    "widget": "TEST=1 node src/widgetEvents.js updateSidebar"
   },
   "author": "Kevin Ngo",
   "license": "MIT",
