@@ -67,12 +67,12 @@ if (process.env.TEST) {
 }
 
 const template = `
-{% for eventDay in eventDays %}
+{%- for eventDay in eventDays %}
   {{ eventDay[0].day }}
 
 
   {%- for event in eventDay %}
-    - {{ event.time }}: {{ event.title }}
+    - {{ event.time }}: [{{ event.location.locality }}] {{ event.title }}
   {%- endfor %}
 {% endfor %}
 `;
@@ -83,14 +83,25 @@ module.exports.updateSidebar = function post (debug) {
   Object.keys(subreddits).forEach(state => {
     // For each state.
     const subreddit = subreddits[state];
-    const eventDays = [];
+    let eventDays = [];
 
     // Filter by state and sort by time.
     let stateEvents = Object.keys(db)
       .filter(id => {
+        // Filter by state.
         const event = db[id];
         if (!event.location) { return; }
         return event.location.region === state;
+      })
+      .filter(id => {
+        // Filter by future.
+        const event = db[id];
+        return moment.unix(event.timeslots[0].start_date).unix() > moment().unix();
+      })
+      .filter(id => {
+        // Filter by within 8 days.
+        const event = db[id];
+        return moment.unix(event.timeslots[0].start_date).unix() < moment().add(8, 'days').unix();
       })
       .map(id => {
         const event = db[id];
@@ -102,7 +113,20 @@ module.exports.updateSidebar = function post (debug) {
         eventTime = eventTime.replace(/ PM/g, 'PM').replace(/ AM/g, 'AM');
         event.time = eventTime;
 
+        // Day title.
         event.day = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('ddd M/D');
+
+        // Format title.
+        event.title = event.title.replace(', CA', '');
+        event.title = event.title.replace(' CA', '');
+        event.title = event.title.replace('CA', '');
+        event.title = event.title.replace(event.location.locality, '');
+        event.title = event.title.replace(' - ', '');
+        event.title = event.title.replace('-', '');
+        event.title = event.title.replace('- ', '');
+        event.title = event.title.replace(' -', '');
+        event.title = event.title.replace(/  /g, ' ');
+        event.title = event.title.replace(' , ', '');
 
         return event;
       });
@@ -116,14 +140,20 @@ module.exports.updateSidebar = function post (debug) {
       eventDays[index].push(event);
     });
 
-    eventDays.forEach((eventDay, i) => {
-      eventDays[i] = eventDay.sort(event => event.timeslots[0].start_date);
+    // Sort.
+    eventDays = eventDays.map(eventDay => {
+      return eventDay.sort((eventA, eventB) => {
+        if (eventA.timeslots[0].start_date > eventB.timeslots[0].start_date) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
     });
 
     const sidebar = nunjucks.renderString(template, {
       eventDays: eventDays
     });
-    console.log(sidebar);
   });
 };
 

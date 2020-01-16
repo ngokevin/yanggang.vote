@@ -190,7 +190,6 @@ module.exports.post = function post (debug) {
       .then(post => {
         return post.id.then(postId => {
           console.log(`Posted to ${subreddit}`);
-          console.log(postId);
           db[id].posted = true;
           db[id].postId = postId;
           fs.writeFileSync('events.json', JSON.stringify(db));
@@ -220,6 +219,7 @@ module.exports.updateDB = function () {
       limit: 200
     }).then(posts => {
       posts.forEach(post => {
+        if (!post.selftext_html) { return; }
         const mobilizeLink = post.selftext_html.match(mobilizeRe);
         if (!mobilizeLink) { return; }
         const id = mobilizeLink[1];
