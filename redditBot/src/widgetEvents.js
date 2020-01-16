@@ -7,57 +7,7 @@ const nunjucks = require('nunjucks');
 const stateAbbr = require('states-abbreviations');
 
 let subreddits = {
-  AK: 'AlaskaForYang',
-  AL: 'AlabamaForYang',
-  AR: 'ArkansasForYang',
-  AZ: 'ArizonaForYang',
-  CA: 'CaliforniaForYang',
-  CO: 'ColoradoForYang',
-  CT: 'ConnecticutForYang',
-  DC: 'DCForYang',
-  DE: 'DelawareForYang',
-  FL: 'FloridaForYang',
-  GA: 'GeorgiaForYang',
-  HI: 'HawaiiForYang',
-  IA: 'IowaForYang',
-  ID: 'IdahoForYang',
-  IL: 'IllinoisForYang',
-  IN: 'IndianaForYang',
-  KS: 'KansasForYang',
-  KY: 'KentuckyForYang',
-  LA: 'LouisianaForYang',
-  MA: 'MassachusettsForYang',
-  MD: 'MarylandForYang',
-  ME: 'MaineForYang',
-  MI: 'MichiganForYang',
-  MN: 'MinnesotaForYang',
-  MO: 'MissouriForYang',
-  MS: 'MississippiForYang',
-  MT: 'MontanaForYang',
-  NC: 'NCForYang',
-  ND: 'NorthDakotaForYang',
-  NE: 'NebraskaForYang',
-  NH: 'NewHampshireForYang',
-  NJ: 'NewJerseyForYang',
-  NM: 'NewMexicoForYang',
-  NY: 'NewYorkForYang',
-  NV: 'NevadaForYang',
-  OH: 'OhioForYang',
-  OK: 'OklahomaForYang',
-  OR: 'OregonForYang',
-  PA: 'PennsylvaniaForYang',
-  RI: 'RIForYang',
-  SC: 'SouthCarolinaForYang',
-  SD: 'SouthDakotaForYang',
-  TN: 'TennesseeForYang',
-  TX: 'TexasForYang',
-  UT: 'UtahForYang',
-  VA: 'VirginiaForYang',
-  VT: 'VermontForYang',
-  WA: 'WashingtonForYang',
-  WI: 'WisconsinForYang',
-  WV: 'WestVirginiaForYang',
-  WY: 'WyomingForYang'
+  SC: 'SouthCarolinaForYang'
 };
 
 if (process.env.TEST) {
@@ -81,6 +31,7 @@ module.exports.updateSidebar = function post (debug) {
   Object.keys(subreddits).forEach(state => {
     // For each state.
     const subreddit = subreddits[state];
+    const stateFull = stateAbbr[state];
     let eventDays = [];
 
     // Filter by state and sort by time.
@@ -115,16 +66,16 @@ module.exports.updateSidebar = function post (debug) {
         event.day = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('dddd M/D');
 
         // Format title.
-        event.title = event.title.replace(', CA', '');
-        event.title = event.title.replace(' CA', '');
-        event.title = event.title.replace('CA', '');
-        event.title = event.title.replace(event.location.locality, '');
-        event.title = event.title.replace(' - ', '');
-        event.title = event.title.replace('-', '');
-        event.title = event.title.replace('- ', '');
-        event.title = event.title.replace(' -', '');
+        event.title = event.title.replace(`, ${event.location.region}`, ' ');
+        event.title = event.title.replace(` ${event.location.region}`, ' ');
+        event.title = event.title.replace(event.location.region, ' ');
+        event.title = event.title.replace(event.location.locality, ' ');
+        event.title = event.title.replace(' - ', ' ');
+        event.title = event.title.replace('-', ' ');
+        event.title = event.title.replace('- ', ' ');
+        event.title = event.title.replace(' -', ' ');
         event.title = event.title.replace(/  /g, ' ');
-        event.title = event.title.replace(' , ', '');
+        event.title = event.title.replace(' , ', ' ');
 
         return event;
       });
@@ -165,20 +116,36 @@ module.exports.updateSidebar = function post (debug) {
       method: 'get',
       uri: `/r/${subreddit}/api/widgets`,
     }).then(results => {
+      let found = false;
+
       Object.keys(results.items).forEach(widgetId => {
         const widget = results.items[widgetId];
-        if (!widget.shortName || widget.shortName.indexOf('Events') === -1) { return; }
+        if (!widget.shortName || widget.shortName.indexOf(`${stateFull} Events`) === -1) { return; }
 
+        found = true;
         client.oauthRequest({
           method: 'put',
           uri: `/r/${subreddit}/api/widget/${widgetId}`,
           body: {
             kind: "textarea",
-            shortName: "Upcoming Events",
+            shortName: `${stateFull} Events`,
             text: sidebar
           }
         });
       });
+
+      // Create.
+      if (!found) {
+        client.oauthRequest({
+          method: 'post',
+          uri: `/r/${subreddit}/api/widget/`,
+          body: {
+            kind: "textarea",
+            shortName: `${stateFull} Events`,
+            text: sidebar
+          }
+        });
+      }
     });
   });
 };

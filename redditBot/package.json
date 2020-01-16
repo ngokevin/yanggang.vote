@@ -10,7 +10,8 @@
     "print": "node src/print.js",
     "post": "node src/reddit.js post",
     "scrape": "node src/scrape.js scrape",
-    "widget": "TEST=1 node src/widgetEvents.js updateSidebar"
+    "widget": "TEST=1 node src/widgetEvents.js updateSidebar",
+    "widget:prod": "node src/widgetEvents.js updateSidebar"
   },
   "author": "Kevin Ngo",
   "license": "MIT",
