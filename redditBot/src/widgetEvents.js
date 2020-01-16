@@ -99,7 +99,7 @@ module.exports.updateSidebar = function post (debug) {
       .filter(id => {
         // Filter by within 8 days.
         const event = db[id];
-        return moment.unix(event.timeslots[0].start_date).tz(event.timezone).unix() <= moment().tz(event.timezone).add(8, 'days').unix();
+        return moment.unix(event.timeslots[0].start_date).tz(event.timezone).unix() <= moment().tz(event.timezone).add(6, 'days').unix();
       })
       .map(id => {
         const event = db[id];
