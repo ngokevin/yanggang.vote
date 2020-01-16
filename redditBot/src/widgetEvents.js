@@ -71,7 +71,7 @@ const template = `
 **{{ eventDay[0].day }}**
 
 {% for event in eventDay %}
-&nbsp;&nbsp;&nbsp;&nbsp; **{{ event.time }} ({{ event.location.locality }}):** {{ event.title }}\n\n
+&nbsp;&nbsp;&nbsp;&nbsp; **{{ event.time }} ({{ event.location.locality }}):** [{{ event.title }}]({{ event.browser_url }})\n\n
 {% endfor %}
 {% endfor %}
 `;
@@ -94,12 +94,12 @@ module.exports.updateSidebar = function post (debug) {
       .filter(id => {
         // Filter by future.
         const event = db[id];
-        return moment.unix(event.timeslots[0].start_date).unix() > moment().unix();
+        return moment.unix(event.timeslots[0].start_date).tz(event.timezone).unix() > moment().tz(event.timezone).unix();
       })
       .filter(id => {
         // Filter by within 8 days.
         const event = db[id];
-        return moment.unix(event.timeslots[0].start_date).unix() < moment().add(8, 'days').unix();
+        return moment.unix(event.timeslots[0].start_date).tz(event.timezone).unix() <= moment().tz(event.timezone).add(8, 'days').unix();
       })
       .map(id => {
         const event = db[id];
@@ -139,15 +139,23 @@ module.exports.updateSidebar = function post (debug) {
     });
 
     // Sort.
-    eventDays = eventDays.map(eventDay => {
-      return eventDay.sort((eventA, eventB) => {
-        if (eventA.timeslots[0].start_date > eventB.timeslots[0].start_date) {
-          return 1;
-        } else {
-          return -1;
-        }
+    eventDays = eventDays
+      .map(eventDay => {
+        return eventDay.sort((eventA, eventB) => {
+          if (eventA.timeslots[0].start_date > eventB.timeslots[0].start_date) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      })
+      .sort((eventDayA, eventDayB) => {
+          if (eventDayA[0].timeslots[0].start_date > eventDayB[0].timeslots[0].start_date) {
+            return 1;
+          } else {
+            return -1;
+          }
       });
-    });
 
     const sidebar = nunjucks.renderString(template, {
       eventDays: eventDays
