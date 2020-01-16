@@ -67,19 +67,17 @@ if (process.env.TEST) {
 }
 
 const template = `
-{%- for eventDay in eventDays %}
-  {{ eventDay[0].day }}
+{%- for eventDay in eventDays -%}
+**{{ eventDay[0].day }}**
 
-
-  {%- for event in eventDay %}
-    - {{ event.time }}: [{{ event.location.locality }}] {{ event.title }}
-  {%- endfor %}
+{% for event in eventDay %}
+&nbsp;&nbsp;&nbsp;&nbsp; **{{ event.time }} ({{ event.location.locality }}):** {{ event.title }}\n\n
+{% endfor %}
 {% endfor %}
 `;
 
 module.exports.updateSidebar = function post (debug) {
   const client = new Reddit(require('./config.local'));
-
   Object.keys(subreddits).forEach(state => {
     // For each state.
     const subreddit = subreddits[state];
@@ -114,7 +112,7 @@ module.exports.updateSidebar = function post (debug) {
         event.time = eventTime;
 
         // Day title.
-        event.day = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('ddd M/D');
+        event.day = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('dddd M/D');
 
         // Format title.
         event.title = event.title.replace(', CA', '');
@@ -153,6 +151,26 @@ module.exports.updateSidebar = function post (debug) {
 
     const sidebar = nunjucks.renderString(template, {
       eventDays: eventDays
+    });
+
+    client.oauthRequest({
+      method: 'get',
+      uri: `/r/${subreddit}/api/widgets`,
+    }).then(results => {
+      Object.keys(results.items).forEach(widgetId => {
+        const widget = results.items[widgetId];
+        if (!widget.shortName || widget.shortName.indexOf('Events') === -1) { return; }
+
+        client.oauthRequest({
+          method: 'put',
+          uri: `/r/${subreddit}/api/widget/${widgetId}`,
+          body: {
+            kind: "textarea",
+            shortName: "Upcoming Events",
+            text: sidebar
+          }
+        });
+      });
     });
   });
 };
