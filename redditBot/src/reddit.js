@@ -7,60 +7,7 @@ const moment = require('moment-timezone');
 const nunjucks = require('nunjucks');
 const stateAbbr = require('states-abbreviations');
 
-let subreddits = {
-  AK: 'AlaskaForYang',
-  AL: 'AlabamaForYang',
-  AR: 'ArkansasForYang',
-  AZ: 'ArizonaForYang',
-  CA: 'CaliforniaForYang',
-  CO: 'ColoradoForYang',
-  CT: 'ConnecticutForYang',
-  DC: 'DCForYang',
-  DE: 'DelawareForYang',
-  FL: 'FloridaForYang',
-  GA: 'GeorgiaForYang',
-  HI: 'HawaiiForYang',
-  IA: 'IowaForYang',
-  ID: 'IdahoForYang',
-  IL: 'IllinoisForYang',
-  IN: 'IndianaForYang',
-  KS: 'KansasForYang',
-  KY: 'KentuckyForYang',
-  LA: 'LouisianaForYang',
-  MA: 'MassachusettsForYang',
-  MD: 'MarylandForYang',
-  ME: 'MaineForYang',
-  MI: 'MichiganForYang',
-  MN: 'MinnesotaForYang',
-  MO: 'MissouriForYang',
-  MS: 'MississippiForYang',
-  MT: 'MontanaForYang',
-  NC: 'NCForYang',
-  ND: 'NorthDakotaForYang',
-  NE: 'NebraskaForYang',
-  NH: 'NewHampshireForYang',
-  NJ: 'NewJerseyForYang',
-  NM: 'NewMexicoForYang',
-  NY: 'NewYorkForYang',
-  NV: 'NevadaForYang',
-  OH: 'OhioForYang',
-  OK: 'OklahomaForYang',
-  OR: 'OregonForYang',
-  PA: 'PennsylvaniaForYang',
-  RI: 'RIForYang',
-  SC: 'SouthCarolinaForYang',
-  SD: 'SouthDakotaForYang',
-  TN: 'TennesseeForYang',
-  TX: 'TexasForYang',
-  UT: 'UtahForYang',
-  VA: 'VirginiaForYang',
-  VT: 'VermontForYang',
-  WA: 'WashingtonForYang',
-  WI: 'WisconsinForYang',
-  WV: 'WestVirginiaForYang',
-  WY: 'WyomingForYang'
-};
-
+let subreddits = require('./subreddits');
 if (process.env.TEST) {
   subreddits = {
     CA: 'TestModForYang'

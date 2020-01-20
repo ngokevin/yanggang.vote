@@ -6,10 +6,7 @@ const moment = require('moment-timezone');
 const nunjucks = require('nunjucks');
 const stateAbbr = require('states-abbreviations');
 
-let subreddits = {
-  SC: 'SouthCarolinaForYang'
-};
-
+let subreddits = require('./subreddits');
 if (process.env.TEST) {
   subreddits = {
     CA: 'TestModForYang'
@@ -25,6 +22,8 @@ const template = `
 {% endfor %}
 {% endfor %}
 `;
+
+const states = {};
 
 module.exports.updateSidebar = function post (debug) {
   const client = new Reddit(require('./config.local'));
@@ -108,46 +107,54 @@ module.exports.updateSidebar = function post (debug) {
           }
       });
 
-    const sidebar = nunjucks.renderString(template, {
+    states[subreddit] = nunjucks.renderString(template, {
       eventDays: eventDays
     });
 
-    client.oauthRequest({
-      method: 'get',
-      uri: `/r/${subreddit}/api/widgets`,
-    }).then(results => {
-      let found = false;
+    if (states[subreddit] === "\n") {
+      states[subreddit] = "No upcoming events. Create an event on [Mobilize](https://mobilize.us/yang2020)!";
+    }
 
-      Object.keys(results.items).forEach(widgetId => {
-        const widget = results.items[widgetId];
-        if (!widget.shortName || widget.shortName.indexOf(`${stateFull} Events`) === -1) { return; }
+    /*
+      client.oauthRequest({
+        method: 'get',
+        uri: `/r/${subreddit}/api/widgets`,
+      }).then(results => {
+        let found = false;
 
-        found = true;
-        client.oauthRequest({
-          method: 'put',
-          uri: `/r/${subreddit}/api/widget/${widgetId}`,
-          body: {
-            kind: "textarea",
-            shortName: `${stateFull} Events`,
-            text: sidebar
-          }
+        Object.keys(results.items).forEach(widgetId => {
+          const widget = results.items[widgetId];
+          if (!widget.shortName || widget.shortName.indexOf(`${stateFull} Events`) === -1) { return; }
+
+          found = true;
+          client.oauthRequest({
+            method: 'put',
+            uri: `/r/${subreddit}/api/widget/${widgetId}`,
+            body: {
+              kind: "textarea",
+              shortName: `${stateFull} Events`,
+              text: sidebar
+            }
+          });
         });
+
+        // Create.
+        if (!found) {
+          client.oauthRequest({
+            method: 'post',
+            uri: `/r/${subreddit}/api/widget/`,
+            body: {
+              kind: "textarea",
+              shortName: `${stateFull} Events`,
+              text: sidebar
+            }
+          });
+        }
       });
-
-      // Create.
-      if (!found) {
-        client.oauthRequest({
-          method: 'post',
-          uri: `/r/${subreddit}/api/widget/`,
-          body: {
-            kind: "textarea",
-            shortName: `${stateFull} Events`,
-            text: sidebar
-          }
-        });
-      }
-    });
+    */
   });
+
+  fs.writeFileSync('../src/subredditWidgets.json', JSON.stringify(states));
 };
 
 /**
