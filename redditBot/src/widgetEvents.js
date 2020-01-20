@@ -120,7 +120,7 @@ module.exports.updateSidebar = function post (debug) {
       eventDays: eventDays
     });
 
-    if (!states[subreddit] || states[subreddit] === '\n\n\n\n\n\n\n\n\n') {
+    if (!states[subreddit] || states[subreddit] === '\n\n\n\n\n\n\n\n\n' || states[subreddit] === '\n') {
       states[subreddit] = "No upcoming events. Create an event on [Mobilize](https://mobilize.us/yang2020)!";
     }
 
