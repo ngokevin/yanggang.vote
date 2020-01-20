@@ -15,11 +15,13 @@ if (process.env.TEST) {
 
 const template = `
 {%- for eventDay in eventDays -%}
+{%- if eventDay[0] -%}
 **{{ eventDay[0].day }}**
 
 {% for event in eventDay %}
 &nbsp;&nbsp;&nbsp;&nbsp; **{{ event.time }} ({{ event.location.locality }}):** [{{ event.title }}]({{ event.browser_url }})\n\n
 {% endfor %}
+{%- endif -%}
 {% endfor %}
 `;
 
@@ -75,6 +77,7 @@ module.exports.updateSidebar = function post (debug) {
         event.title = event.title.replace(' -', ' ');
         event.title = event.title.replace(/  /g, ' ');
         event.title = event.title.replace(' , ', ' ');
+        event.title = event.title.trim(); 
 
         return event;
       });
@@ -117,7 +120,7 @@ module.exports.updateSidebar = function post (debug) {
       eventDays: eventDays
     });
 
-    if (states[subreddit] === "\n") {
+    if (!states[subreddit] || states[subreddit] === '\n\n\n\n\n\n\n\n\n') {
       states[subreddit] = "No upcoming events. Create an event on [Mobilize](https://mobilize.us/yang2020)!";
     }
 
