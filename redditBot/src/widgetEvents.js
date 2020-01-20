@@ -33,8 +33,6 @@ module.exports.updateSidebar = function post (debug) {
     const stateFull = stateAbbr[state];
     let eventDays = [];
 
-    if (state !== 'AZ') { return; }
-
     // Filter by state and sort by time.
     let stateEvents = Object.keys(db)
       .filter(id => {
