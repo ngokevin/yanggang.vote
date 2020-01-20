@@ -33,6 +33,8 @@ module.exports.updateSidebar = function post (debug) {
     const stateFull = stateAbbr[state];
     let eventDays = [];
 
+    if (state !== 'AZ') { return; }
+
     // Filter by state and sort by time.
     let stateEvents = Object.keys(db)
       .filter(id => {
@@ -106,6 +108,12 @@ module.exports.updateSidebar = function post (debug) {
             return -1;
           }
       });
+
+    for (let i = 0; i < 8; i++) {
+      if (!eventDays[i]) {
+        eventDays[i] = [];
+      }
+    }
 
     states[subreddit] = nunjucks.renderString(template, {
       eventDays: eventDays
