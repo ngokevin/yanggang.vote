@@ -52,3 +52,5 @@ db.json
 public
 .deploy_git
 config.local.js
+
+src/*.json

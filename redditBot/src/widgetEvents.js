@@ -26,6 +26,7 @@ const template = `
 `;
 
 const states = {};
+const statesRaw = {};
 
 module.exports.updateSidebar = function post (debug) {
   const client = new Reddit(require('./config.local'));
@@ -77,7 +78,7 @@ module.exports.updateSidebar = function post (debug) {
         event.title = event.title.replace(' -', ' ');
         event.title = event.title.replace(/  /g, ' ');
         event.title = event.title.replace(' , ', ' ');
-        event.title = event.title.trim(); 
+        event.title = event.title.trim();
 
         return event;
       });
@@ -119,51 +120,15 @@ module.exports.updateSidebar = function post (debug) {
     states[subreddit] = nunjucks.renderString(template, {
       eventDays: eventDays
     });
+    statesRaw[subreddit] = eventDays;
 
     if (!states[subreddit] || states[subreddit] === '\n\n\n\n\n\n\n\n\n' || states[subreddit] === '\n') {
       states[subreddit] = "No upcoming events. Create an event on [Mobilize](https://mobilize.us/yang2020)!";
     }
-
-    /*
-      client.oauthRequest({
-        method: 'get',
-        uri: `/r/${subreddit}/api/widgets`,
-      }).then(results => {
-        let found = false;
-
-        Object.keys(results.items).forEach(widgetId => {
-          const widget = results.items[widgetId];
-          if (!widget.shortName || widget.shortName.indexOf(`${stateFull} Events`) === -1) { return; }
-
-          found = true;
-          client.oauthRequest({
-            method: 'put',
-            uri: `/r/${subreddit}/api/widget/${widgetId}`,
-            body: {
-              kind: "textarea",
-              shortName: `${stateFull} Events`,
-              text: sidebar
-            }
-          });
-        });
-
-        // Create.
-        if (!found) {
-          client.oauthRequest({
-            method: 'post',
-            uri: `/r/${subreddit}/api/widget/`,
-            body: {
-              kind: "textarea",
-              shortName: `${stateFull} Events`,
-              text: sidebar
-            }
-          });
-        }
-      });
-    */
   });
 
   fs.writeFileSync('../src/subredditWidgets.json', JSON.stringify(states));
+  fs.writeFileSync('../src/subredditWidgetsRaw.json', JSON.stringify(statesRaw));
 };
 
 /**
