@@ -8,9 +8,12 @@ cron.schedule('*/10 * * * *', () => {
   scrape.scrape().then(() => {
     reddit.post();
     widget.updateSidebar();
+    widget.updateSidebar(true);
   });
 });
 
 scrape.scrape().then(() => {
   reddit.post();
+  widget.updateSidebar();
+  widget.updateSidebar(true);
 });

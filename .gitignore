@@ -55,4 +55,4 @@ config.local.js
 
 src/*.json
 events.json
-subredditCounts.json
+src/subredditCounts.json
