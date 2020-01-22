@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "hexo clean",
-    "cron": "forever src/cron.js &",
+    "cron": "forever src/deployCron.js &",
     "deploy": "hexo generate && hexo deploy",
     "generate": "hexo generate",
     "start": "hexo server"
