@@ -123,10 +123,11 @@ module.exports.updateSidebar = function (isWeekly) {
       });
 
     for (let i = 0; i < 8; i++) {
-      if (!eventDays[i]) {
-        eventDays[i] = [];
+      if (!eventDays[i] || !eventDays[i].length) {
+        eventDays[i] = undefined;
       }
     }
+    eventDays = eventDays.filter(day => !!day); 
 
     if (isWeekly) {
       states[subreddit] = eventDays;
