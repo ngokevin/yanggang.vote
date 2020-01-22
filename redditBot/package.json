@@ -11,7 +11,8 @@
     "post": "node src/reddit.js post",
     "scrape": "node src/scrape.js scrape",
     "widget": "TEST=1 node src/widgetEvents.js updateSidebar",
-    "widget:prod": "node src/widgetEvents.js updateSidebar"
+    "widget:prod": "node src/widgetEvents.js updateSidebar",
+    "widget:weekly:prod": "IS_WEEKLY=true node src/widgetEvents.js updateSidebar"
   },
   "author": "Kevin Ngo",
   "license": "MIT",

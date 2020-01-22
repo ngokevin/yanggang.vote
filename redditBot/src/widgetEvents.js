@@ -28,8 +28,11 @@ const template = `
 const states = {};
 const statesRaw = {};
 
-module.exports.updateSidebar = function post (debug) {
+module.exports.updateSidebar = function (isWeekly) {
   const client = new Reddit(require('./config.local'));
+
+  isWeekly = isWeekly || process.env.IS_WEEKLY;
+
   Object.keys(subreddits).forEach(state => {
     // For each state.
     const subreddit = subreddits[state];
@@ -45,14 +48,22 @@ module.exports.updateSidebar = function post (debug) {
         return event.location.region === state;
       })
       .filter(id => {
+        if (isWeekly) { return true; }
         // Filter by future.
         const event = db[id];
         return moment.unix(event.timeslots[0].start_date).tz(event.timezone).unix() > moment().tz(event.timezone).unix();
       })
       .filter(id => {
-        // Filter by within 8 days.
         const event = db[id];
-        return moment.unix(event.timeslots[0].start_date).tz(event.timezone).unix() <= moment().tz(event.timezone).add(6, 'days').unix();
+        if (isWeekly) {
+          // Filter by the week.
+          const start = moment().tz(event.timezone).weekday(0);
+          const end = moment().tz(event.timezone).weekday(7);
+          return moment.unix(event.timeslots[0].start_date).tz(event.timezone).isBetween(start, end, null, '[]');
+        } else {
+          // Filter by within 8 days.
+          return moment.unix(event.timeslots[0].start_date).tz(event.timezone).unix() <= moment().tz(event.timezone).add(6, 'days').unix();
+        }
       })
       .map(id => {
         const event = db[id];
@@ -117,9 +128,14 @@ module.exports.updateSidebar = function post (debug) {
       }
     }
 
-    states[subreddit] = nunjucks.renderString(template, {
-      eventDays: eventDays
-    });
+    if (isWeekly) {
+      states[subreddit] = eventDays;
+    } else {
+      states[subreddit] = nunjucks.renderString(template, {
+        eventDays: eventDays
+      });
+    }
+
     statesRaw[subreddit] = eventDays;
 
     if (!states[subreddit] || states[subreddit] === '\n\n\n\n\n\n\n\n\n' || states[subreddit] === '\n') {
@@ -127,8 +143,12 @@ module.exports.updateSidebar = function post (debug) {
     }
   });
 
-  fs.writeFileSync('../src/subredditWidgets.json', JSON.stringify(states));
-  fs.writeFileSync('../src/subredditWidgetsRaw.json', JSON.stringify(statesRaw));
+  if (isWeekly) {
+    fs.writeFileSync('../src/subredditWeek.json', JSON.stringify(states));
+  } else {
+    fs.writeFileSync('../src/subredditWidgets.json', JSON.stringify(states));
+    fs.writeFileSync('../src/subredditWidgetsRaw.json', JSON.stringify(statesRaw));
+  }
 };
 
 /**
