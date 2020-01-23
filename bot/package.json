@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "node src/scrape.js clean && node src/reddit.js updateDB",
-    "cron": "forever src/cron.js &",
+    "cron": "node src/cron.js &",
     "count": "node src/subredditCount.js scrape",
     "print": "node src/print.js",
     "post": "node src/reddit.js post",
