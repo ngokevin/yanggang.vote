@@ -4,7 +4,7 @@ const scrape = require('./scrape');
 const widget = require('./widgetEvents');
 
 console.log('Cron for Yang!');
-cron.schedule('*/10 * * * *', () => {
+cron.schedule('*/60 * * * *', () => {
   scrape.scrape().then(() => {
     reddit.post();
     widget.updateSidebar();
