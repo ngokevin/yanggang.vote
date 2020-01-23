@@ -160,19 +160,30 @@ module.exports.updateDB = function () {
 
   const client = new Reddit(require('./config.local'));
 
+  const ids = [];
+
   client.getMe().then(user => {
     user.getSubmissions({
-      amount: 200,
-      limit: 200
+      amount: 500,
+      limit: 500
     }).then(posts => {
       posts.forEach(post => {
         if (!post.selftext_html) { return; }
         const mobilizeLink = post.selftext_html.match(mobilizeRe);
         if (!mobilizeLink) { return; }
+
         const id = mobilizeLink[1];
         if (!db[id]) { return; }
+
+        if (ids.indexOf(id) !== -1) {
+          r.getSubmission(post.id).delete();
+          console.log(`Deleting duplicate ${post.id}.`);
+          return;
+        }
+
         console.log(`Updating ${id}.`);
         db[id].posted = true;
+        ids.push(id);
       });
       fs.writeFileSync('events.json', JSON.stringify(db));
     });
