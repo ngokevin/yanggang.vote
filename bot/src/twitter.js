@@ -21,7 +21,7 @@ const templates = {
 const client = new Twitter(config.twitter);
 
 module.exports.tweet = function tweet(state, region) {
-  state = state.toUpperCase() || process.env.STATE.toUpperCase();
+  state = state || process.env.STATE;
   region = region || process.env.REGION; 
 
   let event = Object.keys(db)
@@ -29,17 +29,21 @@ module.exports.tweet = function tweet(state, region) {
       const evt = db[id];
       const viable = !!(
         evt.location &&
-        evt.location.region === state &&
-        evt.location.locality === region &&
-        moment.unix(evt.timeslots[0].start_date).tz(evt.timezone) > moment().tz(evt.timezone).unix() &&
+        evt.location.region.toUpperCase() === state.toUpperCase() &&
+        evt.location.locality.toUpperCase() === region.toUpperCase() &&
+        moment.unix(evt.timeslots[0].start_date).tz(evt.timezone).unix() > moment().tz(evt.timezone).unix() &&
         !evt.tweetInitial
       );
       return viable;
     })
     .map(id => db[id]);
 
+  if (!event.length) {
+    console.log('No events.');
+    return;
+  }
+
   event = event[0];
-  if (!event) { return; }
 
   const eventType = getEventType(event);
 

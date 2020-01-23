@@ -10,7 +10,7 @@
     "print": "node src/print.js",
     "post": "node src/reddit.js post",
     "scrape": "node src/scrape.js scrape",
-    "twitter:sf": "DEBUG=true STATE=CA REGION='San Francisco' node src/twitter.js tweet",
+    "twitter:sf": "STATE=CA REGION='San Francisco' node src/twitter.js tweet",
     "updateDB": "node src/reddit.js updateDB",
     "widget": "TEST=1 node src/widgetEvents.js updateSidebar",
     "widget:prod": "node src/widgetEvents.js updateSidebar",
