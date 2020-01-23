@@ -26,7 +26,9 @@ module.exports.scrape = function scrape () {
             return;
           }
           data.data.forEach(event => {
+            // Preserve data.
             if (db[event.id] && db[event.id].posted) { event.posted = true; }
+            if (db[event.id] && db[event.id].tweetInitial) { event.tweetInitial = true; }
             db[event.id] = event;
           });
           console.log(`Processed page ${i}.`);
