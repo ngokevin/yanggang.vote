@@ -176,7 +176,7 @@ module.exports.updateDB = function () {
         if (!db[id]) { return; }
 
         if (ids.indexOf(id) !== -1) {
-          r.getSubmission(post.id).delete().then(() => {
+          client.getSubmission(post.id).delete().then(() => {
             console.log(`Deleted duplicate ${post.id}.`);
           });
           return;

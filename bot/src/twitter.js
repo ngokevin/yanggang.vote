@@ -32,11 +32,17 @@ module.exports.tweet = function tweet(state, region) {
         evt.location.region.toUpperCase() === state.toUpperCase() &&
         evt.location.locality.toUpperCase() === region.toUpperCase() &&
         moment.unix(evt.timeslots[0].start_date).tz(evt.timezone).unix() > moment().tz(evt.timezone).unix() &&
+        moment.unix(evt.timeslots[0].start_date).tz(evt.timezone).unix() < moment().add(5, 'days').tz(evt.timezone).unix() &&
         !evt.tweetInitial
       );
       return viable;
     })
-    .map(id => db[id]);
+    .map(id => db[id])
+    .sort((evtA, evtB) => {
+      if (evtA.timeslots[0].start_date < evtB.timeslots[0].start_date) { return -1; }
+      if (evtA.timeslots[0].start_date > evtB.timeslots[0].start_date) { return 1; }
+      return 0;
+    });
 
   if (!event.length) {
     console.log('No events.');
@@ -64,12 +70,12 @@ module.exports.tweet = function tweet(state, region) {
     }, () => {
       console.log(text);
       db[event.id].tweetInitial = true;
-      fs.writeFileSync('../events.json', JSON.stringify(db));
+      fs.writeFileSync('events.json', JSON.stringify(db));
     });
   }, () => {
     console.log('Event deleted.');
     delete db[event.id];
-    fs.writeFileSync('../events.json', JSON.stringify(db));
+    fs.writeFileSync('events.json', JSON.stringify(db));
   });
 };
 
@@ -110,7 +116,7 @@ function getEventType (evt) {
   if (evt.type === 'CANVASS' || title.match(/canvas/i) || (title.match(/door/i) && title.match(/knock/i))) { return 'canvass'; }
   if (title.match(/crowd/i)) { return 'crowd'; }
   if (title.match(/gang hang/)) { return 'hang'; }
-  if (evt.type === 'PHONEBANK' || title.match(/phonebank/i) || title.match(/phone bank/i)) { return 'phonebank'; }
+  if (evt.type === 'PHONE_BANK' || title.match(/phonebank/i) || title.match(/phone bank/i)) { return 'phonebank'; }
   if (title.match(/textbank/i) || title.match(/text bank/i) || title.match(/texting/i)) { return 'textbank'; }
   return 'misc';
 }

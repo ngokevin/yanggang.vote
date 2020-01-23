@@ -12,7 +12,7 @@ function clean (db) {
 	if (!db) { db = require('../events.json'); }
 	Object.keys(db).forEach(id => {
 		const event = db[id];
-		if (event.timeslots[0].start_date < moment().add(7, 'days').unix()) {
+		if (event.timeslots[0].start_date < moment().subtract(7, 'days').unix()) {
 			delete db[id];
 		}
 	});
