@@ -19,7 +19,7 @@ const template = `
 
 **Time:** {{ time }}
 
-**Location:** {{ city }}{%- if location -%} / {{ location }}{%- endif -%}
+**Location:** {{ city }} / {{ location }}
 
 **Event URL:** RSVP at [{{ url }}]({{ url }})
 
@@ -93,7 +93,7 @@ module.exports.post = function post (debug) {
     }
     if (event.location.venue.indexOf('is private') !== -1 ||
 	event.location.address_lines[0].indexOf('is private') !== -1) {
-      eventLocation = '';
+      eventLocation = '(location in description)';
     }
 
     let eventTime = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('ddd M/D LT').replace(/:00/g, '');
