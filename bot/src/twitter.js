@@ -1,10 +1,12 @@
 const Twitter = require('twitter');
-const fetch = require('node-fetch');
-const db = require('../events.json');
 const emoji = require('node-emoji');
+const fetch = require('node-fetch');
 const fs = require('fs');
 const moment = require('moment-timezone');
 const stateAbbr = require('states-abbreviations');
+
+const config = require('./config.local');
+const db = require('../events.json');
 
 const templates = {
   canvass: `${emoji.find('door').emoji}${emoji.find('woman-walking').emoji} Wanna claim some turf for @andrewyang? Join us #yanggang in knocking door-to-door.`,
@@ -19,22 +21,7 @@ const templates = {
 const state = process.env.STATE.toUpperCase();
 const region = process.env.REGION;
 
-let client;
-if (process.env.DEBUG) {
-  client = new Twitter({
-    access_token_key: '',
-    access_token_secret: '',
-    consumer_key: '',
-    consumer_secret: ''
-  });
-} else {
-  client = new Twitter({
-    access_token_key: '',
-    access_token_secret: '',
-    consumer_key: '',
-    consumer_secret: ''
-  });
-}
+const client = new Twitter(config.twitter);
 
 module.exports.tweet = function tweet() {
   let event = Object.keys(db)
@@ -72,8 +59,8 @@ module.exports.tweet = function tweet() {
       status: text
     }, () => {
       console.log(text);
-      // db[event.id].tweetInitial = true;
-      // fs.writeFileSync('./events.json', JSON.stringify(db));
+      db[event.id].tweetInitial = true;
+      fs.writeFileSync('./events.json', JSON.stringify(db));
     });
   }, () => {
     console.log('Event deleted.');
