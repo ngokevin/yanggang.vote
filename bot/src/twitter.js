@@ -116,7 +116,7 @@ function getTitle (event) {
 
 function getEventType (evt) {
   const title = evt.title;
-  if (title.match(/tabling/i) || title.match(/table/i)) { return 'tabling'; }
+  if (title.match(/tabling/i) || title.match(/tabel/i) || title.match(/table/i)) { return 'tabling'; }
   if (evt.type === 'CANVASS' || title.match(/canvas/i) || (title.match(/door/i) && title.match(/knock/i))) { return 'canvass'; }
   if (title.match(/crowd/i)) { return 'crowd'; }
   if (title.match(/gang hang/)) { return 'hang'; }
