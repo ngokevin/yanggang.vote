@@ -58,9 +58,13 @@ module.exports.tweet = function tweet(state, region) {
   eventTime = `${eventTime}-${endTime}`;
   eventTime = eventTime.replace(/ PM/g, 'PM').replace(/ AM/g, 'AM');
 
-  const eventLocation = event.location.venue || event.location.address_lines[0];
-
-  const description = `${getTitle(event)} at ${eventLocation} on ${eventTime}`;
+  let eventLocation = event.location.venue || event.location.address_lines[0];
+  let description;
+  if (!eventLocation || eventLocation.indexOf('is private') !== -1) {
+    description = `${getTitle(event)} at ${eventTime}`;
+  } else {
+    description = `${getTitle(event)} at ${eventLocation} on ${eventTime}`;
+  }
 
   const text = templates[eventType] + ` ${description} ${event.browser_url}`;
 
