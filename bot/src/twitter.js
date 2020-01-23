@@ -1,17 +1,19 @@
 const Twitter = require('twitter');
+const fetch = require('node-fetch');
 const db = require('../events.json');
+const emoji = require('node-emoji');
 const fs = require('fs');
 const moment = require('moment-timezone');
 const stateAbbr = require('states-abbreviations');
 
 const templates = {
-  canvass: 'Wanna knock on some doors?',
-  crowd: 'Let\'s shout to the streets!',
-  hang: 'Come and hang with the #YangGang!',
-  misc: 'Volunteer at a Yang event!',
-  phonebank: 'Time is ticking, call for Yang.',
-  tabling: 'Come show your support for Yang.',
-  textbank: 'Send out some texts and spread the word.'
+  canvass: `${emoji.find('door').emoji}${emoji.find('woman-walking').emoji} Wanna claim some turf for @andrewyang? Join us #yanggang in knocking door-to-door.`,
+  crowd: `${emoji.find('speaking_head_in_silhoutette')}${emoji.find('cityscape')} Let's shout to the streets for @andrewyang! Come show off #yanggang numbers.`,
+  hang: `${emoji.find('man-woman-girl-boy')} Hang with the #YangGang where we mobilize on getting @andrewyang to the White House.`,
+  misc: `${emoji.find('v').emoji} The better world is still possible. Come out and fight for @andrewyang and the #yanggang.`,
+  phonebank: `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Phonebanking is the highest priority here for the #yanggang! Take a bit of time to call for @andrewyang.`,
+  tabling: `${emoji.find('seat').emoji} Come show support and talk with the @andrewyang-curious with the #yanggang.`,
+  textbank: `${emoji.find('computer').emoji}${emoji.find('iphone').emoji} Send out a wave of texts to spread the word about @andrewyang and mobilize #yanggang volunteers.`
 };
 
 const state = process.env.STATE.toUpperCase();
@@ -20,10 +22,10 @@ const region = process.env.REGION;
 let client;
 if (process.env.DEBUG) {
   client = new Twitter({
-    access_token_key: '1156694132737241088-dkNPdQhAaA45rB4niPYWx36hrVwH5j',
-    access_token_secret: 'VoetziT7hpXWIOUQABB675Iq73PNWE76gJbj8lJmYnHQI',
-    consumer_key: 'ptPQWgoQodez5mKbsjz5LPdod',
-    consumer_secret: '6ueMWw9y4EX9Vj5fOEt9azcvjgT2tGu44jl1yRarqHkC1j85Dr'
+    access_token_key: '',
+    access_token_secret: '',
+    consumer_key: '',
+    consumer_secret: ''
   });
 } else {
   client = new Twitter({
@@ -53,24 +55,71 @@ module.exports.tweet = function tweet() {
   if (!event) { return; }
 
   const eventType = getEventType(event);
-  const text = templates[eventType] + ` ${event.browser_url}`;
 
-  client.post('statuses/update', {
-    status: text
+  let eventTime = moment.unix(event.timeslots[0].start_date).tz(event.timezone).format('ddd M/D LT').replace(/:00/g, '');
+  const endTime = moment.unix(event.timeslots[0].end_date).tz(event.timezone).format('LT').replace(/:00/g, '');
+  eventTime = `${eventTime}-${endTime}`;
+  eventTime = eventTime.replace(/ PM/g, 'PM').replace(/ AM/g, 'AM');
+
+  const eventLocation = event.location.venue || event.location.address_lines[0];
+
+  const description = `${getTitle(event)} at ${eventLocation} on ${eventTime}`;
+
+  const text = templates[eventType] + ` ${description} ${event.browser_url}`;
+
+  validateEvent(event).then(() => {
+    client.post('statuses/update', {
+      status: text
+    }, () => {
+      console.log(text);
+      // db[event.id].tweetInitial = true;
+      // fs.writeFileSync('./events.json', JSON.stringify(db));
+    });
   }, () => {
-    console.log(text);
-    // db[evt.id].tweetInitial = true;
-    // fs.writeFileSync('./events.json', JSON.stringify(db));
+    console.log('Event deleted.');
+    delete db[event.id];
+    fs.writeFileSync('./events.json', JSON.stringify(db));
   });
 };
 
+function validateEvent (event) {
+  return new Promise((resolve, reject) => {
+    fetch(event.browser_url).then(res => {
+      if (res.url.endsWith('error=404')) {
+        reject();
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+function getTitle (event) {
+  // Format title.
+  let title = event.title;
+  title = title.replace(`, ${event.location.region}`, ' ');
+  title = title.replace(` ${event.location.region}`, ' ');
+  title = title.replace(event.location.region, ' ');
+  title = title.replace(event.location.locality, ' ');
+  title = title.replace(' - ', ' ');
+  title = title.replace('-', ' ');
+  title = title.replace('- ', ' ');
+  title = title.replace(' -', ' ');
+  title = title.replace(/  /g, ' ');
+  title = title.replace(' , ', ' ');
+  title = title.replace('SF', ' ');
+  title = title.replace('in SF', ' ');
+  title = title.trim();
+  return title;
+}
+
 function getEventType (evt) {
   const title = evt.title;
-  if (evt.type === 'CANVASS' || title.match(/canvas/) || (title.match(/door/) && title.match(/knock/))) { return 'canvass'; }
+  if (evt.type === 'CANVASS' || title.match(/canvas/i) || (title.match(/door/i) && title.match(/knock/i))) { return 'canvass'; }
   if (title.match(/crowd/)) { return 'crowd'; }
   if (title.match(/gang hang/)) { return 'hang'; }
-  if (evt.type === 'PHONEBANK' || title.match(/phonebank/) || title.match(/phone bank/)) { return 'phonebank'; }
-  if (title.match(/textbank/) || title.match(/text bank/)) { return 'textbank'; }
+  if (evt.type === 'PHONEBANK' || title.match(/phonebank/i) || title.match(/phone bank/i)) { return 'phonebank'; }
+  if (title.match(/textbank/i) || title.match(/text bank/i) || title.match(/texting/i)) { return 'textbank'; }
   return 'misc';
 }
 

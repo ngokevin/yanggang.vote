@@ -9,7 +9,14 @@ function getUrl (page) {
 }
 
 function clean (db) {
-  return;
+	if (!db) { db = require('../events.json'); }
+	Object.keys(db).forEach(id => {
+		const event = db[id];
+		if (event.timeslots[0].start_date < moment().add(7, 'days').unix()) {
+			delete db[id];
+		}
+	});
+	fs.writeFileSync('events.json', JSON.stringify(db));
 };
 module.exports.clean = clean;
 
