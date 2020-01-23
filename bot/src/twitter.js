@@ -102,8 +102,9 @@ function getTitle (event) {
 
 function getEventType (evt) {
   const title = evt.title;
+  if (title.match(/tabling/i) || title.match(/table/i)) { return 'tabling'; }
   if (evt.type === 'CANVASS' || title.match(/canvas/i) || (title.match(/door/i) && title.match(/knock/i))) { return 'canvass'; }
-  if (title.match(/crowd/)) { return 'crowd'; }
+  if (title.match(/crowd/i)) { return 'crowd'; }
   if (title.match(/gang hang/)) { return 'hang'; }
   if (evt.type === 'PHONEBANK' || title.match(/phonebank/i) || title.match(/phone bank/i)) { return 'phonebank'; }
   if (title.match(/textbank/i) || title.match(/text bank/i) || title.match(/texting/i)) { return 'textbank'; }
