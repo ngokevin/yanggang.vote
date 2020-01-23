@@ -18,12 +18,12 @@ const templates = {
   textbank: `${emoji.find('computer').emoji}${emoji.find('iphone').emoji} Send out a wave of texts to spread the word about @andrewyang and mobilize #yanggang volunteers.`
 };
 
-const state = process.env.STATE.toUpperCase();
-const region = process.env.REGION;
-
 const client = new Twitter(config.twitter);
 
-module.exports.tweet = function tweet() {
+module.exports.tweet = function tweet(state, region) {
+  state = state.toUpperCase() || process.env.STATE.toUpperCase();
+  region = region || process.env.REGION; 
+
   let event = Object.keys(db)
     .filter(id => {
       const evt = db[id];
@@ -60,12 +60,12 @@ module.exports.tweet = function tweet() {
     }, () => {
       console.log(text);
       db[event.id].tweetInitial = true;
-      fs.writeFileSync('./events.json', JSON.stringify(db));
+      fs.writeFileSync('../events.json', JSON.stringify(db));
     });
   }, () => {
     console.log('Event deleted.');
     delete db[event.id];
-    fs.writeFileSync('./events.json', JSON.stringify(db));
+    fs.writeFileSync('../events.json', JSON.stringify(db));
   });
 };
 
