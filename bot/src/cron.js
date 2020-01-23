@@ -17,8 +17,6 @@ cron.schedule('*/60 * * * *', () => {
 
 scrape.scrape().then(() => {
   reddit.updateDB();
-  reddit.post();
-  twitter.tweet('CA', 'San Francisco');
   widget.updateSidebar();
   widget.updateSidebar(true);
 });
