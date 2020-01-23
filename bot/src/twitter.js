@@ -13,7 +13,7 @@ const templates = {
   crowd: `${emoji.find('speaking_head_in_silhoutette')}${emoji.find('cityscape')} Let's shout to the streets for @andrewyang! Come show off #yanggang numbers.`,
   hang: `${emoji.find('man-woman-girl-boy')} Hang with the #YangGang where we mobilize on getting @andrewyang to the White House.`,
   misc: `${emoji.find('v').emoji} The better world is still possible. Come out and fight for @andrewyang and the #yanggang.`,
-  phonebank: `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Phonebanking is the highest priority here for the #yanggang! Take a bit of time to call for @andrewyang.`,
+  phonebank: `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Phonebanking is the highest priority here for the #yanggang! Newcomers encouraged! We'll get you trained and set up easy.`,
   tabling: `${emoji.find('seat').emoji} Come show support and talk with the @andrewyang-curious with the #yanggang.`,
   textbank: `${emoji.find('computer').emoji}${emoji.find('iphone').emoji} Send out a wave of texts to spread the word about @andrewyang and mobilize #yanggang volunteers.`
 };
