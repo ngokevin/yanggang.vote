@@ -57,3 +57,4 @@ src/*.json
 events.json
 bot/events.json
 src/subredditCounts.json
+*.sqlite

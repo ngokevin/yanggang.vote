@@ -5,6 +5,11 @@ module.exports = {
   password: '',
   userAgent: '',
 
+  db: {
+    username: '',
+    password: ''
+  },
+
   discord: {
     clientId: '',
     clientSecret: ''

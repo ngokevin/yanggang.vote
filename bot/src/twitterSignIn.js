@@ -12,7 +12,7 @@ const logger = require('express-logger');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const session = require('express-session');
-const sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 const inspect = require('util-inspect');
 const oauth = require('oauth');
 
@@ -20,15 +20,34 @@ const config = require('./config.local');
 
 const app = express();
 
+const sequelize = new Sequelize('database', config.db.username, config.db.password, {
+  host: 'localhost',
+  dialect: 'sqlite',
+  pool: {max: 5, min: 0, idle: 10000},
+  storage: 'database.sqlite'
+});
+
+const User = sequelize.define('user', {
+  id: {type: Sequelize.STRING, unique: true, allowNull: false, primaryKey: true},
+	region: {type: Sequelize.STRING},
+	username: {type: Sequelize.STRING, unique: true, allowNull: false},
+  secret: {type: Sequelize.STRING},
+  token: {type: Sequelize.STRING}
+}, {
+  freezeTableName: true // Model tableName will be the same as the model name
+});
+
+User.sync()
+
 // Get credentials: https://dev.twitter.com/apps
-const _twitterConsumerKey = config.twitter.consumer_key;
-const _twitterConsumerSecret = config.twitter.consumer_secret;
+const consumerKey = config.twitter.consumer_key;
+const consumerSecret = config.twitter.consumer_secret;
 
 const consumer = new oauth.OAuth(
   'https://twitter.com/oauth/request_token',
   'https://twitter.com/oauth/access_token',
-  _twitterConsumerKey,
-  _twitterConsumerSecret,
+  consumerKey,
+  consumerSecret,
   '1.0A', 'http://127.0.0.1:8080/sessions/callback',
   'HMAC-SHA1');
 
@@ -83,15 +102,33 @@ app.get('/sessions/callback', function (req, res) {
           500);
       } else {
         // Got the tokens.
+
+				User.findOne({
+        	where: {username:  results.screen_name}
+				}).then(user => {
+					if (user) {
+            user.token = oauthAccessToken;
+            user.secret = oauthAccessTokenSecret;
+            user.save();
+					} else {
+            User.create({
+              id: results.user_id,
+              username: results.screen_name,
+              token: oauthAccessToken,
+              secret: oauthAccessTokenSecret
+            });
+					}
+				});
+
         req.session.oauthAccessToken = oauthAccessToken;
         req.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
-        res.redirect('/home');
+        res.redirect(`/authorize?user=${results.screen_name}`);
       }
     }
   );
 });
 
-app.get('/home', function (req, res) {
+app.get('/authorize', function (req, res) {
   consumer.get(
     'https://api.twitter.com/1.1/account/verify_credentials.json',
     req.session.oauthAccessToken,
@@ -101,7 +138,7 @@ app.get('/home', function (req, res) {
         res.redirect('/sessions/connect');
       } else {
         const parsedData = JSON.parse(data);
-        res.send('You are signed in: ' + inspect(parsedData.screen_name));
+	      res.sendFile(path.resolve('index.html'));
       }
     }
   );

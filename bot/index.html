@@ -55,6 +55,12 @@
     img {
       margin-top: 30px;
     }
+
+    .success {
+      font-weight: bold;
+      text-decoration: underline;
+      margin-top: 30px;
+    }
   </style>
 
   <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700&display=swap" rel="stylesheet">
@@ -69,5 +75,15 @@
 
   <p>Mobilize volunteers to upcoming events for <a href="https://yang2020.com">Andrew Yang</a>!</p>
 
-  <a href="/home"><img src="https://cdn.cms-twdigitalassets.com/content/dam/developer-twitter/icons/sign-in-with-twitter-gray-png-img-fullhd-medium.png.img.fullhd.medium.png"></a>
+  <a id="authLink" href="/authorize"><img src="https://cdn.cms-twdigitalassets.com/content/dam/developer-twitter/icons/sign-in-with-twitter-gray-png-img-fullhd-medium.png.img.fullhd.medium.png"></a>
+
+  <script>
+    if (window.location.search.indexOf('user') !== -1) {
+      document.body.removeChild(document.getElementById('authLink'));
+      const p = document.createElement('p');
+      p.classList.add('success');
+      p.innerHTML = `Successfully authorized @${window.location.search.split('=')[1]}!`;
+      document.body.appendChild(p);
+    }
+  </script>
 </body>
