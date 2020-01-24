@@ -48,7 +48,10 @@ const consumer = new oauth.OAuth(
   'https://twitter.com/oauth/access_token',
   consumerKey,
   consumerSecret,
-  '1.0A', '/sessions/callback',
+  '1.0A',
+  process.env.NODE_ENV === 'production'
+    ? 'http://twitter.yanggang.vote/sessions/callback'
+    : 'http://localhost:8080/sessions/callback',
   'HMAC-SHA1');
 
 app.use(bodyParser.urlencoded({extended: true}));

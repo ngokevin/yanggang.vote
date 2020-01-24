@@ -9,7 +9,7 @@
     "print": "node src/print.js",
     "post": "node src/reddit.js post",
     "scrape": "node src/scrape.js scrape",
-    "start": "node index.js &",
+    "start": "NODE_ENV=production node index.js &",
     "start:debug": "node index.js",
     "twitter:sf": "STATE=CA REGION='San Francisco' node src/twitter.js tweet",
     "updateDB": "node src/reddit.js updateDB",
