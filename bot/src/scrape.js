@@ -27,11 +27,13 @@ module.exports.scrape = function scrape () {
           }
           data.data.forEach(event => {
             // Preserve data.
-            Object.keys(db[event.id]).forEach(key => {
-              if (!(key in event)) {
-                event[key] = db[event.id][key];
-              }
-            });
+            if (db[event.id]) {
+              Object.keys(db[event.id]).forEach(key => {
+                if (!(key in event)) {
+                  event[key] = db[event.id][key];
+                }
+              });
+            }
             db[event.id] = event;
           });
           console.log(`Processed page ${i}.`);

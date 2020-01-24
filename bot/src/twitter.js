@@ -28,7 +28,7 @@ const accounts = [
     regions: ['SAN FRANCISCO']
   },
   {
-    user: 'sfyanggang',
+    user: 'SFYangGang',
     state: 'CA',
     regions: ['SAN FRANCISCO']
   }
@@ -41,13 +41,16 @@ module.exports.tweet = function tweet () {
   accounts.forEach(account => {
     if (!account.client) {
       // Initialize client.
-      User.findOne(account.user).then(user => {
+      User.findOne({where: {username: account.user}}).then(user => {
+        if (!user) { return; }
+        console.log(`Initializing ${account.user} Twitter client.`);
         account.client = new Twitter({
           access_token_key: user.token,
           access_token_secret: user.secret,
           consumer_key: config.twitter.consumer_key,
           consumer_secret: config.twitter.consumer_secret
         });
+        doTweet(account);
       });
     } else {
       doTweet(account);
@@ -141,15 +144,20 @@ function doTweet (account) {
   if (tweetDayOf) { tweetTime = '[Today]'; }
   if (tweetDayBefore) { tweetTime = '[Tomorrow]'; }
   if (tweetWeekOf) { tweetTime = '[This Week]'; }
-  const text = `${tweetTime} ${templates[eventType]} ${description} ${event.browser_url}`;
+  const tweet = `${tweetTime} ${templates[eventType]} ${description} ${event.browser_url}`;
+
+  if (process.env.DRY) {
+    console.log(`[@${username}] | ${tweet}`);
+    return;
+  }
 
   // Tweet.
   validateEvent(event).then(() => {
     account.client.post('statuses/update', {
-      status: text
+      status: tweet
     }, () => {
       // Mark as tweeted (per user per timeline).
-      console.log(text);
+      console.log(tweet);
       db[event.id].tweeted = db[event.id].tweeted || {};
       db[event.id].tweeted[username] = db[event.id].tweeted[username] || {};
       if (tweetDayOf) {
@@ -213,13 +221,16 @@ function getEventType (evt) {
 
 function migrate (evt) {
   if (evt.tweetInitial) {
-    evt.tweeted.sfyanggang.weekOf = true;
+    evt.tweeted['SFYangGang'] = evt.tweeted['SFYangGang'] || {};
+    evt.tweeted['SFYangGang'].weekOf = true;
   }
   if (evt.tweetDayBefore) {
-    evt.tweeted.sfyanggang.dayBefore = true;
+    evt.tweeted['SFYangGang'] = evt.tweeted['SFYangGang'] || {};
+    evt.tweeted['SFYangGang'].dayBefore = true;
   }
   if (evt.tweetDayOf) {
-    evt.tweeted.sfyanggang.dayOf = true;
+    evt.tweeted['SFYangGang'] = evt.tweeted['SFYangGang'] || {};
+    evt.tweeted['SFYangGang'].dayOf = true;
   }
 }
 
