@@ -12,8 +12,8 @@ const User = require('./twitterSignIn').User;
 
 const templates = {
   canvass: `${emoji.find('door').emoji}${emoji.find('woman-walking').emoji} Wanna claim some turf for @andrewyang? Join us #yanggang in knocking door-to-door.`,
-  crowd: `${emoji.find('speaking_head_in_silhoutette')}${emoji.find('cityscape')} Let's shout to the streets for @andrewyang! Come show off #yanggang numbers.`,
-  hang: `${emoji.find('man-woman-girl-boy')} Hang with the #YangGang where we mobilize on getting @andrewyang to the White House.`,
+  crowd: `${emoji.find('speaking_head_in_silhouette').emoji}${emoji.find('cityscape').emoji} Let's shout to the streets for @andrewyang! Come show off #yanggang numbers.`,
+  hang: `${emoji.find('man-woman-girl-boy').emoji} Hang with the #YangGang where we mobilize on getting @andrewyang to the White House.`,
   misc: `${emoji.find('v').emoji} The better world is still possible. Come out for @andrewyang and the #yanggang!`,
   phonebank: `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Make calls to the early states! Phonebanking is the highest priority #yanggang! Newcomers encouraged, we'll get you trained and set up quick.`,
   tabling: `${emoji.find('seat').emoji} Come show support and talk with the @andrewyang-curious with the #yanggang.`,
