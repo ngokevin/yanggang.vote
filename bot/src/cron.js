@@ -5,7 +5,7 @@ const twitter = require('./twitter');
 const widget = require('./widgetEvents');
 
 console.log('Cron for Yang!');
-cron.schedule('*/60 * * * *', () => {
+cron.schedule('0 8-16 * * *', () => {
   scrape.scrape().then(() => {
     reddit.updateDB();
     reddit.post();
@@ -13,6 +13,8 @@ cron.schedule('*/60 * * * *', () => {
     widget.updateSidebar();
     widget.updateSidebar(true);
   });
+}, {
+  timezone: "America/Los_Angeles"
 });
 
 scrape.scrape().then(() => {
