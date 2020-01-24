@@ -36,8 +36,8 @@ const User = sequelize.define('user', {
 }, {
   freezeTableName: true // Model tableName will be the same as the model name
 });
-
 User.sync()
+module.exports.User = User;
 
 // Get credentials: https://dev.twitter.com/apps
 const consumerKey = config.twitter.consumer_key;

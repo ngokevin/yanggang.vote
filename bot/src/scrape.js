@@ -27,10 +27,11 @@ module.exports.scrape = function scrape () {
           }
           data.data.forEach(event => {
             // Preserve data.
-            if (db[event.id] && db[event.id].posted) { event.posted = true; }
-            if (db[event.id] && db[event.id].tweetInitial) { event.tweetInitial = true; }
-            if (db[event.id] && db[event.id].tweetDayOf) { event.tweetDayOf = true; }
-            if (db[event.id] && db[event.id].tweetDayBefore) { event.tweetDayBefore = true; }
+            Object.keys(db[event.id]).forEach(key => {
+              if (!(key in event)) {
+                event[key] = db[event.id][key];
+              }
+            });
             db[event.id] = event;
           });
           console.log(`Processed page ${i}.`);
