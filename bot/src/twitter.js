@@ -28,6 +28,11 @@ const accounts = [
     regions: ['SAN FRANCISCO']
   },
   {
+    user: 'OaklandYangGang',
+    state: 'CA',
+    regions: ['OAKLAND', 'BERKELEY', 'FREMONT', 'ORINDA', 'SAN LEANDRO', 'WALNUT CREEK', 'CONCORD']
+  },
+  {
     user: 'SFYangGang',
     state: 'CA',
     regions: ['SAN FRANCISCO']
