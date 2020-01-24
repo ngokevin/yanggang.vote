@@ -4,7 +4,6 @@ const scrape = require('./src/scrape');
 const twitter = require('./src/twitter');
 const widget = require('./src/widgetEvents');
 
-/*
 console.log('Cron for Yang!');
 cron.schedule('0 8-16 * * *', () => {
   scrape.scrape().then(() => {
@@ -23,6 +22,5 @@ scrape.scrape().then(() => {
   widget.updateSidebar();
   widget.updateSidebar(true);
 });
-*/
 
 const twitterSignIn = require('./src/twitterSignIn');
