@@ -13,7 +13,7 @@ const templates = {
   crowd: `${emoji.find('speaking_head_in_silhoutette')}${emoji.find('cityscape')} Let's shout to the streets for @andrewyang! Come show off #yanggang numbers.`,
   hang: `${emoji.find('man-woman-girl-boy')} Hang with the #YangGang where we mobilize on getting @andrewyang to the White House.`,
   misc: `${emoji.find('v').emoji} The better world is still possible. Come out for @andrewyang and the #yanggang!`,
-  phonebank: `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Phonebanking is the highest priority here for the #yanggang! Newcomers encouraged! We'll get you trained and set up easy.`,
+  phonebank: `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Make calls to the early states! Phonebanking is the highest priority #yanggang! Newcomers encouraged, we'll get you trained and set up quick.`,
   tabling: `${emoji.find('seat').emoji} Come show support and talk with the @andrewyang-curious with the #yanggang.`,
   textbank: `${emoji.find('computer').emoji}${emoji.find('iphone').emoji} Send out a wave of texts to spread the word about @andrewyang and mobilize #yanggang volunteers.`
 };
@@ -22,21 +22,9 @@ const client = new Twitter(config.twitter);
 
 module.exports.tweet = function tweet(state, region) {
   state = state || process.env.STATE;
-  region = region || process.env.REGION; 
+  region = region || process.env.REGION;
 
-  let event = Object.keys(db)
-    .filter(id => {
-      const evt = db[id];
-      const viable = !!(
-        evt.location &&
-        evt.location.region.toUpperCase() === state.toUpperCase() &&
-        evt.location.locality.toUpperCase() === region.toUpperCase() &&
-        moment.unix(evt.timeslots[0].start_date).tz(evt.timezone).unix() > moment().tz(evt.timezone).unix() &&
-        moment.unix(evt.timeslots[0].start_date).tz(evt.timezone).unix() < moment().add(3, 'days').tz(evt.timezone).unix() &&
-        !evt.tweetInitial
-      );
-      return viable;
-    })
+  const events = Object.keys(db)
     .map(id => db[id])
     .sort((evtA, evtB) => {
       if (evtA.timeslots[0].start_date < evtB.timeslots[0].start_date) { return -1; }
@@ -44,12 +32,51 @@ module.exports.tweet = function tweet(state, region) {
       return 0;
     });
 
-  if (!event.length) {
+  let event;
+  let tweetToday = false;
+  let tweetTomorrow = false;
+  let tweetWeek = false;
+  for (let i = 0; i < events.length; i++) {
+    const evt = events[i];
+    const startTime = moment.unix(evt.timeslots[0].start_date).tz(evt.timezone).unix();
+
+    const viable = !!(
+      evt.location &&
+      evt.location.region.toUpperCase() === state.toUpperCase() &&
+      evt.location.locality.toUpperCase() === region.toUpperCase() &&
+      startTime > moment().tz(evt.timezone).unix()
+    );
+
+    if (!viable) { continue; }
+
+    if (evt.description.indexOf('Zoom') !== -1) { continue; }
+
+    // Tweet eight hours out.
+    if (!evt.tweetDayOf && startTime < moment().add(8, 'hours').tz(evt.timezone).unix()) {
+      event = evt;
+      tweetToday = true;
+      break;
+    }
+
+    // Tweet 24 hours out.
+    if (!evt.tweetDayOf && !evt.tweetDayBefore && startTime < moment().add(24, 'hours').tz(evt.timezone).unix()) {
+      event = evt;
+      tweetTomorrow = true;
+      break;
+    }
+
+    // Tweet five days out.
+    if (!evt.tweetDayOf && !evt.tweetDayBefore && !evt.tweetInitial && startTime < moment().add(5, 'days').tz(evt.timezone).unix()) {
+      event = evt;
+      tweetWeek = true;
+      break;
+    }
+  }
+
+  if (!event) {
     console.log('No events.');
     return;
   }
-
-  event = event[0];
 
   const eventType = getEventType(event);
 
@@ -66,14 +93,24 @@ module.exports.tweet = function tweet(state, region) {
     description = `${getTitle(event)} at ${eventLocation} on ${eventTime}`;
   }
 
-  const text = templates[eventType] + ` ${description} ${event.browser_url}`;
+  let tweetTime;
+  if (tweetToday) { tweetTime = '[Today]'; }
+  if (tweetTomorrow) { tweetTime = '[Tomorrow]'; }
+  if (tweetWeek) { tweetTime = '[This Week]'; }
+  const text = `${tweetTime} ${templates[eventType]} ${description} ${event.browser_url}`;
 
   validateEvent(event).then(() => {
     client.post('statuses/update', {
       status: text
     }, () => {
       console.log(text);
-      db[event.id].tweetInitial = true;
+      if (tweetToday) {
+        db[event.id].tweetDayOf = true;
+      } else if (tweetTomorrow) {
+        db[event.id].tweetDayBefore = true;
+      } else if (tweetWeek) {
+        db[event.id].tweetInitial = true;
+      }
       fs.writeFileSync('events.json', JSON.stringify(db));
     });
   }, () => {

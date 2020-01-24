@@ -29,6 +29,8 @@ module.exports.scrape = function scrape () {
             // Preserve data.
             if (db[event.id] && db[event.id].posted) { event.posted = true; }
             if (db[event.id] && db[event.id].tweetInitial) { event.tweetInitial = true; }
+            if (db[event.id] && db[event.id].tweetDayOf) { event.tweetDayOf = true; }
+            if (db[event.id] && db[event.id].tweetDayBefore) { event.tweetDayBefore = true; }
             db[event.id] = event;
           });
           console.log(`Processed page ${i}.`);
