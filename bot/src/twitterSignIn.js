@@ -48,7 +48,7 @@ const consumer = new oauth.OAuth(
   'https://twitter.com/oauth/access_token',
   consumerKey,
   consumerSecret,
-  '1.0A', 'http://127.0.0.1:8080/sessions/callback',
+  '1.0A', '/sessions/callback',
   'HMAC-SHA1');
 
 app.use(bodyParser.urlencoded({extended: true}));
