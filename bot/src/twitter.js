@@ -18,12 +18,28 @@ const templates = {
   textbank: `${emoji.find('computer').emoji}${emoji.find('iphone').emoji} Send out a wave of texts to spread the word about @andrewyang and mobilize #yanggang volunteers.`
 };
 
+const accounts = [
+  {
+    user: 'bubblepoptarts',
+    state: 'CA',
+    regions: ['SAN FRANCISCO']
+  },
+  {
+    user: 'sfyanggang',
+    state: 'CA',
+    regions: ['SAN FRANCISCO']
+  }
+];
+
 const client = new Twitter(config.twitter);
 
-module.exports.tweet = function tweet(state, region) {
-  state = state || process.env.STATE;
-  region = region || process.env.REGION;
+module.exports.tweet = function tweet () {
+  accounts.forEach(account => {
+    doTweet(account.user, account.state, account.regions);
+  });
+};
 
+function doTweet (user, state, regions) {
   const events = Object.keys(db)
     .map(id => db[id])
     .sort((evtA, evtB) => {
@@ -43,7 +59,7 @@ module.exports.tweet = function tweet(state, region) {
     const viable = !!(
       evt.location &&
       evt.location.region.toUpperCase() === state.toUpperCase() &&
-      evt.location.locality.toUpperCase() === region.toUpperCase() &&
+      regions.indexOf(evt.location.locality.toUpperCase()) !== -1 &&
       startTime > moment().tz(evt.timezone).unix()
     );
 
