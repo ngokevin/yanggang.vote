@@ -13,7 +13,7 @@ const User = require('./twitterSignIn').User;
 const templates = {
   canvass: `${emoji.find('door').emoji}${emoji.find('woman-walking').emoji} Wanna claim some turf for @andrewyang? Join us #yanggang in knocking door-to-door.`,
   crowd: `${emoji.find('speaking_head_in_silhouette').emoji}${emoji.find('cityscape').emoji} Shout to the streets for @andrewyang! Come show off our #yanggang numbers.`,
-  hang: `${emoji.find('man-woman-girl-boy').emoji} Hang with the #YangGang where we mobilize on getting @andrewyang to the White House.`,
+  hang: `${emoji.find('man-woman-girl-boy').emoji} Hang with the #YangGang and coordinate on getting @andrewyang to the White House!`,
   misc: `${emoji.find('v').emoji} The better world is still possible! Come out for @andrewyang and the #yanggang.`,
   phonebank: `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Come make calls to early states. Phonebanking is the highest priority #yanggang! Newcomers encouraged, we'll get you trained and set up quick.`,
   tabling: `${emoji.find('seat').emoji} Come show support and talk to the @andrewyang-curious with the #yanggang.`,
@@ -104,15 +104,24 @@ function doTweet (account) {
     evt.tweeted[username] = evt.tweeted[username] || {};
     migrate(evt);
 
-    const viable = !!(
-      evt.location &&
-      evt.location.region.toUpperCase() === account.state.toUpperCase() &&
-      account.regions.indexOf(evt.location.locality.toUpperCase()) !== -1 &&
-      startTime > moment().tz(evt.timezone).unix()
-    );
-
-    if (!viable) { continue; }
     if (evt.description.indexOf('Zoom') !== -1) { continue; }
+
+    let viable;
+    if (account.states) {
+      viable = !!(
+        evt.location &&
+        account.states.indexOf(evt.location.region.toUpperCase()) !== -1 &&
+        startTime > moment().tz(evt.timezone).unix()
+      );
+    } else {
+      viable = !!(
+        evt.location &&
+        evt.location.region.toUpperCase() === account.state.toUpperCase() &&
+        account.regions.indexOf(evt.location.locality.toUpperCase()) !== -1 &&
+        startTime > moment().tz(evt.timezone).unix()
+      );
+    }
+    if (!viable) { continue; }
 
     // Tweet eight hours out.
     if (!evt.tweeted[username].dayOf &&
@@ -235,7 +244,7 @@ function getEventType (evt) {
   if (title.match(/tabling/i) || title.match(/tabel/i) || title.match(/table/i)) { return 'tabling'; }
   if (evt.type === 'CANVASS' || title.match(/canvas/i) || (title.match(/door/i) && title.match(/knock/i))) { return 'canvass'; }
   if (title.match(/crowd/i)) { return 'crowd'; }
-  if (title.match(/gang hang/)) { return 'hang'; }
+  if (title.match(/hang/i)) { return 'hang'; }
   if (evt.type === 'PHONE_BANK' || title.match(/phonebank/i) || title.match(/phone bank/i)) { return 'phonebank'; }
   if (title.match(/textbank/i) || title.match(/text bank/i) || title.match(/texting/i)) { return 'textbank'; }
   return 'misc';
