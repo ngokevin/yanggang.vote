@@ -11,13 +11,41 @@ const db = require('../events.json');
 const User = require('./twitterSignIn').User;
 
 const templates = {
-  canvass: `${emoji.find('door').emoji}${emoji.find('woman-walking').emoji} Wanna claim some turf for @andrewyang? Join us #yanggang in knocking door-to-door.`,
-  crowd: `${emoji.find('speaking_head_in_silhouette').emoji}${emoji.find('cityscape').emoji} Shout to the streets for @andrewyang! Come show off our #yanggang numbers.`,
-  hang: `${emoji.find('man-woman-girl-boy').emoji} Hang with the #YangGang and coordinate on getting @andrewyang to the White House!`,
-  misc: `${emoji.find('v').emoji} The better world is still possible! Come out for @andrewyang and the #yanggang.`,
-  phonebank: `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Come make calls to early states. Phonebanking is the highest priority #yanggang! Newcomers encouraged, we'll get you trained and set up quick.`,
-  tabling: `${emoji.find('seat').emoji} Come show support and talk to the @andrewyang-curious with the #yanggang.`,
-  textbank: `${emoji.find('computer').emoji}${emoji.find('iphone').emoji} Send out a wave of texts to spread the word about @andrewyang and mobilize #yanggang volunteers.`
+  canvass: [
+    `${emoji.find('door').emoji}${emoji.find('woman-walking').emoji} Wanna claim some turf for @AndrewYang? Join us #YangGang in knocking door-to-door.`,
+    `${emoji.find('door').emoji}${emoji.find('woman-walking').emoji} Let's knock on some doors and plant the #YangGang flag in the neighborhood.`,
+    `${emoji.find('door').emoji}${emoji.find('woman-walking').emoji} Talking face-to-face is the most effective way to get people onboard #HumanityFirst. Come knock on some doors!`,
+  ],
+  crowd: [
+    `${emoji.find('speaking_head_in_silhouette').emoji}${emoji.find('cityscape').emoji} Shout to the streets for @AndrewYang! Come show off our #YangGang numbers.`,
+    `${emoji.find('speaking_head_in_silhouette').emoji}${emoji.find('cityscape').emoji} Come hold signs, engage with the crowd, and turn people #YangGang!`,
+    `${emoji.find('speaking_head_in_silhouette').emoji}${emoji.find('cityscape').emoji} People walking by; they can't sleep on @AndrewYang. Show our #YangGang strength in numbers.`
+  ],
+  hang: [
+    `${emoji.find('man-woman-girl-boy').emoji} Hang with the #YangGang and coordinate on getting @AndrewYang to the White House!`,
+    `${emoji.find('man-woman-girl-boy').emoji} Come hang out with your fellow #YangGang and hatch a plot for a better world.`,
+    `${emoji.find('man-woman-girl-boy').emoji} Raise a glass to freedom for @AndrewYang! Come join our #YangGang hang and chill.`,
+  ],
+  misc: [
+    `${emoji.find('v').emoji} The better world is still possible! Come out for @AndrewYang and the #YangGang.`,
+    `${emoji.find('v').emoji} Rise up #YangGang! Come lend your heart and soul to volunteer for @AndrewYang.`,
+    `${emoji.find('v').emoji} Are you going to wait for it, or are you willing to fight for it? Get out here for the #YangGang.`
+  ],
+  phonebank: [
+    `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Come make calls to early states. Phonebanking is the highest priority #YangGang! Newcomers encouraged, we'll get you trained and set up quick.`,
+    `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} It's crunchtime to call for @AndrewYang. We need more phonebankers! It's super easy, come and we'll show you how.`,
+    `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Phonebanking for @AndrewYang is easy and empowering. Newbies strongly encouraged! Orders from the Chief.`,
+  ],
+  tabling: [
+    `${emoji.find('seat').emoji} Come show support and talk to the @AndrewYang-curious with the #YangGang.`,
+    `${emoji.find('seat').emoji} We'll set up a table for @AndrewYang in a busy area, come help hold it down!`,
+    `${emoji.find('seat').emoji} People are waiting for you to flip their world and tell them about @AndrewYang. Come to the #YangGang table.`,
+  ],
+  textbank: [
+    `${emoji.find('computer').emoji}${emoji.find('iphone').emoji} Send out a wave of texts to spread the word about @AndrewYang and mobilize #YangGang volunteers.`,
+    `${emoji.find('computer').emoji}${emoji.find('iphone').emoji} Feeling a bit introverted? This is for you. Send texts for @AndrewYang to spread the world and mobilize volunteers.`,
+    `${emoji.find('computer').emoji}${emoji.find('iphone').emoji} Get set up textbanking, and it's something you can do in with any spare seconds of your day!`,
+  ]
 };
 
 // Curate which regions for each account.
@@ -178,9 +206,9 @@ function doTweet (account) {
   // Build tweet text.
   let tweetTime;
   if (tweetDayOf) { tweetTime = '[Today]'; }
-  if (tweetDayBefore) { tweetTime = '[Day After Tomorrow]'; }
+  if (tweetDayBefore) { tweetTime = '[In Two Days]'; }
   if (tweetWeekOf) { tweetTime = '[This Week]'; }
-  const tweet = `${tweetTime} ${templates[eventType]} ${description} ${event.browser_url}`;
+  const tweet = `${tweetTime} ${getTemplate(eventType)} ${description} ${event.browser_url}`;
 
   if (process.env.DRY) {
     console.log(`[@${username}] | ${tweet}`);
@@ -268,6 +296,10 @@ function migrate (evt) {
     evt.tweeted['SFYangGang'] = evt.tweeted['SFYangGang'] || {};
     evt.tweeted['SFYangGang'].dayOf = true;
   }
+}
+
+function getTemplate (eventType) {
+  return templates[eventType][Math.floor(Math.random() * templates[eventType].length)];
 }
 
 require('make-runnable');
