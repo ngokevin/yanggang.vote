@@ -50,9 +50,14 @@ const accounts = [
     regions: ['Tampa']
   },
   {
-    user: 'NolaYangGang',
+    user: 'NOLAYangGang',
     state: 'LA',
     regions: ['New Orleans']
+  },
+  {
+    user: 'HoustonYangGang',
+    state: 'TX',
+    regions: ['Houston']
   }
 ];
 
