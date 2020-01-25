@@ -23,11 +23,6 @@ const templates = {
 // Curate which regions for each account.
 const accounts = [
   {
-    user: 'bubblepoptarts',
-    state: 'CA',
-    regions: ['SAN FRANCISCO']
-  },
-  {
     user: 'OaklandYangGang',
     state: 'CA',
     regions: ['OAKLAND', 'BERKELEY', 'FREMONT', 'ORINDA', 'SAN LEANDRO', 'WALNUT CREEK', 'CONCORD']
@@ -53,6 +48,11 @@ const accounts = [
     user: 'Kev_Pham03',
     state: 'FL',
     regions: ['Tampa']
+  },
+  {
+    user: 'NolaYangGang',
+    state: 'LA',
+    regions: ['New Orleans']
   }
 ];
 
