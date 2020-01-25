@@ -36,6 +36,23 @@ const accounts = [
     user: 'SFYangGang',
     state: 'CA',
     regions: ['SAN FRANCISCO']
+  },
+  {
+    user: 'Yang2020Mass',
+    states: ['MA']
+  },
+  {
+    user: 'BrendonCarpent4',
+    states: ['AZ']
+  },
+  {
+    user: 'yennijb',
+    states: ['ME', 'VT', 'NH', 'RI', 'MA', 'CT']
+  },
+  {
+    user: 'Kev_Pham03',
+    state: 'FL',
+    regions: ['Tampa']
   }
 ];
 
@@ -105,9 +122,9 @@ function doTweet (account) {
       break;
     }
 
-    // Tweet 24 hours out.
+    // Tweet 48 hours out.
     if (!evt.tweeted[username].dayOf && !evt.tweeted[username].dayBefore &&
-        startTime < moment().add(24, 'hours').tz(evt.timezone).unix()) {
+        startTime < moment().add(48, 'hours').tz(evt.timezone).unix()) {
       event = evt;
       tweetDayBefore = true;
       break;
@@ -147,7 +164,7 @@ function doTweet (account) {
   // Build tweet text.
   let tweetTime;
   if (tweetDayOf) { tweetTime = '[Today]'; }
-  if (tweetDayBefore) { tweetTime = '[Tomorrow]'; }
+  if (tweetDayBefore) { tweetTime = '[Day After Tomorrow]'; }
   if (tweetWeekOf) { tweetTime = '[This Week]'; }
   const tweet = `${tweetTime} ${templates[eventType]} ${description} ${event.browser_url}`;
 
