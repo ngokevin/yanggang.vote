@@ -86,6 +86,10 @@ const accounts = [
     user: 'HoustonYangGang',
     state: 'TX',
     regions: ['Houston']
+  },
+  {
+    user: 'nycyanggang',
+    states: ['NY', 'NJ']
   }
 ];
 
