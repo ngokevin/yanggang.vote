@@ -5,7 +5,7 @@ const twitter = require('./src/twitter');
 const widget = require('./src/widgetEvents');
 
 console.log('Cron for Yang!');
-cron.schedule('0 8-16 * * *', () => {
+cron.schedule('0 6-16 * * *', () => {
   scrape.scrape().then(() => {
   reddit.updateDB();
   reddit.post();
