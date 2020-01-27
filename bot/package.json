@@ -9,7 +9,7 @@
     "print": "node src/print.js",
     "post": "node src/reddit.js post",
     "scrape": "node src/scrape.js scrape",
-    "start": "NODE_ENV=production node index.js &",
+    "start": "NODE_ENV=production forever index.js &",
     "start:debug": "node index.js",
     "twitter": "node src/twitter.js tweet",
     "twitter:dry": "DRY=true node src/twitter.js tweet",
