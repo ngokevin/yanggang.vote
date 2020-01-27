@@ -36,6 +36,10 @@ const templates = {
     `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} It's crunchtime to call for @AndrewYang. We need more phonebankers! It's super easy, come and we'll show you how.`,
     `${emoji.find('computer').emoji}${emoji.find('telephone').emoji} Phonebanking for @AndrewYang is easy and empowering. Newbies strongly encouraged! Orders from the Chief.`,
   ],
+  signature: [
+    `${emoji.find('clipboard').emoji} Get @AndrewYang on the ballot! Help us gather signatures for the #YangGang.`,
+    `${emoji.find('clipboard').emoji} We need help gathering signatures to get @AndrewYang on the ballot! Come out and volunteer #YangGang.`
+  ],
   tabling: [
     `${emoji.find('seat').emoji} Come show support and talk to the @AndrewYang-curious with the #YangGang.`,
     `${emoji.find('seat').emoji} We'll set up a table for @AndrewYang in a busy area, come help hold it down!`,
@@ -278,12 +282,13 @@ function getTitle (event) {
 
 function getEventType (evt) {
   const title = evt.title;
+  if (title.match(/signature/i)) { return 'signature'; }
   if (title.match(/tabling/i) || title.match(/tabel/i) || title.match(/table/i)) { return 'tabling'; }
   if (evt.type === 'CANVASS' || title.match(/canvas/i) || (title.match(/door/i) && title.match(/knock/i))) { return 'canvass'; }
   if (title.match(/crowd/i)) { return 'crowd'; }
-  if (title.match(/hang/i)) { return 'hang'; }
   if (evt.type === 'PHONE_BANK' || title.match(/phonebank/i) || title.match(/phone bank/i)) { return 'phonebank'; }
   if (title.match(/textbank/i) || title.match(/text bank/i) || title.match(/texting/i)) { return 'textbank'; }
+  if (title.match(/hang/i)) { return 'hang'; }
   return 'misc';
 }
 
