@@ -12,8 +12,6 @@
   <style>
     html {
       background: #13294b;
-      display: flex;
-      justify-content: center;
     }
 
     html,
@@ -24,11 +22,9 @@
       display: flex;
       font-family: 'Montserrat';
       flex-wrap: wrap;
-      height: 100%;
       justify-content: center;
       margin: 0;
-      overflow-x: hidden;
-      padding: 0 1%;
+      padding: 0 1% 30px 1%;
       width: 98%;
     }
 
@@ -36,6 +32,18 @@
       font-size: 32px;
       text-align: center;
       width: 100%;
+    }
+
+    h2 {
+      font-size: 20px;
+      text-align: center;
+      width: 100%;
+    }
+
+    p,
+    i{
+      text-align: center;
+      max-width: 66%;
     }
 
     @media (min-width: 600px) {
@@ -58,18 +66,30 @@
     }
 
     a {
+      text-align: center;
       color: #DA3248;
       text-decoration: none;
     }
 
-    img {
-      margin-top: 30px;
+    #icon {
+      margin-bottom: 15px;
+      margin-top: 10px;
+      max-width: 128px;
+    }
+
+    #authLink img {
+      margin-top: 20px;
+      margin-bottom: 50px;
     }
 
     .success {
       font-weight: bold;
       text-decoration: underline;
       margin-top: 30px;
+    }
+
+    i {
+      font-size: 12px;
     }
   </style>
 
@@ -79,13 +99,21 @@
 <body>
   <h1>Automate #YangGang Event Tweets</h1>
 
-  <p>Created by <a href="https://twitter.com/sfyanggang">San Francisco Yang Gang (@sfyanggang).</a> Used by Arizona, Massachusetts, New England, Houston, Oakland Yang Gangs.</p>
+  <h2>Mobilize volunteers to upcoming events for <a href="https://yang2020.com">Andrew Yang</a> via Twitter!</h2>
+
+  <img id="icon" src="https://www.yang2020.com/wp-content/uploads/2019/10/YANG_WAVE_300px_v2.gif">
+
+  <p>Created by <a href="https://twitter.com/sfyanggang">San Francisco Yang Gang (@sfyanggang).</a></p>
+
+  <p>Used by Arizona, Houston, Massachusetts, New Jersey, New York, Massachusetts, New England, Oakland Yang Gangs.</p>
 
   <p>Automatically tweets Yang volunteer events in your region from <a href="https://mobilize.us/yang2020/">Mobilize</a>.</p>
 
-  <p>Mobilize volunteers to upcoming events for <a href="https://yang2020.com">Andrew Yang</a>!</p>
-
   <a id="authLink" href="/authorize"><img src="https://cdn.cms-twdigitalassets.com/content/dam/developer-twitter/icons/sign-in-with-twitter-gray-png-img-fullhd-medium.png.img.fullhd.medium.png"></a>
+
+  <i>Once you authorize your Twitter account, I will manually configure and enable it to run for events in your region.</i>
+
+  <i>Events will be tweeted on a regular schedule (up to three times per event leading up to the event). Contact @bubblepoptarts for questions and requests!</i>
 
   <script>
     if (window.location.search.indexOf('user') !== -1) {
