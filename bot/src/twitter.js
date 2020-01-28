@@ -157,14 +157,14 @@ function doTweet (account) {
       viable = !!(
         evt.location &&
         account.states.indexOf(evt.location.region.toUpperCase()) !== -1 &&
-        startTime > moment().tz(evt.timezone).unix()
+        startTime > moment().tz(evt.timezone).add(4, 'hours').unix()
       );
     } else {
       viable = !!(
         evt.location &&
         evt.location.region.toUpperCase() === account.state.toUpperCase() &&
         account.regions.indexOf(evt.location.locality.toUpperCase()) !== -1 &&
-        startTime > moment().tz(evt.timezone).unix()
+        startTime > moment().tz(evt.timezone).add(4, 'hours').unix()
       );
     }
     if (!viable) { continue; }
