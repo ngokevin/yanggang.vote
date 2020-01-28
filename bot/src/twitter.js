@@ -99,6 +99,20 @@ const accounts = [
     user: 'CincyYangGang',
     state: 'OH',
     regions: ['Cincinnati']
+  },
+  {
+    user: 'vegasyanggang',
+    state: 'NV',
+    regions: ['Las Vegas']
+  },
+  {
+    user: 'vegasyanggang',
+    state: 'NV',
+    regions: ['Las Vegas']
+  },
+  {
+    user: 'IL4Yang',
+    states: ['IL']
   }
 ];
 
@@ -271,8 +285,11 @@ function getTitle (event) {
   let title = event.title;
   title = title.replace(`, ${event.location.region}`, ' ');
   title = title.replace(` ${event.location.region}`, ' ');
-  title = title.replace(event.location.region, ' ');
-  title = title.replace(event.location.locality, ' ');
+  title = title.replace(` ${event.location.locality}`, ' ');
+  title = title.replace(` in ${event.location.region}`, ' ');
+  title = title.replace(` in ${event.location.locality}`, ' ');
+  title = title.replace(` at ${event.location.region}`, ' ');
+  title = title.replace(` at ${event.location.locality}`, ' ');
   title = title.replace(' - ', ' ');
   title = title.replace('-', ' ');
   title = title.replace('- ', ' ');
