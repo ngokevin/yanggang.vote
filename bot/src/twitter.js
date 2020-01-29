@@ -113,6 +113,11 @@ const accounts = [
   {
     user: 'IL4Yang',
     states: ['IL']
+  },
+  {
+    user: 'LancPAYangGang',
+    state: 'PA',
+    regions: ['Lancaster']
   }
 ];
 
