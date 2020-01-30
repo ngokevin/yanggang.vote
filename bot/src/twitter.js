@@ -130,6 +130,19 @@ const accounts = [
   {
     user: 'Floridayanggang',
     states: ['FL']
+  },
+  {
+    user: 'oregon_yang',
+    states: ['OR']
+  },
+  {
+    user: 'MspYangGang',
+    states: ['MN'],
+    regions: ['Saint Paul', 'Minneapolis', 'Bloomington']
+  },
+  {
+    user: 'VirginiaForYang',
+    states: ['VA']
   }
 ];
 
