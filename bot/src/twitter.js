@@ -143,6 +143,10 @@ const accounts = [
   {
     user: 'VirginiaForYang',
     states: ['VA']
+  },
+  {
+    user: 'alaskayanggang',
+    states: ['AL']
   }
 ];
 
@@ -335,12 +339,12 @@ function getTitle (event) {
 function getEventType (evt) {
   const title = evt.title;
   if (title.match(/signature/i)) { return 'signature'; }
+  if (title.match(/hang/i)) { return 'hang'; }
   if (title.match(/tabling/i) || title.match(/tabel/i) || title.match(/table/i)) { return 'tabling'; }
   if (evt.type === 'CANVASS' || title.match(/canvas/i) || (title.match(/door/i) && title.match(/knock/i))) { return 'canvass'; }
   if (title.match(/crowd/i)) { return 'crowd'; }
   if (evt.type === 'PHONE_BANK' || title.match(/phonebank/i) || title.match(/phone bank/i)) { return 'phonebank'; }
   if (title.match(/textbank/i) || title.match(/text bank/i) || title.match(/texting/i)) { return 'textbank'; }
-  if (title.match(/hang/i)) { return 'hang'; }
   return 'misc';
 }
 
